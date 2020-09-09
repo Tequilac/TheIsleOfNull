@@ -1,0 +1,6 @@
+{
+  "itemType": "DefensiveItem",
+  "type": "Helmet",
+  "cost": 200,
+  "damageReduction": 10
+}

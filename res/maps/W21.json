@@ -1,0 +1,30 @@
+{
+  "height": 40,
+  "width": 40,
+  "hasTownEntrance": false,
+  "hasDungeonEntrance": false,
+  "hasQuestGivers": false,
+  "hasChests" : false,
+  "monstersCount": 2,
+  "monsters":
+  [
+    {
+      "name": "Rat",
+      "amount": 3,
+      "level": 1,
+      "experience": 20,
+      "x": 20,
+      "y": 20
+    },
+    {
+      "name": "Rat",
+      "amount": 4,
+      "level": 1,
+      "experience": 20,
+      "x": 25,
+      "y": 25
+    }
+  ],
+  "chestsCount": 0,
+  "chests": []
+}

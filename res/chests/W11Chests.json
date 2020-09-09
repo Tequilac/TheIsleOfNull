@@ -1,0 +1,39 @@
+{
+  "chestsCount": 3,
+  "chests":
+  [
+    {
+      "x": 15,
+      "y": 15,
+      "gold": 50,
+      "itemsCount": 1,
+      "items":
+      [
+        "Basic sword"
+      ]
+    },
+    {
+      "x": 30,
+      "y": 32,
+      "gold": 50,
+      "itemsCount": 2,
+      "items":
+      [
+        "Basic shield",
+        "Basic Fire Spell"
+      ]
+    },
+    {
+      "x": 23,
+      "y": 23,
+      "gold": 300,
+      "itemsCount": 3,
+      "items":
+      [
+        "Silver helmet",
+        "Turkish knife",
+        "Throwing knife"
+      ]
+    }
+  ]
+}

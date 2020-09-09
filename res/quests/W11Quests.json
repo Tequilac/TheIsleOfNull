@@ -1,0 +1,27 @@
+{
+  "amount": 1,
+  "questGivers":
+  [
+    {
+      "name": "Test",
+      "x": 10,
+      "y": 10,
+      "questsAmount": 1,
+      "quests":
+      [
+        {
+          "type": "KillEnemies",
+          "name": "The Beginnings",
+          "description": "Your adventure begins here. Prove your strength by killing some rats.",
+          "goldReward": 100,
+          "experienceReward": 200,
+          "itemsRewardAmount": 0,
+          "itemsReward":
+          [],
+          "targetName": "Rat",
+          "requiredAmount": 3
+        }
+      ]
+    }
+  ]
+}

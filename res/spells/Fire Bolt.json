@@ -1,0 +1,8 @@
+{
+  "type": "DamageSpell",
+  "school": "Fire",
+  "description": "Damage one enemy.",
+  "cost": 10,
+  "level": 1,
+  "value": 5
+}

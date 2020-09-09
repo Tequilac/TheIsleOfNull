@@ -1,0 +1,38 @@
+{
+  "height": 40,
+  "width": 40,
+  "hasTownEntrance": true,
+  "townEntrance":
+  {
+    "x": 24,
+    "y": 25
+  },
+  "hasDungeonEntrance": true,
+  "dungeonEntrance":
+  {
+    "x": 13,
+    "y": 13
+  },
+  "hasQuestGivers": true,
+  "hasChests": true,
+  "monstersCount": 2,
+  "monsters":
+  [
+    {
+      "name": "Rat",
+      "amount": 3,
+      "level": 1,
+      "experience": 20,
+      "x": 20,
+      "y": 20
+    },
+    {
+      "name": "Rat",
+      "amount": 4,
+      "level": 1,
+      "experience": 20,
+      "x": 25,
+      "y": 25
+    }
+  ]
+}

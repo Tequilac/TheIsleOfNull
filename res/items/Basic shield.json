@@ -1,0 +1,6 @@
+{
+  "itemType": "DefensiveItem",
+  "type": "Shield",
+  "cost": 50,
+  "damageReduction": 5
+}

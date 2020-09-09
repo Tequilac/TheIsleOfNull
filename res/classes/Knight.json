@@ -1,0 +1,17 @@
+{
+  "might": 16,
+
+  "intellect": 12,
+
+  "personality": 12,
+
+  "endurance": 12,
+
+  "accuracy": 12,
+
+  "speed": 10,
+
+  "luck": 10,
+
+  "usesMagic": false
+}

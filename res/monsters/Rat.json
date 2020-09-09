@@ -1,0 +1,7 @@
+{
+  "health": 10,
+  "race": "Animal",
+  "minDamage": 5,
+  "maxDamage": 10,
+  "areaAttack": false
+}
