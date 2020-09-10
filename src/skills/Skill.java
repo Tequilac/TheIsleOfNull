@@ -21,4 +21,19 @@ public class Skill
         this.value = value;
         this.level = level;
     }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public int getValue()
+    {
+        return value;
+    }
+
+    public int getLevel()
+    {
+        return level;
+    }
 }

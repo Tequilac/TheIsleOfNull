@@ -13,5 +13,10 @@
 
   "luck": 10,
 
-  "usesMagic": true
+  "usesMagic": true,
+
+  "skills":
+  [
+    "Water Magic"
+  ]
 }

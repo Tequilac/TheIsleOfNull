@@ -28,6 +28,9 @@ public class TeamPanel extends PrimaryPanel
         pane.addTab("Statistics", new TeamStatisticsPanel(game, frame));
         pane.setMnemonicAt(2, KeyEvent.VK_3);
 
+        pane.addTab("Skills", new SkillsPanel(game, frame));
+        pane.setMnemonicAt(3, KeyEvent.VK_4);
+
         add(pane);
     }
 }

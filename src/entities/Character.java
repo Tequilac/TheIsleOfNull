@@ -191,6 +191,11 @@ public class Character extends Entity
         return maxMana;
     }
 
+    public ArrayList<Skill> getSkills()
+    {
+        return skills;
+    }
+
     public void setMana(int mana)
     {
         this.mana = mana;

@@ -13,5 +13,10 @@
 
   "luck": 12,
 
-  "usesMagic": false
+  "usesMagic": false,
+
+  "skills":
+  [
+    "Bow"
+  ]
 }
