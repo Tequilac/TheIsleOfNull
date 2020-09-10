@@ -15,21 +15,29 @@ public class TeamStatisticsPanel extends PrimaryPanel
     {
         super(game, frame);
 
+        setLayout(null);
+
         drawCharacter(game.getCurrentCharacter());
     }
 
     public void drawCharacter(Character character)
     {
         JLabel name = new JLabel(character.getName());
-        JLabel characterClass = new JLabel(character.getCharacterClass().getName());
-        JLabel race = new JLabel(character.getRace().getName());
+        JLabel characterClass = new JLabel("Class: " + character.getCharacterClass().getName());
+        JLabel race = new JLabel("Race: " + character.getRace().getName());
+        JLabel level = new JLabel("Level: " + character.getLevel());
+        JLabel experience = new JLabel("Experience: " + character.getExperience());
         JLabel magicUsage = new JLabel("Can" + ((character instanceof MagicCharacter)? "" : "'t") + " use magic");
         name.setBounds(50, 50, 120, 30);
         add(name);
-        characterClass.setBounds(50, 100, 120, 30);
+        characterClass.setBounds(50, 80, 120, 30);
         add(characterClass);
-        race.setBounds(50, 150, 120, 30);
+        race.setBounds(50, 110, 120, 30);
         add(race);
+        level.setBounds(50, 140, 120, 30);
+        add(level);
+        experience.setBounds(50, 170, 120, 30);
+        add(experience);
         drawAttributes(character, magicUsage);
     }
 
