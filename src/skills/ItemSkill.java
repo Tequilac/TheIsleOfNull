@@ -8,7 +8,7 @@ public abstract class ItemSkill extends Skill
 {
     private String targetName;
 
-    public ItemSkill(String name, ArrayList<Class> classes, int value, int level)
+    public ItemSkill(String name, ArrayList<String> classes, int value, int level)
     {
         super(name, classes, value, level);
     }

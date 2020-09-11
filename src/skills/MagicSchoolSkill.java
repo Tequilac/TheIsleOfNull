@@ -9,7 +9,7 @@ public class MagicSchoolSkill extends Skill
 {
     MagicSchool magicSchool;
 
-    public MagicSchoolSkill(String name, ArrayList<Class> classes, int value, int level, MagicSchool magicSchool)
+    public MagicSchoolSkill(String name, ArrayList<String> classes, int value, int level, MagicSchool magicSchool)
     {
         super(name, classes, value, level);
         this.magicSchool = magicSchool;

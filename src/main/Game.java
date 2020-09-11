@@ -12,6 +12,8 @@ import map.districts.World;
 import quests.Quest;
 import quests.QuestGiver;
 import saves.Save;
+import skills.Skill;
+import skills.SkillParser;
 import visuals.Frame;
 
 import java.io.File;
@@ -53,6 +55,8 @@ public class Game
 
     private Map<String, Class> knownClasses = new HashMap<>();
 
+    private Map<String, Skill> knownSkills = new HashMap<>();
+
     public Game() throws IOException
     {
         classes = new ArrayList<>();
@@ -65,11 +69,11 @@ public class Game
         currentMember = 0;
     }
 
-    public void loadClasses(File folder) throws FileNotFoundException
+    public void loadClasses(File folder) throws IOException
     {
         for (final File fileEntry : folder.listFiles())
         {
-            classes.add(ClassParser.parseClass(fileEntry.getName()));
+            classes.add(ClassParser.parseClass(this, fileEntry.getName()));
         }
     }
 
@@ -368,15 +372,26 @@ public class Game
         return race;
     }
 
-    public Class getClass(String className) throws FileNotFoundException
+    public Class getClass(String className) throws IOException
     {
         Class aClass = knownClasses.get(className);
         if(aClass == null)
         {
-            aClass = ClassParser.parseClass(className + ".json");
+            aClass = ClassParser.parseClass(this, className + ".json");
             knownClasses.put(className, aClass);
         }
         return aClass;
+    }
+
+    public Skill getSkill(String skillName) throws IOException
+    {
+        Skill skill = knownSkills.get(skillName);
+        if(skill == null)
+        {
+            skill = SkillParser.parseSkill(this, skillName);
+            knownSkills.put(skillName, skill);
+        }
+        return skill;
     }
 
     public Character getCurrentCharacter()

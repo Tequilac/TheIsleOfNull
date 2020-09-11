@@ -58,6 +58,7 @@ public class Character extends Entity
         this.accuracy = accuracy;
         this.speed = speed;
         this.luck = luck;
+        this.skills = characterClass.getSkills();
     }
 
     public Character(String name, int health, int maxHealth, int mana, int maxMana, Race race, int level, int experience, Class characterClass, int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck)
@@ -74,6 +75,7 @@ public class Character extends Entity
         this.accuracy = accuracy;
         this.speed = speed;
         this.luck = luck;
+        this.skills = characterClass.getSkills();
     }
 
     public Character(String name, int health, Race race, int level, int experience, Class characterClass)
@@ -256,6 +258,7 @@ public class Character extends Entity
         this.accuracy = characterClass.getAccuracy() + race.getAccuracyModifier();
         this.speed = characterClass.getSpeed() + race.getSpeedModifier();
         this.luck = characterClass.getLuck() + race.getLuckModifier();
+        this.skills = characterClass.getSkills();
     }
 
     public void setCharacterClass(Class characterClass)

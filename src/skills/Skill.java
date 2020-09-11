@@ -8,13 +8,13 @@ public class Skill
 {
     protected String name;
 
-    protected ArrayList<Class> classes;
+    protected ArrayList<String> classes;
 
     protected int value;
 
     protected int level;
 
-    public Skill(String name, ArrayList<Class> classes, int value, int level)
+    public Skill(String name, ArrayList<String> classes, int value, int level)
     {
         this.name = name;
         this.classes = classes;

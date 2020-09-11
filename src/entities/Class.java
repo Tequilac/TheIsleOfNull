@@ -1,5 +1,9 @@
 package entities;
 
+import skills.Skill;
+
+import java.util.ArrayList;
+
 public class Class
 {
     private String name;
@@ -20,7 +24,9 @@ public class Class
 
     private boolean usesMagic;
 
-    public Class(String name, int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck, boolean usesMagic)
+    private ArrayList<Skill> skills;
+
+    public Class(String name, int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck, boolean usesMagic, ArrayList<Skill> skills)
     {
         this.name = name;
         this.might = might;
@@ -31,6 +37,7 @@ public class Class
         this.speed = speed;
         this.luck = luck;
         this.usesMagic = usesMagic;
+        this.skills = skills;
     }
 
     public String getName()
@@ -76,5 +83,10 @@ public class Class
     public boolean usesMagic()
     {
         return usesMagic;
+    }
+
+    public ArrayList<Skill> getSkills()
+    {
+        return skills;
     }
 }

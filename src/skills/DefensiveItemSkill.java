@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class DefensiveItemSkill extends ItemSkill
 {
-    public DefensiveItemSkill(String name, ArrayList<Class> classes, int value, int level)
+    public DefensiveItemSkill(String name, ArrayList<String> classes, int value, int level)
     {
         super(name, classes, value, level);
     }

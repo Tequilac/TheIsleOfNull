@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class OffensiveItemSkill extends ItemSkill
 {
 
-    public OffensiveItemSkill(String name, ArrayList<Class> classes, int value, int level)
+    public OffensiveItemSkill(String name, ArrayList<String> classes, int value, int level)
     {
         super(name, classes, value, level);
     }

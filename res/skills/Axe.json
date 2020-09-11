@@ -1,0 +1,8 @@
+{
+  "type": "OffensiveItemSkill",
+  "classNumber": 1,
+  "classes":
+  [
+    "Knight"
+  ]
+}

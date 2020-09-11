@@ -76,7 +76,7 @@ public class Save
                 {
                     name = br.readLine();
                     teamInfo.append(name).append("\n");
-                    characterClass = ClassParser.parseClass(br.readLine() + ".json");
+                    characterClass = ClassParser.parseClass(game, br.readLine() + ".json");
                     teamInfo.append(characterClass.getName()).append("\n");
                     race = RaceParser.parseRace(br.readLine() + ".json");
                     teamInfo.append(race.getName()).append("\n");
