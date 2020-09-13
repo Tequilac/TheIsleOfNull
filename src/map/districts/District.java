@@ -8,7 +8,7 @@ import quests.QuestGiver;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class District
+public abstract class District
 {
     protected String name;
 
@@ -59,6 +59,8 @@ public class District
     {
         enemies.remove(group);
     }
+
+    public abstract boolean canMove(Vector2d position);
 
     public void setLoadedInfo(String loadedInfo)
     {

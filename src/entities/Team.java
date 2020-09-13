@@ -8,6 +8,7 @@ import quests.Quest;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Team extends Group
 {
@@ -34,10 +35,7 @@ public class Team extends Group
         this.entities = teamMembers;
         this.gold = 200;
         this.activeQuests = new LinkedList<>();
-        if(items == null)
-            this.itemsInInventory = new ArrayList<>();
-        else
-            this.itemsInInventory = items;
+        this.itemsInInventory = Objects.requireNonNullElseGet(items, ArrayList::new);
     }
 
     public void distributeExperience(int experience, int currentMember)

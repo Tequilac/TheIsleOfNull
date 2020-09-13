@@ -6,25 +6,25 @@ import java.util.ArrayList;
 
 public class Class
 {
-    private String name;
+    private final String name;
 
-    private int might;
+    private final int might;
 
-    private int intellect;
+    private final int intellect;
 
-    private int personality;
+    private final int personality;
 
-    private int endurance;
+    private final int endurance;
 
-    private int accuracy;
+    private final int accuracy;
 
-    private int speed;
+    private final int speed;
 
-    private int luck;
+    private final int luck;
 
-    private boolean usesMagic;
+    private final boolean usesMagic;
 
-    private ArrayList<Skill> skills;
+    private final ArrayList<Skill> skills;
 
     public Class(String name, int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck, boolean usesMagic, ArrayList<Skill> skills)
     {

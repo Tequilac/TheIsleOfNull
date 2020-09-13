@@ -32,8 +32,7 @@ public class MonsterParser
 
     public static Enemy read(String name, int level, int experience) throws FileNotFoundException
     {
-        ArrayList<Object> attributes = new ArrayList<>(3);
-        attributes = MonsterParser.parseMonster(name);
+        ArrayList<Object> attributes = MonsterParser.parseMonster(name);
         return new Enemy(name, (int)attributes.get(0), (Race)attributes.get(1), level, experience, (int)attributes.get(2), (int)attributes.get(3), (boolean)attributes.get(4));
     }
 }

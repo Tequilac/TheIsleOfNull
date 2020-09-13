@@ -1,5 +1,7 @@
 package map;
 
+import map.districts.District;
+
 import java.util.Objects;
 
 public class Vector2d
@@ -37,9 +39,9 @@ public class Vector2d
         return null;
     }
 
-    public Vector2d trim(int width, int height)
+    public Vector2d trim(District district)
     {
-        return new Vector2d((x+width)%width, (y+height)%height);
+        return new Vector2d((x + district.getWidth()) % district.getWidth(), (y + district.getHeight()) % district.getHeight());
     }
 
     @Override

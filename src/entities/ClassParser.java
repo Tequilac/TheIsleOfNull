@@ -7,7 +7,6 @@ import com.google.gson.JsonParser;
 import main.Game;
 import skills.Skill;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;

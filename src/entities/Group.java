@@ -17,8 +17,7 @@ public class Group
 
     public Group(Vector2d position, MapDirection mapDirection, ArrayList<Entity> entities)
     {
-        this.position = position;
-        this.mapDirection = mapDirection;
+        this(position, mapDirection);
         this.entities = entities;
     }
 
@@ -57,61 +56,29 @@ public class Group
         return checkForDead();
     }
 
-    public boolean moveFront(District district)
+    private boolean moveSomewhere(MoveDirection moveDirection, District district)
     {
-        if(district instanceof World && ((World) district).canMove(position.add(mapDirection.toVector2d())))
+        Vector2d newPosition;
+        switch(moveDirection)
         {
-            position = position.add(mapDirection.toVector2d()).trim(district.getWidth(), district.getHeight());
-            return true;
+            case Front:
+                newPosition = position.add(mapDirection.toVector2d());
+                break;
+            case Back:
+                newPosition = position.subtract(mapDirection.toVector2d());
+                break;
+            case Left:
+                newPosition = position.subtract(mapDirection.getNext().toVector2d());
+                break;
+            case Right:
+                newPosition = position.subtract(mapDirection.getPrevious().toVector2d());
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + moveDirection);
         }
-        if(district instanceof Town && ((Town) district).canMove(position.add(mapDirection.toVector2d())))
+        if(district.canMove(newPosition))
         {
-            position = position.add(mapDirection.toVector2d()).trim(district.getWidth(), district.getHeight());
-            return true;
-        }
-        return false;
-    }
-
-    public boolean moveBack(District district)
-    {
-        if(district instanceof World && ((World) district).canMove(position.subtract(mapDirection.toVector2d())))
-        {
-            position = position.subtract(mapDirection.toVector2d()).trim(district.getWidth(), district.getHeight());
-            return true;
-        }
-        if(district instanceof Town && ((Town) district).canMove(position.subtract(mapDirection.toVector2d())))
-        {
-            position = position.subtract(mapDirection.toVector2d()).trim(district.getWidth(), district.getHeight());
-            return true;
-        }
-        return false;
-    }
-
-    public boolean moveLeft(District district)
-    {
-        if(district instanceof World && ((World) district).canMove(position.subtract(mapDirection.getNext().toVector2d())))
-        {
-            position = position.subtract(mapDirection.getNext().toVector2d()).trim(district.getWidth(), district.getHeight());
-            return true;
-        }
-        if(district instanceof Town && ((Town) district).canMove(position.subtract(mapDirection.getNext().toVector2d())))
-        {
-            position = position.subtract(mapDirection.getNext().toVector2d()).trim(district.getWidth(), district.getHeight());
-            return true;
-        }
-        return false;
-    }
-
-    public boolean moveRight(District district)
-    {
-        if(district instanceof World && ((World) district).canMove(position.subtract(mapDirection.getPrevious().toVector2d())))
-        {
-            position = position.subtract(mapDirection.getPrevious().toVector2d()).trim(district.getWidth(), district.getHeight());
-            return true;
-        }
-        if(district instanceof Town && ((Town) district).canMove(position.subtract(mapDirection.getPrevious().toVector2d())))
-        {
-            position = position.subtract(mapDirection.getPrevious().toVector2d()).trim(district.getWidth(), district.getHeight());
+            position = newPosition.trim(district);
             return true;
         }
         return false;
@@ -119,22 +86,19 @@ public class Group
 
     public boolean move(MoveDirection moveDirection, District district)
     {
-        boolean moved = false;
+        boolean moved;
         switch (moveDirection)
         {
-            case Left: moved = moveLeft(district);
-            break;
-            case Right: moved = moveRight(district);
-            break;
-            case Front: moved = moveFront(district);
-            break;
-            case Back: moved = moveBack(district);
-            break;
-            case TurnLeft: mapDirection = mapDirection.getPrevious();
-            moved = true;
-            break;
-            default: mapDirection = mapDirection.getNext();
-            moved = true;
+            case TurnLeft:
+                mapDirection = mapDirection.getPrevious();
+                moved = true;
+                break;
+            case TurnRight:
+                mapDirection = mapDirection.getNext();
+                moved = true;
+                break;
+            default:
+                moved = moveSomewhere(moveDirection, district);
         }
         return moved;
     }
