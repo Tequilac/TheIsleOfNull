@@ -7,6 +7,7 @@ import quests.QuestGiver;
 import visuals.primaryPanels.*;
 import visuals.secondaryPanels.BlankPanel;
 import visuals.secondaryPanels.CharacterInfoPanel;
+import visuals.secondaryPanels.CharactersInfoPanel;
 import visuals.secondaryPanels.OptionsPanel;
 
 import javax.swing.*;
@@ -74,7 +75,7 @@ public class Frame extends JFrame implements KeyListener
         game.update();
         mainPanel.addPrimaryPanel(new MapPanel(game, this));
         mainPanel.addLeftPanel(new OptionsPanel(game, this));
-        mainPanel.addRightPanel(new CharacterInfoPanel(game, this));
+        mainPanel.addRightPanel(new CharactersInfoPanel(game, this));
 
         setResizable(false);
         pack();

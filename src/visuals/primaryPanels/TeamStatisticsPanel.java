@@ -6,11 +6,10 @@ import main.Game;
 import visuals.Frame;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class TeamStatisticsPanel extends PrimaryPanel
 {
-    private Character currentCharacter;
-
     public TeamStatisticsPanel(Game game, Frame frame)
     {
         super(game, frame);

@@ -6,63 +6,95 @@ import visuals.Frame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class CharacterInfoPanel extends SecondaryPanel
+public class CharacterInfoPanel extends JPanel
 {
+    private  Game game;
 
-    private JLabel[] names;
+    private Frame frame;
 
-    private JLabel[] charactersHealthStats;
+    private Character character;
 
-    private JLabel[] charactersManaStats;
+    private JLabel name;
 
-    public CharacterInfoPanel(Game game, Frame frame)
+    private JLabel characterHealthStats;
+
+    private JLabel characterManaStats;
+
+    public CharacterInfoPanel(Game game, Frame frame, Character character)
     {
-        super(game, frame);
+        super();
+        this.game = game;
+        this.frame = frame;
+        this.character = character;
+        setPreferredSize(new Dimension(300, 200));
+        setLayout(null);
     }
 
     public void drawCharacterInfo(Graphics g)
     {
-        if(names == null)
+        if(name == null)
         {
-            names = new JLabel[4];
-
-
-            charactersHealthStats = new JLabel[4];
-            charactersManaStats = new JLabel[4];
-
-            for (int i = 0; i < 4; i++)
+            name = new JLabel(character.getName());
+            name.setBounds(10,20, 120,20);
+            name.addMouseListener(new MouseListener()
             {
-                names[i] = new JLabel(game.getCharacters().get(i).getName());
-                names[i].setBounds(10,150*i + 20, 120,20);
-                add(names[i]);
+                @Override
+                public void mouseClicked(MouseEvent mouseEvent)
+                {
+                    game.setCurrentCharacter(character);
+                    frame.openTeamView();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent mouseEvent)
+                {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent mouseEvent)
+                {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent mouseEvent)
+                {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent mouseEvent)
+                {
+
+                }
+            });
+            add(name);
 
 
-                charactersHealthStats[i] = new JLabel();
-                charactersHealthStats[i].setBounds(140,150*i + 45,100,20);
-                add(charactersHealthStats[i]);
+            characterHealthStats = new JLabel();
+            characterHealthStats.setBounds(140,45,100,20);
+            add(characterHealthStats);
 
-                charactersManaStats[i] = new JLabel();
-                charactersManaStats[i].setBounds(140,150*i + 70,100,20);
-                add(charactersManaStats[i]);
-            }
+            characterManaStats = new JLabel();
+            characterManaStats.setBounds(140,70,100,20);
+            add(characterManaStats);
         }
-        Character character;
-        for (int i = 0; i < 4; i++)
-        {
-            character = game.getCharacters().get(i);
-            g.setColor(new Color(0, 255, 0));
-            g.drawRect(10,150*i + 45,280,20);
-            g.fillRect(10,150*i + 45,280*character.getHealth()/character.getMaxHealth(),20);
 
-            g.setColor(new Color(0, 0, 255));
-            g.drawRect(10,150*i + 70,280,20);
-            g.fillRect(10,150*i + 70,280*character.getMana()/character.getMaxMana(),20);
+        g.setColor(new Color(0, 255, 0));
+        g.drawRect(10,45,280,20);
+        g.fillRect(10,45,280*character.getHealth()/character.getMaxHealth(),20);
 
-            charactersHealthStats[i].setText(character.getHealth() + "/" + character.getMaxHealth());
+        g.setColor(new Color(0, 0, 255));
+        g.drawRect(10,70,280,20);
+        g.fillRect(10,70,280*character.getMana()/character.getMaxMana(),20);
 
-            charactersManaStats[i].setText(character.getMana() + "/" + character.getMaxMana());
-        }
+        characterHealthStats.setText(character.getHealth() + "/" + character.getMaxHealth());
+
+        characterManaStats.setText(character.getMana() + "/" + character.getMaxMana());
     }
 
     @Override

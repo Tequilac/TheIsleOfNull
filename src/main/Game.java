@@ -49,6 +49,8 @@ public class Game
 
     private Group chosenEnemies;
 
+    private Character currentCharacter;
+
     private Map<String, Race> knownRaces = new HashMap<>();
 
     private Map<String, Race> knownEnemyRaces = new HashMap<>();
@@ -98,6 +100,7 @@ public class Game
     {
         this.currentSave = filename;
         Save.parseSave(this, filename);
+        this.currentCharacter = characters.get(0);
     }
 
     public void saveGame() throws IOException
@@ -111,6 +114,7 @@ public class Game
         {
             this.team = new Team(new Vector2d(32, 34), MapDirection.North, characters);
             ((World) currentDistrict).updateVisibleTiles(team.getPosition());
+            currentCharacter = characters.get(0);
         }
     }
 
@@ -396,7 +400,7 @@ public class Game
 
     public Character getCurrentCharacter()
     {
-        return team.getTeamMembers().get(0);
+        return currentCharacter;
     }
 
     public District getCurrentDistrict()
@@ -494,5 +498,8 @@ public class Game
         this.chosenEnemies = currentDistrict.getEnemies().get(index);
     }
 
-
+    public void setCurrentCharacter(Character currentCharacter)
+    {
+        this.currentCharacter = currentCharacter;
+    }
 }
