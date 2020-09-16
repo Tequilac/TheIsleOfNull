@@ -1,5 +1,6 @@
 package visuals;
 
+import equipment.Equipment;
 import items.Item;
 
 import javax.swing.*;
@@ -10,10 +11,13 @@ public class EquipmentPanel extends JPanel
 {
     private JLabel itemIcon;
 
-    public EquipmentPanel()
+    private Equipment equipment;
+
+    public EquipmentPanel(Equipment equipment)
     {
         super();
         setBackground(Color.CYAN);
+        this.equipment = equipment;
     }
 
     public void addItem(Item item)
@@ -25,5 +29,10 @@ public class EquipmentPanel extends JPanel
 
         add(itemIcon);
         updateUI();
+    }
+
+    public Equipment getEquipment()
+    {
+        return equipment;
     }
 }

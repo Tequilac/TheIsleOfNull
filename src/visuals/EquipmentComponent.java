@@ -1,5 +1,6 @@
 package visuals;
 
+import entities.Character;
 import items.Item;
 
 import javax.swing.*;
@@ -11,6 +12,8 @@ import java.awt.dnd.DropTargetDropEvent;
 
 public class EquipmentComponent extends JComponent
 {
+    private Character character;
+
     private EquipmentPanel head;
 
     private EquipmentPanel torso;
@@ -19,7 +22,7 @@ public class EquipmentComponent extends JComponent
 
     private EquipmentPanel rightHand;
 
-    public EquipmentComponent()
+    public EquipmentComponent(Character character)
     {
         super();
         setPreferredSize(new Dimension(400, 800));
@@ -31,22 +34,22 @@ public class EquipmentComponent extends JComponent
     {
         MyDropTargetListener mtl;
 
-        head = new EquipmentPanel();
+        head = new EquipmentPanel(character.getHead());
         head.setBounds(155, 50, 50, 50);
         mtl = new MyDropTargetListener(head);
         add(head);
 
-        torso = new EquipmentPanel();
+        torso = new EquipmentPanel(character.getTorso());
         torso.setBounds(155, 350, 50, 50);
         mtl = new MyDropTargetListener(torso);
         add(torso);
 
-        leftHand = new EquipmentPanel();
+        leftHand = new EquipmentPanel(character.getLeftHand());
         leftHand.setBounds(30, 440, 50, 50);
         mtl = new MyDropTargetListener(leftHand);
         add(leftHand);
 
-        rightHand = new EquipmentPanel();
+        rightHand = new EquipmentPanel(character.getRightHand());
         rightHand.setBounds(300, 410, 50, 50);
         mtl = new MyDropTargetListener(rightHand);
         add(rightHand);
@@ -83,7 +86,7 @@ public class EquipmentComponent extends JComponent
                 var tr = event.getTransferable();
                 var item = (Item) tr.getTransferData(TransferableItem.itemFlavor);
 
-                if (event.isDataFlavorSupported(TransferableItem.itemFlavor))
+                if (event.isDataFlavorSupported(TransferableItem.itemFlavor) && panel.getEquipment().addItem(item))
                 {
 
                     event.acceptDrop(DnDConstants.ACTION_COPY);

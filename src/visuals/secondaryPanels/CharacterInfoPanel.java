@@ -11,11 +11,11 @@ import java.awt.event.MouseListener;
 
 public class CharacterInfoPanel extends JPanel
 {
-    private  Game game;
+    private final Game game;
 
-    private Frame frame;
+    private final Frame frame;
 
-    private Character character;
+    private final Character character;
 
     private JLabel name;
 
@@ -35,10 +35,17 @@ public class CharacterInfoPanel extends JPanel
 
     public void drawCharacterInfo(Graphics g)
     {
+        if(character == game.getCurrentCharacter())
+        {
+            g.setColor(new Color(220, 155, 76));
+            g.fillRect(0,0,298,198);
+        }
+
+
         if(name == null)
         {
             name = new JLabel(character.getName());
-            name.setBounds(10,20, 120,20);
+            name.setBounds(10,20, 280,20);
             name.addMouseListener(new MouseListener()
             {
                 @Override
@@ -46,6 +53,7 @@ public class CharacterInfoPanel extends JPanel
                 {
                     game.setCurrentCharacter(character);
                     frame.openTeamView();
+                    frame.getMainPanel().repaint();
                 }
 
                 @Override
@@ -79,22 +87,31 @@ public class CharacterInfoPanel extends JPanel
             characterHealthStats.setBounds(140,45,100,20);
             add(characterHealthStats);
 
-            characterManaStats = new JLabel();
-            characterManaStats.setBounds(140,70,100,20);
-            add(characterManaStats);
+            if(character.getCharacterClass().usesMagic())
+            {
+                characterManaStats = new JLabel();
+                characterManaStats.setBounds(140,70,100,20);
+                add(characterManaStats);
+            }
         }
 
         g.setColor(new Color(0, 255, 0));
         g.drawRect(10,45,280,20);
         g.fillRect(10,45,280*character.getHealth()/character.getMaxHealth(),20);
 
-        g.setColor(new Color(0, 0, 255));
-        g.drawRect(10,70,280,20);
-        g.fillRect(10,70,280*character.getMana()/character.getMaxMana(),20);
+        if(character.getCharacterClass().usesMagic())
+        {
+            g.setColor(new Color(0, 0, 255));
+            g.drawRect(10, 70, 280, 20);
+            g.fillRect(10, 70, 280 * character.getMana() / character.getMaxMana(), 20);
+        }
 
         characterHealthStats.setText(character.getHealth() + "/" + character.getMaxHealth());
 
-        characterManaStats.setText(character.getMana() + "/" + character.getMaxMana());
+        if(character.getCharacterClass().usesMagic())
+        {
+            characterManaStats.setText(character.getMana() + "/" + character.getMaxMana());
+        }
     }
 
     @Override

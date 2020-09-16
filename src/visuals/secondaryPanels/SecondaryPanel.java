@@ -8,9 +8,9 @@ import java.awt.*;
 
 public class SecondaryPanel extends JPanel
 {
-    protected Game game;
+    protected final Game game;
 
-    protected visuals.Frame frame;
+    protected final visuals.Frame frame;
 
     public SecondaryPanel(Game game, Frame frame)
     {

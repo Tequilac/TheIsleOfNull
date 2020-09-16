@@ -8,9 +8,9 @@ import java.awt.*;
 
 public class PrimaryPanel extends JPanel
 {
-    protected Game game;
+    protected final Game game;
 
-    protected Frame frame;
+    protected final Frame frame;
 
     public PrimaryPanel(Game game, Frame frame)
     {

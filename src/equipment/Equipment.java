@@ -4,11 +4,23 @@ import items.Item;
 
 public class Equipment
 {
+    private EquipmentType type;
+
     private Item item;
 
-    public Equipment(Item item)
+    public Equipment(EquipmentType type)
     {
-        this.item = item;
+        this.type = type;
+    }
+
+    public boolean addItem(Item item)
+    {
+        if(type.compatibleWith(item))
+        {
+            this.item = item;
+            return true;
+        }
+        return false;
     }
 
     public int getValue()

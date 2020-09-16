@@ -1,6 +1,7 @@
 package entities;
 
 import equipment.Equipment;
+import equipment.EquipmentType;
 import items.DefensiveItem;
 import items.Item;
 import items.OffensiveItem;
@@ -59,6 +60,7 @@ public class Character extends Entity
         this.speed = speed;
         this.luck = luck;
         this.skills = characterClass.getSkills();
+        initEquipment();
     }
 
     public Character(String name, int health, int maxHealth, int mana, int maxMana, Race race, int level, int experience, Class characterClass, int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck)
@@ -76,6 +78,7 @@ public class Character extends Entity
         this.speed = speed;
         this.luck = luck;
         this.skills = characterClass.getSkills();
+        initEquipment();
     }
 
     public Character(String name, int health, Race race, int level, int experience, Class characterClass)
@@ -85,6 +88,15 @@ public class Character extends Entity
         this.maxHealth = 100;
         this.mana = 100;
         this.maxMana = 100;
+        initEquipment();
+    }
+
+    public void initEquipment()
+    {
+        leftHand = new Equipment(EquipmentType.LeftHand);
+        rightHand = new Equipment(EquipmentType.RightHand);
+        head = new Equipment(EquipmentType.Head);
+        torso = new Equipment(EquipmentType.Torso);
     }
 
     public int getDamage()
@@ -196,6 +208,26 @@ public class Character extends Entity
     public ArrayList<Skill> getSkills()
     {
         return skills;
+    }
+
+    public Equipment getLeftHand()
+    {
+        return leftHand;
+    }
+
+    public Equipment getRightHand()
+    {
+        return rightHand;
+    }
+
+    public Equipment getHead()
+    {
+        return head;
+    }
+
+    public Equipment getTorso()
+    {
+        return torso;
     }
 
     public void setMana(int mana)
