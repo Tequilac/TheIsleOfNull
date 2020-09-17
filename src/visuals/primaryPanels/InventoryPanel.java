@@ -17,25 +17,39 @@ import java.io.IOException;
 
 public class InventoryPanel extends PrimaryPanel implements DragGestureListener
 {
-    private Team team;
+    private final Team team;
 
     private JLabel[] items;
 
     private EquipmentComponent equipmentComponent;
 
-    public InventoryPanel(Game game, Team team, Frame frame)
+    public InventoryPanel(Game game, Frame frame)
     {
         super(game, frame);
 
         setLayout(null);
 
-        this.team = team;
+        this.team = game.getTeam();
 
-        this.equipmentComponent = new EquipmentComponent();
+        this.equipmentComponent = new EquipmentComponent(this, team, game.getCurrentCharacter());
         equipmentComponent.setBounds(400, 0, 400, 800);
         add(equipmentComponent);
 
+        drawItems();
+    }
+
+    public void drawItems()
+    {
         DragSource ds = new DragSource();
+
+        if(this.items != null)
+        {
+            for(int i = 0; i < items.length; i++)
+            {
+                remove(items[i]);
+            }
+        }
+        updateUI();
 
         this.items = new JLabel[team.getItemsInInventory().size()];
         for (int i = 0; i < team.getItemsInInventory().size(); i++)

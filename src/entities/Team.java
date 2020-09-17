@@ -55,14 +55,20 @@ public class Team extends Group
         }
     }
 
-    public void equipItem(Item item)
-    {
-
-    }
-
     public void addItemToInventory(Item item)
     {
         itemsInInventory.add(item);
+    }
+
+    public void removeItemFromInventory(Item item)
+    {
+        int toRemove = -1;
+        for(int i = 0; i < itemsInInventory.size(); i++)
+        {
+            if(item.toString().equals(itemsInInventory.get(i).toString()))
+                toRemove = i;
+        }
+        itemsInInventory.remove(toRemove);
     }
 
     public void addGold(int gold)

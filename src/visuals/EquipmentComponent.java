@@ -1,7 +1,9 @@
 package visuals;
 
 import entities.Character;
+import entities.Team;
 import items.Item;
+import visuals.primaryPanels.InventoryPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +14,11 @@ import java.awt.dnd.DropTargetDropEvent;
 
 public class EquipmentComponent extends JComponent
 {
-    private Character character;
+    private final InventoryPanel inventoryPanel;
+
+    private final Team team;
+
+    private final Character character;
 
     private EquipmentPanel head;
 
@@ -22,10 +28,15 @@ public class EquipmentComponent extends JComponent
 
     private EquipmentPanel rightHand;
 
-    public EquipmentComponent(Character character)
+    public EquipmentComponent(InventoryPanel inventoryPanel, Team team, Character character)
     {
         super();
         setPreferredSize(new Dimension(400, 800));
+
+        this.inventoryPanel = inventoryPanel;
+        this.team = team;
+        this.character = character;
+
         repaint();
         loadEquipmentPanels();
     }
@@ -88,9 +99,13 @@ public class EquipmentComponent extends JComponent
 
                 if (event.isDataFlavorSupported(TransferableItem.itemFlavor) && panel.getEquipment().addItem(item))
                 {
-
                     event.acceptDrop(DnDConstants.ACTION_COPY);
+
+                    team.removeItemFromInventory(item);
+                    inventoryPanel.drawItems();
+
                     this.panel.addItem(item);
+
                     event.dropComplete(true);
                     return;
                 }

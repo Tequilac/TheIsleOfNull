@@ -32,7 +32,7 @@ public class TeamPanel extends PrimaryPanel
         pane.addTab("Skills", new SkillsPanel(game, frame));
         pane.setMnemonicAt(1, KeyEvent.VK_2);
 
-        pane.addTab("Inventory", new InventoryPanel(game, game.getTeam(), frame));
+        pane.addTab("Inventory", new InventoryPanel(game, frame));
         pane.setMnemonicAt(2, KeyEvent.VK_3);
 
         pane.addTab("Quests", new ActiveQuestsPanel(game, frame));

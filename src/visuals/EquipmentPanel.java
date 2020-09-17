@@ -18,6 +18,8 @@ public class EquipmentPanel extends JPanel
         super();
         setBackground(Color.CYAN);
         this.equipment = equipment;
+        if(equipment.getItem() != null)
+            addItem(equipment.getItem());
     }
 
     public void addItem(Item item)
