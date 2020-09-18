@@ -1,12 +1,12 @@
 package visuals.primaryPanels;
 
 import entities.Team;
+import items.Item;
 import items.ItemParser;
 import main.Game;
 import quests.QuestGiver;
-import visuals.EquipmentComponent;
+import visuals.*;
 import visuals.Frame;
-import visuals.TransferableItem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,11 +15,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class InventoryPanel extends PrimaryPanel implements DragGestureListener
+public class InventoryPanel extends PrimaryPanel
 {
-    private final Team team;
-
-    private JLabel[] items;
+    private TeamInventoryPanel teamInventoryPanel;
 
     private EquipmentComponent equipmentComponent;
 
@@ -29,63 +27,67 @@ public class InventoryPanel extends PrimaryPanel implements DragGestureListener
 
         setLayout(null);
 
-        this.team = game.getTeam();
+        MyDropTargetListener mtl;
+        this.teamInventoryPanel = new TeamInventoryPanel(this, game.getTeam());
+        mtl = new MyDropTargetListener(teamInventoryPanel);
+        teamInventoryPanel.setBounds(0, 0, 400, 800);
+        add(teamInventoryPanel);
 
-        this.equipmentComponent = new EquipmentComponent(this, team, game.getCurrentCharacter());
+        this.equipmentComponent = new EquipmentComponent(this, game.getTeam(), game.getCurrentCharacter());
         equipmentComponent.setBounds(400, 0, 400, 800);
         add(equipmentComponent);
-
-        drawItems();
     }
 
     public void drawItems()
     {
-        DragSource ds = new DragSource();
+        teamInventoryPanel.drawItems();
+    }
 
-        if(this.items != null)
+    private class MyDropTargetListener extends DropTargetAdapter
+    {
+
+        private final DropTarget dropTarget;
+
+        private final TeamInventoryPanel panel;
+
+        public MyDropTargetListener(TeamInventoryPanel panel)
         {
-            for(int i = 0; i < items.length; i++)
+            this.panel = panel;
+
+            dropTarget = new DropTarget(panel, DnDConstants.ACTION_COPY, this, true, null);
+        }
+
+
+        public void drop(DropTargetDropEvent event)
+        {
+
+            try
             {
-                remove(items[i]);
+
+                var tr = event.getTransferable();
+                var item = (Item) tr.getTransferData(TransferableItem.itemFlavor);
+
+                if (event.isDataFlavorSupported(TransferableItem.itemFlavor) && panel.getTeam().addItemToInventory(item))
+                {
+                    event.acceptDrop(DnDConstants.ACTION_COPY);
+
+                    equipmentComponent.removeItem(item);
+                    drawItems();
+
+                    equipmentComponent.repaint();
+
+                    event.dropComplete(true);
+                    return;
+                }
+
+                event.rejectDrop();
+            }
+            catch (Exception e)
+            {
+
+                e.printStackTrace();
+                event.rejectDrop();
             }
         }
-        updateUI();
-
-        this.items = new JLabel[team.getItemsInInventory().size()];
-        for (int i = 0; i < team.getItemsInInventory().size(); i++)
-        {
-            items[i] = team.getItemsInInventory().get(i).getLabel();
-            items[i].setBounds(0, 20 + i*40, 40, 40);
-            items[i].setToolTipText("<html>" + team.getItemsInInventory().get(i).toString() + "</html>");
-
-            ds.createDefaultDragGestureRecognizer(items[i], DnDConstants.ACTION_COPY, this);
-
-            add(items[i]);
-        }
     }
-
-    @Override
-    public void dragGestureRecognized(DragGestureEvent event)
-    {
-        var cursor = Cursor.getDefaultCursor();
-        JLabel label = (JLabel) event.getComponent();
-        String text = label.getToolTipText();
-        text = text.substring(6, text.indexOf("<br>"));
-
-        if(event.getDragAction() == DnDConstants.ACTION_COPY)
-        {
-            cursor = DragSource.DefaultCopyDrop;
-        }
-
-        try
-        {
-            event.startDrag(cursor, new TransferableItem(ItemParser.parseItem(text)));
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-
 }

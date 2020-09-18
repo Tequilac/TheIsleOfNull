@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class TransferableItem implements Transferable
 {
-    protected static final DataFlavor itemFlavor = new DataFlavor(Item.class, "Item object");
+    public static final DataFlavor itemFlavor = new DataFlavor(Item.class, "Item object");
 
     protected static final DataFlavor[] supportedFlavors = { itemFlavor, DataFlavor.stringFlavor };
 

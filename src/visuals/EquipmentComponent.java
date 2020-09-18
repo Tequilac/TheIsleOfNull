@@ -66,6 +66,19 @@ public class EquipmentComponent extends JComponent
         add(rightHand);
     }
 
+    public void removeItem(Item item)
+    {
+        EquipmentPanel[] equipmentPanels = {head, leftHand, rightHand, torso};
+        for(EquipmentPanel panel : equipmentPanels)
+        {
+            if(panel.getEquipment().getItem() != null && panel.getEquipment().getItem().getName().equals(item.getName()))
+            {
+                panel.clear();
+                break;
+            }
+        }
+    }
+
     @Override
     public void paintComponent(Graphics g)
     {

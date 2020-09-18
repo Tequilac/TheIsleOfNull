@@ -23,6 +23,11 @@ public class Equipment
         return false;
     }
 
+    public void clear()
+    {
+        item = null;
+    }
+
     public int getValue()
     {
         return item.getValue();

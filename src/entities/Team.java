@@ -55,9 +55,17 @@ public class Team extends Group
         }
     }
 
-    public void addItemToInventory(Item item)
+    public boolean addItemToInventory(Item item)
     {
+        for(int i = 0; i < itemsInInventory.size(); i++)
+        {
+            if(item.getName().equals(itemsInInventory.get(i).getName()))
+            {
+                return false;
+            }
+        }
         itemsInInventory.add(item);
+        return true;
     }
 
     public void removeItemFromInventory(Item item)
@@ -65,8 +73,11 @@ public class Team extends Group
         int toRemove = -1;
         for(int i = 0; i < itemsInInventory.size(); i++)
         {
-            if(item.toString().equals(itemsInInventory.get(i).toString()))
+            if(item.getName().equals(itemsInInventory.get(i).getName()))
+            {
                 toRemove = i;
+                break;
+            }
         }
         itemsInInventory.remove(toRemove);
     }
