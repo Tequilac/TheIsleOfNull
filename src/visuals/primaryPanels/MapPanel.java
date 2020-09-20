@@ -3,6 +3,7 @@ package visuals.primaryPanels;
 import main.Game;
 import map.Chest;
 import map.Vector2d;
+import map.districts.Town;
 import map.districts.World;
 import quests.QuestGiver;
 import visuals.Frame;
@@ -17,6 +18,10 @@ import java.util.ArrayList;
 
 public class MapPanel extends PrimaryPanel
 {
+    private final Image townImage;
+
+    private final Image dungeonImage;
+
     private final Image chestImage;
 
     private final Image questGiverImage;
@@ -24,6 +29,8 @@ public class MapPanel extends PrimaryPanel
     private final Image[] worldTileGraphics;
 
     private final Image[] townTileGraphics;
+
+    private final Image[] dungeonTileGraphics;
 
     private final BufferedImage[] teamImages = new BufferedImage[4];
 
@@ -46,16 +53,26 @@ public class MapPanel extends PrimaryPanel
         worldTileGraphics[1] = iiGrass.getImage();
         ImageIcon iiSand = new ImageIcon("res/graphics/worldGraphics/sand.png");
         worldTileGraphics[2] = iiSand.getImage();
-        ImageIcon iiTown = new ImageIcon("res/graphics/worldGraphics/town.png");
-        worldTileGraphics[3] = iiTown.getImage();
-        ImageIcon iiDungeon = new ImageIcon("res/graphics/worldGraphics/dungeon.png");
-        worldTileGraphics[4] = iiDungeon.getImage();
         ImageIcon iiTeam = new ImageIcon("res/graphics/team.png");
         ImageIcon iiEnemies = new ImageIcon("res/graphics/enemy.png");
 
         townTileGraphics = new Image[10];
         townTileGraphics[0] = iiGrass.getImage();
-        townTileGraphics[1] = iiTown.getImage();
+        ImageIcon iiHouse = new ImageIcon("res/graphics/worldGraphics/house.png");
+        townTileGraphics[1] = iiHouse.getImage();
+
+        dungeonTileGraphics = new Image[10];
+        ImageIcon iiWall = new ImageIcon("res/graphics/worldGraphics/dungeon_wall.png");
+        dungeonTileGraphics[0] = iiWall.getImage();
+        ImageIcon iiFloor = new ImageIcon("res/graphics/worldGraphics/dungeon_floor.png");
+        dungeonTileGraphics[1] = iiFloor.getImage();
+        ImageIcon iiBlackFloor = new ImageIcon("res/graphics/worldGraphics/dungeon_black_floor.png");
+        dungeonTileGraphics[2] = iiBlackFloor.getImage();
+
+        ImageIcon iiTown = new ImageIcon("res/graphics/worldGraphics/town.png");
+        townImage = iiTown.getImage();
+        ImageIcon iiDungeon = new ImageIcon("res/graphics/worldGraphics/dungeon.png");
+        dungeonImage = iiDungeon.getImage();
 
         teamImages[0] = new BufferedImage(20, 20, BufferedImage.TYPE_INT_ARGB);
         Graphics2D bGr = teamImages[0].createGraphics();
@@ -122,9 +139,13 @@ public class MapPanel extends PrimaryPanel
                     if(((World) game.getCurrentDistrict()).getVisibleTiles()[j][i])
                         g.drawImage(worldTileGraphics[game.getCurrentDistrict().getTiles()[j][i]], i*20, j*20, this);
                 }
-                else
+                else if(game.getCurrentDistrict() instanceof Town)
                 {
                     g.drawImage(townTileGraphics[game.getCurrentDistrict().getTiles()[j][i]], i*20, j*20, this);
+                }
+                else
+                {
+                    g.drawImage(dungeonTileGraphics[game.getCurrentDistrict().getTiles()[j][i]], i*20, j*20, this);
                 }
             }
         }
@@ -133,10 +154,10 @@ public class MapPanel extends PrimaryPanel
         {
             Vector2d town = ((World) game.getCurrentDistrict()).getTownEntrance();
             if(town != null && ((World) game.getCurrentDistrict()).isVisible(town))
-                g.drawImage(worldTileGraphics[3], town.getX()*20, town.getY()*20, this);
+                g.drawImage(townImage, town.getX()*20, town.getY()*20, this);
             Vector2d dungeon = ((World) game.getCurrentDistrict()).getDungeonEntrance();
             if(dungeon != null && ((World) game.getCurrentDistrict()).isVisible(dungeon))
-                g.drawImage(worldTileGraphics[4], dungeon.getX()*20, dungeon.getY()*20, this);
+                g.drawImage(dungeonImage, dungeon.getX()*20, dungeon.getY()*20, this);
         }
 
         ArrayList<Chest> chests = game.getCurrentDistrict().getChests();

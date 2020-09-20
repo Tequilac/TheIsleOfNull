@@ -21,9 +21,7 @@ public class Town extends District
 
     public boolean canMove(Vector2d position)
     {
-        if(position.getX() < 0 || position.getX() >= width || position.getY() < 0 || position.getY() >= height)
-            return false;
-        return tiles[position.getY()][position.getX()] != 0;
+        return true;
     }
 
     public boolean isExit(Vector2d position)

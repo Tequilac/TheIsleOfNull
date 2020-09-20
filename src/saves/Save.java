@@ -272,7 +272,11 @@ public class Save
         {
             for(int i = 0; i < game.getCurrentDistrict().getHeight(); i++)
             {
-                boolean[][] visTiles = ((World) game.getCurrentDistrict()).getVisibleTiles();
+                boolean[][] visTiles;
+                if(game.getCurrentDistrict() instanceof World)
+                    visTiles = ((World) game.getCurrentDistrict()).getVisibleTiles();
+                else
+                    visTiles = ((Dungeon) game.getCurrentDistrict()).getVisibleTiles();
                 for(int j = 0; j < game.getCurrentDistrict().getWidth(); j++)
                 {
                     if(visTiles[j][i])

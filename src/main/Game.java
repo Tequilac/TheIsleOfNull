@@ -128,18 +128,34 @@ public class Game
         MapDirection changeDirection = team.changeMap(direction, currentDistrict);
         if(changeDirection == null)
             return null;
-        switch (changeDirection)
+        if(currentDistrict instanceof World)
         {
-            case North:
-                return "W" + currentDistrict.getName().charAt(1) + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(2)))+1);
-            case South:
-                return "W" + currentDistrict.getName().charAt(1) + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(2)))-1);
-            case West:
-                return "W" + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(1)))+1) + currentDistrict.getName().charAt(2);
-            case East:
-                return "W" + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(1)))-1) + currentDistrict.getName().charAt(2);
-            default:
-                return null;
+            switch(changeDirection)
+            {
+                case North:
+                    return "W" + currentDistrict.getName().charAt(1) + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(2))) + 1);
+                case South:
+                    return "W" + currentDistrict.getName().charAt(1) + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(2))) - 1);
+                case West:
+                    return "W" + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(1))) + 1) + currentDistrict.getName().charAt(2);
+                case East:
+                    return "W" + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(1))) - 1) + currentDistrict.getName().charAt(2);
+                default:
+                    return null;
+            }
+        }
+        else
+        {
+            switch(changeDirection)
+            {
+                case North:
+                case South:
+                case West:
+                case East:
+                    return "W" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2);
+                default:
+                    return null;
+            }
         }
     }
 
@@ -280,11 +296,16 @@ public class Game
 
     public void loadNewWorldMap(String newMap) throws IOException
     {
+        boolean isTown = (currentDistrict instanceof Town);
         Save.saveGame(this, currentSave);
         Save.parseSave(this, currentSave);
         Save.setCurrentDistrict(this, currentSave, newMap, team.getPosition(), team.getMapDirection());
         currentDistrict = MapParser.parseMap(newMap);
         Save.parseSave(this, currentSave);
+        if(isTown)
+            team.setPosition(((World)currentDistrict).getTownEntrance());
+        else
+            team.setPosition(((World)currentDistrict).getDungeonEntrance());
     }
 
     public void loadNewTownMap(String newMap) throws IOException
@@ -339,7 +360,7 @@ public class Game
 
     public void takeQuest(Quest quest)
     {
-        team.getActiveQuests().add(quest);
+        team.addActiveQuest(quest);
     }
 
     public void transferItem(Item item)

@@ -21,12 +21,17 @@ public class Dungeon extends District
     public boolean canMove(Vector2d position)
     {
         if(position.getX() < 0 || position.getX() >= width || position.getY() < 0 || position.getY() >= height)
-            return false;
+            return true;
         return tiles[position.getY()][position.getX()] != 0;
     }
 
     public boolean isExit(Vector2d position)
     {
         return position.equals(new Vector2d(0, 0));
+    }
+
+    public boolean[][] getVisibleTiles()
+    {
+        return visibleTiles;
     }
 }

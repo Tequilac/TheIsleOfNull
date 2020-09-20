@@ -4,7 +4,7 @@ import items.Item;
 
 public class Equipment
 {
-    private EquipmentType type;
+    private final EquipmentType type;
 
     private Item item;
 
@@ -15,7 +15,7 @@ public class Equipment
 
     public boolean addItem(Item item)
     {
-        if(type.compatibleWith(item))
+        if(this.item != null && type.compatibleWith(item))
         {
             this.item = item;
             return true;

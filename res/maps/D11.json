@@ -3,6 +3,5 @@
   "width": 20,
   "monstersCount": 0,
   "monsters": [],
-  "chestsCount": 0,
-  "chests": []
+  "hasChests": false
 }

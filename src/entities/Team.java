@@ -82,6 +82,12 @@ public class Team extends Group
         itemsInInventory.remove(toRemove);
     }
 
+    public void addActiveQuest(Quest quest)
+    {
+        if(!activeQuests.contains(quest))
+            activeQuests.add(quest);
+    }
+
     public void addGold(int gold)
     {
         this.gold += gold;
