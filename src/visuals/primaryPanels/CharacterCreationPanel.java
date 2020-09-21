@@ -1,9 +1,11 @@
 package visuals.primaryPanels;
 
+import entities.Race;
 import main.Game;
 import skills.Skill;
 import visuals.Frame;
 import entities.Character;
+import entities.Class;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,18 +42,23 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
     public void drawCharacters(Game game)
     {
         names = new JTextField[4];
+
         String[] classes = new String[game.getClasses().size()];
+        Object[] classesArray = game.getClasses().values().toArray();
         for (int i = 0; i < game.getClasses().size(); i++)
         {
-            classes[i] = game.getClasses().get(i).getName();
+            classes[i] = ((Class)(classesArray[i])).getName();
         }
         JComboBox[] classChoosers = new JComboBox[4];
-        String races[] = new String[game.getRaces().size()];
+
+        String[] races = new String[game.getRaces().size()];
+        Object[] racesArray = game.getRaces().values().toArray();
         for (int i = 0; i < game.getRaces().size(); i++)
         {
-            races[i] = game.getRaces().get(i).getName();
+            races[i] = ((Race)(racesArray[i])).getName();
         }
         JComboBox[] raceChoosers = new JComboBox[4];
+
         JLabel[] attributes = new JLabel[28];
         JLabel[] magicUsage = new JLabel[4];
         JLabel[] skills = new JLabel[12];
@@ -64,7 +71,7 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
             int finalI = i;
             classChoosers[i].addActionListener(actionEvent ->
             {
-                game.getCharacters().get(finalI).setClass(game.getClasses().get((classChoosers[finalI].getSelectedIndex())));
+                game.getCharacters().get(finalI).setClass(game.getClasses().get(classes[classChoosers[finalI].getSelectedIndex()]));
                 drawAttributes(game, attributes, magicUsage, skills, finalI);
             });
             classChoosers[i].setBounds(i*400 + 50,100, 120,30);
@@ -73,7 +80,7 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
             int finalI1 = i;
             raceChoosers[i].addActionListener(actionEvent ->
             {
-                game.getCharacters().get(finalI1).setRace(game.getRaces().get(raceChoosers[finalI1].getSelectedIndex()));
+                game.getCharacters().get(finalI1).setRace(game.getRaces().get(races[raceChoosers[finalI1].getSelectedIndex()]));
                 drawAttributes(game, attributes, magicUsage, skills, finalI1);
             });
             raceChoosers[i].setBounds(i*400 + 50,150, 120,30);

@@ -15,7 +15,7 @@ public class Equipment
 
     public boolean addItem(Item item)
     {
-        if(this.item != null && type.compatibleWith(item))
+        if(this.item == null && type.compatibleWith(item))
         {
             this.item = item;
             return true;

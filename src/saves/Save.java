@@ -76,9 +76,9 @@ public class Save
                 {
                     name = br.readLine();
                     teamInfo.append(name).append("\n");
-                    characterClass = ClassParser.parseClass(game, br.readLine() + ".json");
+                    characterClass = game.getClass(br.readLine());
                     teamInfo.append(characterClass.getName()).append("\n");
-                    race = RaceParser.parseRace(br.readLine() + ".json");
+                    race = (game.getRace(br.readLine()));
                     teamInfo.append(race.getName()).append("\n");
                     health = Integer.parseInt(br.readLine());
                     teamInfo.append(health).append("\n");

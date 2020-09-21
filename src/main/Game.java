@@ -31,10 +31,6 @@ public class Game
 
     private District currentDistrict;
 
-    private ArrayList<Class> classes;
-
-    private ArrayList<Race> races;
-
     private ArrayList<Character> characters;
 
     private Team team;
@@ -61,8 +57,6 @@ public class Game
 
     public Game() throws IOException
     {
-        classes = new ArrayList<>();
-        races = new ArrayList<>();
         characters = new ArrayList<>(4);
         loadClasses(new File("res/classes"));
         loadRaces(new File("res/races"));
@@ -75,7 +69,7 @@ public class Game
     {
         for (final File fileEntry : folder.listFiles())
         {
-            classes.add(ClassParser.parseClass(this, fileEntry.getName()));
+            getClass(fileEntry.getName().substring(0, fileEntry.getName().length() - 5));
         }
     }
 
@@ -83,7 +77,7 @@ public class Game
     {
         for (final File fileEntry : folder.listFiles())
         {
-            races.add(RaceParser.parseRace(fileEntry.getName()));
+            getRace(fileEntry.getName().substring(0, fileEntry.getName().length() - 5));
         }
     }
 
@@ -91,7 +85,7 @@ public class Game
     {
         for (int i = 0; i < 4; i++)
         {
-            Character character = new Character("Choose name", 100, races.get(0), 0, 0, classes.get(0));
+            Character character = new Character("Choose name", 100, knownRaces.get("Human"), 0, 0, knownClasses.get("Knight"));
             characters.add(character);
         }
     }
@@ -112,10 +106,11 @@ public class Game
     {
         if (this.team == null)
         {
+            System.out.println("creating team");
             this.team = new Team(new Vector2d(32, 34), MapDirection.North, characters);
             ((World) currentDistrict).updateVisibleTiles(team.getPosition());
-            currentCharacter = characters.get(0);
         }
+        currentCharacter = team.getTeamMembers().get(0);
     }
 
     public boolean move(MoveDirection direction)
@@ -429,14 +424,14 @@ public class Game
         return currentDistrict;
     }
 
-    public ArrayList<Class> getClasses()
+    public Map<String, Class> getClasses()
     {
-        return classes;
+        return knownClasses;
     }
 
-    public ArrayList<Race> getRaces()
+    public Map<String, Race> getRaces()
     {
-        return races;
+        return knownRaces;
     }
 
     public ArrayList<Character> getCharacters()
@@ -482,16 +477,6 @@ public class Game
     public void setCurrentDistrict(District currentDistrict)
     {
         this.currentDistrict = currentDistrict;
-    }
-
-    public void setClasses(ArrayList<Class> classes)
-    {
-        this.classes = classes;
-    }
-
-    public void setRaces(ArrayList<Race> races)
-    {
-        this.races = races;
     }
 
     public void setCharacters(ArrayList<Character> characters)

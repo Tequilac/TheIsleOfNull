@@ -10,6 +10,7 @@ import skills.OffensiveItemSkill;
 import skills.Skill;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Character extends Entity
 {
