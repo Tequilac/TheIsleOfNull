@@ -3,6 +3,7 @@ package visuals.primaryPanels;
 import main.Game;
 import map.Chest;
 import map.Vector2d;
+import map.districts.Dungeon;
 import map.districts.Town;
 import map.districts.World;
 import quests.QuestGiver;
@@ -145,7 +146,8 @@ public class MapPanel extends PrimaryPanel
                 }
                 else
                 {
-                    g.drawImage(dungeonTileGraphics[game.getCurrentDistrict().getTiles()[j][i]], i*20, j*20, this);
+                    if(((Dungeon) game.getCurrentDistrict()).getVisibleTiles()[j][i])
+                        g.drawImage(dungeonTileGraphics[game.getCurrentDistrict().getTiles()[j][i]], i*20, j*20, this);
                 }
             }
         }
@@ -166,14 +168,19 @@ public class MapPanel extends PrimaryPanel
             for (Chest chest : chests)
             {
                 Vector2d position = chest.getPosition();
-                if (game.getCurrentDistrict() instanceof World)
+                if(game.getCurrentDistrict() instanceof World)
                 {
                     if (((World) game.getCurrentDistrict()).getVisibleTiles()[position.getY()][position.getX()])
                         g.drawImage(chestImage, position.getX() * 20, position.getY() * 20, this);
                 }
-                else
+                else if (game.getCurrentDistrict() instanceof Town)
                 {
                     g.drawImage(chestImage, position.getX() * 20, position.getY() * 20, this);
+                }
+                else
+                {
+                    if (((Dungeon) game.getCurrentDistrict()).getVisibleTiles()[position.getY()][position.getX()])
+                        g.drawImage(chestImage, position.getX() * 20, position.getY() * 20, this);
                 }
             }
         }

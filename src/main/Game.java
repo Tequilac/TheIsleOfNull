@@ -262,6 +262,7 @@ public class Game
         checkForTownEnter();
         checkForDungeonExit();
         checkForDungeonEnter();
+        update();
     }
 
     public void checkForChest()
@@ -350,7 +351,12 @@ public class Game
     public void update()
     {
         if(currentDistrict instanceof World)
+        {
             ((World) currentDistrict).updateVisibleTiles(team.getPosition());
+            return;
+        }
+        if(currentDistrict instanceof Dungeon)
+            ((Dungeon) currentDistrict).updateVisibleTiles(team.getPosition());
     }
 
     public void takeQuest(Quest quest)

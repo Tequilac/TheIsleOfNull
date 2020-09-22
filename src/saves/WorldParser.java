@@ -40,7 +40,7 @@ public class WorldParser implements IDistrictParser
             {
                 String mapLine = br.readLine();
                 currentDistrictInfo.append("\n").append(mapLine);
-                for (int j = 0; j < district.getHeight(); j++)
+                for (int j = 0; j < district.getWidth(); j++)
                 {
                     visibleTiles[j][i] = mapLine.charAt(j) == '1';
                 }

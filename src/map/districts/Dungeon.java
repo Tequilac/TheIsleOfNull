@@ -30,8 +30,27 @@ public class Dungeon extends District
         return position.equals(new Vector2d(0, 0));
     }
 
+    public void setVisibleTiles(boolean[][] visibleTiles)
+    {
+        this.visibleTiles = visibleTiles;
+    }
+
     public boolean[][] getVisibleTiles()
     {
         return visibleTiles;
+    }
+
+    public void updateVisibleTiles(Vector2d position)
+    {
+        int posX = position.getX();
+        int posY = position.getY();
+        for (int i = -4; i <= 4; i++)
+        {
+            for (int j = -4; j <= 4; j++)
+            {
+                if(posY + i > -1 && posY + i < height && posX + j > -1 && posX + j < width)
+                    visibleTiles[posY + i][posX + j] = true;
+            }
+        }
     }
 }
