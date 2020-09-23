@@ -26,9 +26,10 @@ public class QuestsPanel extends PrimaryPanel
         closeButton = new JButton(new ImageIcon("res/graphics/exit.png"));
         closeButton.addActionListener(actionEvent ->
         {
-            //TODO close quests
+            game.doAction();
+            frame.updateButtons(true, false);
         });
-        closeButton.setBounds(760, 0, 40, 40);
+        closeButton.setBounds(750, 10, 40, 40);
         add(closeButton);
 
         this.quests = new JButton[questGiver.getQuests().size()];

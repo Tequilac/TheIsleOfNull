@@ -248,9 +248,7 @@ public class Game
 
     public void enterLocation() throws IOException
     {
-        checkForTownExit();
         checkForTownEnter();
-        checkForDungeonExit();
         checkForDungeonEnter();
         update();
     }
@@ -264,29 +262,11 @@ public class Game
         }
     }
 
-    public void checkForTownExit() throws IOException
-    {
-        if(currentDistrict instanceof Town && ((Town) currentDistrict).isExit(team.getPosition()))
-        {
-            loadNewWorldMap("W" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2));
-            frame.getMainPanel().repaint();
-        }
-    }
-
     public void checkForDungeonEnter() throws IOException
     {
         if(currentDistrict instanceof World && ((World) currentDistrict).isDungeon(team.getPosition()))
         {
             loadNewDungeonMap("D" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2));
-            frame.getMainPanel().repaint();
-        }
-    }
-
-    public void checkForDungeonExit() throws IOException
-    {
-        if(currentDistrict instanceof Dungeon && ((Dungeon) currentDistrict).isExit(team.getPosition()))
-        {
-            loadNewWorldMap("W" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2));
             frame.getMainPanel().repaint();
         }
     }

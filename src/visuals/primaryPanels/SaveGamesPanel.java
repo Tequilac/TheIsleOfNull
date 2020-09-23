@@ -5,6 +5,7 @@ import visuals.Frame;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,12 +31,11 @@ public class SaveGamesPanel extends PrimaryPanel
         setFocusable(true);
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        closeButton = new JButton(new ImageIcon("res/graphics/exit.png"));
+        closeButton = new JButton("Exit to Main Menu");
         closeButton.addActionListener(actionEvent ->
-        {
-            //TODO back to starting panel
-        });
-        closeButton.setBounds(760, 0, 40, 40);
+                frame.openStartingPanel());
+        closeButton.setBackground(Color.GRAY);
+        closeButton.setAlignmentX(CENTER_ALIGNMENT);
         add(closeButton);
 
         File folder = new File("saveGames");

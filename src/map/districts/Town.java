@@ -23,9 +23,4 @@ public class Town extends District
     {
         return true;
     }
-
-    public boolean isExit(Vector2d position)
-    {
-        return position.equals(new Vector2d(0, 0));
-    }
 }

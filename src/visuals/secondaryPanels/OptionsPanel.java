@@ -72,6 +72,7 @@ public class OptionsPanel extends SecondaryPanel
             {
                 e.printStackTrace();
             }
+            frame.updateButtons(false, false);
             frame.getMainPanel().repaint();
             frame.requestFocus();
         });

@@ -31,15 +31,20 @@ public class Frame extends JFrame implements KeyListener
         game.setFrame(this);
         this.game = game;
         mainPanel = new MainPanel(this);
-        mainPanel.addPrimaryPanel(new StartingPanel(game, this));
         add(mainPanel);
+        openStartingPanel();
+    }
+
+    public void openStartingPanel()
+    {
+
+        mainPanel.addPrimaryPanel(new StartingPanel(game, this));
         setResizable(false);
         pack();
 
         setTitle("The Isle of Null");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
     public void openCharacterCreationPanel()

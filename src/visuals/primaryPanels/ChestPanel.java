@@ -31,9 +31,10 @@ public class ChestPanel extends PrimaryPanel
         closeButton = new JButton(new ImageIcon("res/graphics/exit.png"));
         closeButton.addActionListener(actionEvent ->
         {
-            //TODO close chest
+            game.doAction();
+            frame.updateButtons(true, false);
         });
-        closeButton.setBounds(760, 0, 40, 40);
+        closeButton.setBounds(750, 10, 40, 40);
         add(closeButton);
 
         setChestContent();

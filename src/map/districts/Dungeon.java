@@ -25,11 +25,6 @@ public class Dungeon extends District
         return tiles[position.getY()][position.getX()] != 0;
     }
 
-    public boolean isExit(Vector2d position)
-    {
-        return position.equals(new Vector2d(0, 0));
-    }
-
     public void setVisibleTiles(boolean[][] visibleTiles)
     {
         this.visibleTiles = visibleTiles;
