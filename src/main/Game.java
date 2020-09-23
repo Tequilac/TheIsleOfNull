@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Game
 {
@@ -55,6 +56,10 @@ public class Game
 
     private Map<String, Skill> knownSkills = new HashMap<>();
 
+    private boolean onObject;
+
+    private boolean onEntrance;
+
     public Game() throws IOException
     {
         characters = new ArrayList<>(4);
@@ -63,11 +68,13 @@ public class Game
         createStartingCharacters();
         currentDistrict = MapParser.parseMap("W11");
         currentMember = 0;
+        onObject = false;
+        onEntrance = false;
     }
 
     public void loadClasses(File folder) throws IOException
     {
-        for (final File fileEntry : folder.listFiles())
+        for (final File fileEntry : Objects.requireNonNull(folder.listFiles()))
         {
             getClass(fileEntry.getName().substring(0, fileEntry.getName().length() - 5));
         }
@@ -75,7 +82,7 @@ public class Game
 
     public void loadRaces(File folder) throws FileNotFoundException
     {
-        for (final File fileEntry : folder.listFiles())
+        for (final File fileEntry : Objects.requireNonNull(folder.listFiles()))
         {
             getRace(fileEntry.getName().substring(0, fileEntry.getName().length() - 5));
         }
@@ -166,6 +173,12 @@ public class Game
 
         if(chosenEnemies != null)
             frame.updateEnemies();
+
+        checkForObjects();
+
+        checkForEntrances();
+
+        frame.updateButtons(onObject, onEntrance);
     }
 
     public void checkForMonsters()
@@ -192,6 +205,54 @@ public class Game
                 right = right.add(direction.toVector2d());
             }
         }
+    }
+
+    public void checkForObjects()
+    {
+        if(currentDistrict.getChests() != null)
+            for(Chest chest : currentDistrict.getChests())
+            {
+                if(chest.getPosition().equals(team.getPosition()))
+                {
+                    onObject = true;
+                    return;
+                }
+            }
+        if(currentDistrict instanceof World || currentDistrict instanceof Town)
+        {
+            if(currentDistrict.getQuestGivers() != null)
+                for(QuestGiver questGiver : currentDistrict.getQuestGivers())
+                {
+                    if(questGiver.getPosition().equals(team.getPosition()))
+                    {
+                        onObject = true;
+                        return;
+                    }
+                }
+        }
+        onObject = false;
+    }
+
+    public void checkForEntrances()
+    {
+        if(currentDistrict instanceof World)
+        {
+            if(((World) currentDistrict).isTown(team.getPosition()) || ((World) currentDistrict).isDungeon(team.getPosition()))
+            {
+                onEntrance = true;
+                return;
+            }
+        }
+        onEntrance = false;
+    }
+
+    public void enterLocation() throws IOException
+    {
+        checkForTownExit();
+        checkForTownEnter();
+        checkForDungeonExit();
+        checkForDungeonEnter();
+        update();
     }
 
     public void checkForTownEnter() throws IOException
@@ -230,7 +291,7 @@ public class Game
         }
     }
 
-    public void doAction() throws IOException
+    public void doAction()
     {
         if(openedChest != null)
         {
@@ -258,11 +319,6 @@ public class Game
                 frame.meetQuestGiver();
             }
         }
-        checkForTownExit();
-        checkForTownEnter();
-        checkForDungeonExit();
-        checkForDungeonEnter();
-        update();
     }
 
     public void checkForChest()

@@ -58,6 +58,13 @@ public class MainPanel extends JPanel
             ((OptionsPanel) leftPanel).setEnemiesName();
     }
 
+    public void updateButtons(boolean onObject, boolean onEntrance)
+    {
+
+        if(leftPanel instanceof OptionsPanel)
+            ((OptionsPanel) leftPanel).updateButtons(onObject, onEntrance);
+    }
+
     public boolean mapOpened()
     {
         return primaryPanel instanceof MapPanel;

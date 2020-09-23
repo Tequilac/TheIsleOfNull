@@ -19,12 +19,22 @@ public class ChestPanel extends PrimaryPanel
 
     private JLabel[] items;
 
+    private JButton closeButton;
+
     public ChestPanel(Game game, Chest chest, Frame frame)
     {
         super(game, frame);
 
         setLayout(null);
         this.chest = chest;
+
+        closeButton = new JButton(new ImageIcon("res/graphics/exit.png"));
+        closeButton.addActionListener(actionEvent ->
+        {
+            //TODO close chest
+        });
+        closeButton.setBounds(760, 0, 40, 40);
+        add(closeButton);
 
         setChestContent();
     }

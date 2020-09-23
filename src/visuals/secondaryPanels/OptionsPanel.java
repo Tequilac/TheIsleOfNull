@@ -18,6 +18,8 @@ public class OptionsPanel extends SecondaryPanel
 
     private JButton hitButton;
 
+    private JButton enterButton;
+
     private JButton inventoryButton;
 
     private JButton optionsButton;
@@ -39,17 +41,11 @@ public class OptionsPanel extends SecondaryPanel
         actionButton = new JButton(new ImageIcon("res/graphics/action.png"));
         actionButton.addActionListener(actionEvent ->
         {
-            try
-            {
-                game.doAction();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+            game.doAction();
             frame.requestFocus();
         });
         actionButton.setBounds(5, 5, 40, 40);
+        actionButton.setEnabled(false);
         add(actionButton);
 
 
@@ -65,13 +61,32 @@ public class OptionsPanel extends SecondaryPanel
         add(hitButton);
 
 
+        enterButton = new JButton(new ImageIcon("res/graphics/entrance.png"));
+        enterButton.addActionListener(actionEvent ->
+        {
+            try
+            {
+                game.enterLocation();
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+            frame.getMainPanel().repaint();
+            frame.requestFocus();
+        });
+        enterButton.setBounds(95, 5, 40, 40);
+        enterButton.setEnabled(false);
+        add(enterButton);
+
+
         inventoryButton = new JButton(new ImageIcon("res/graphics/backpack.png"));
         inventoryButton.addActionListener(actionEvent ->
         {
             frame.toggleTeamView();
             frame.requestFocus();
         });
-        inventoryButton.setBounds(95, 5, 40, 40);
+        inventoryButton.setBounds(140, 5, 40, 40);
         add(inventoryButton);
 
 
@@ -79,7 +94,7 @@ public class OptionsPanel extends SecondaryPanel
         optionsButton.addActionListener(actionEvent ->
         {
         });
-        optionsButton.setBounds(140, 5, 40, 40);
+        optionsButton.setBounds(185, 5, 40, 40);
         add(optionsButton);
 
         exitButton = new JButton(new ImageIcon("res/graphics/exit.png"));
@@ -94,7 +109,7 @@ public class OptionsPanel extends SecondaryPanel
             }
             frame.exitGame();
         });
-        exitButton.setBounds(185, 5, 40, 40);
+        exitButton.setBounds(230, 5, 40, 40);
         add(exitButton);
     }
 
@@ -114,5 +129,11 @@ public class OptionsPanel extends SecondaryPanel
                 enemiesInfo[i].setText(enemies.getEntities().get(0).getName() + " health: " + enemies.getEntities().get(i-2).getHealth());
             }
         }
+    }
+
+    public void updateButtons(boolean onObject, boolean onEntrance)
+    {
+        actionButton.setEnabled(onObject);
+        enterButton.setEnabled(onEntrance);
     }
 }

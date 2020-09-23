@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class SaveGamesPanel extends PrimaryPanel
 {
@@ -20,14 +21,25 @@ public class SaveGamesPanel extends PrimaryPanel
 
     public JButton[] buttons;
 
+    public JButton closeButton;
+
     public SaveGamesPanel(Game game, Frame frame)
     {
         super(game, frame);
 
         setFocusable(true);
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+        closeButton = new JButton(new ImageIcon("res/graphics/exit.png"));
+        closeButton.addActionListener(actionEvent ->
+        {
+            //TODO back to starting panel
+        });
+        closeButton.setBounds(760, 0, 40, 40);
+        add(closeButton);
+
         File folder = new File("saveGames");
-        for (final File fileEntry : folder.listFiles())
+        for (final File fileEntry : Objects.requireNonNull(folder.listFiles()))
         {
             files.add(fileEntry);
             fileNames.add(fileEntry.getName());

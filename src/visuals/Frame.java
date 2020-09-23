@@ -127,6 +127,11 @@ public class Frame extends JFrame implements KeyListener
         mainPanel.updateEnemies();
     }
 
+    public void updateButtons(boolean onObject, boolean onEntrance)
+    {
+        mainPanel.updateButtons(onObject, onEntrance);
+    }
+
     @Override
     public void keyTyped(KeyEvent keyEvent)
     {

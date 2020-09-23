@@ -14,12 +14,22 @@ public class QuestsPanel extends PrimaryPanel
 
     private JButton[] quests;
 
+    private JButton closeButton;
+
     public QuestsPanel(Game game, QuestGiver questGiver, Frame frame)
     {
         super(game, frame);
 
         setLayout(null);
         this.questGiver = questGiver;
+
+        closeButton = new JButton(new ImageIcon("res/graphics/exit.png"));
+        closeButton.addActionListener(actionEvent ->
+        {
+            //TODO close quests
+        });
+        closeButton.setBounds(760, 0, 40, 40);
+        add(closeButton);
 
         this.quests = new JButton[questGiver.getQuests().size()];
         for (int i = 0; i < questGiver.getQuests().size(); i++)
