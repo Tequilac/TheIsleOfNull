@@ -114,7 +114,7 @@ public class Save
 
                 game.setCharacters(characters);
                 game.setCurrentMember(0);
-                game.setTeam(new Team(new Vector2d(posX, posY), mapDirection, characters, items));
+                game.setTeam(new Team(new Vector2d(posX, posY), mapDirection, characters, null, items));
                 game.setTeamInfo(teamInfo.toString());
             }
         }

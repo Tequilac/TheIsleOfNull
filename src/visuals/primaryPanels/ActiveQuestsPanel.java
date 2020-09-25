@@ -25,11 +25,11 @@ public class ActiveQuestsPanel extends PrimaryPanel
         {
             quests[i] = new JButton(team.getActiveQuests().get(i).getName());
             quests[i].setBounds(0, 20 + i*20, 250, 20);
-            quests[i].setToolTipText(team.getActiveQuests().get(i).getDescription());
+            quests[i].setToolTipText("<html>" + team.getActiveQuests().get(i).toString() + "</html>");
+            if(team.getActiveQuests().get(i).isCompleted())
+                quests[i].setBackground(Color.GREEN);
             quests[i].addActionListener(actionEvent ->
-            {
-                frame.requestFocus();
-            });
+                    frame.requestFocus());
             add(quests[i]);
         }
     }

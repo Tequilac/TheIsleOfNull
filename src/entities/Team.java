@@ -5,6 +5,8 @@ import items.Item;
 import map.MapDirection;
 import map.Vector2d;
 import quests.Quest;
+import quests.QuestBringItem;
+import quests.QuestKillEnemies;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -29,12 +31,13 @@ public class Team extends Group
         this.itemsInInventory = new ArrayList<>();
     }
 
-    public Team(Vector2d position, MapDirection mapDirection, ArrayList<Character> teamMembers, ArrayList<Item> items)
+    public Team(Vector2d position, MapDirection mapDirection, ArrayList<Character> teamMembers, LinkedList<Quest> quests, ArrayList<Item> items)
     {
         super(position, mapDirection);
         this.entities = teamMembers;
         this.gold = 200;
         this.activeQuests = new LinkedList<>();
+        this.activeQuests = Objects.requireNonNullElseGet(quests, LinkedList::new);
         this.itemsInInventory = Objects.requireNonNullElseGet(items, ArrayList::new);
     }
 
@@ -57,14 +60,15 @@ public class Team extends Group
 
     public boolean addItemToInventory(Item item)
     {
-        for(int i = 0; i < itemsInInventory.size(); i++)
+        for(Item value : itemsInInventory)
         {
-            if(item.getName().equals(itemsInInventory.get(i).getName()))
+            if(item.getName().equals(value.getName()))
             {
                 return false;
             }
         }
         itemsInInventory.add(item);
+        updateItemQuests(item);
         return true;
     }
 
@@ -86,6 +90,24 @@ public class Team extends Group
     {
         if(!activeQuests.contains(quest))
             activeQuests.add(quest);
+    }
+
+    public void updateKillQuests(Enemy enemy)
+    {
+        for(Quest quest : activeQuests)
+        {
+            if(quest instanceof QuestKillEnemies && ((QuestKillEnemies) quest).getTargetName().equals(enemy.getName()) && !quest.isCompleted())
+                quest.updateQuest();
+        }
+    }
+
+    public void updateItemQuests(Item item)
+    {
+        for(Quest quest : activeQuests)
+        {
+            if(quest instanceof QuestBringItem && ((QuestBringItem) quest).getRequiredItem().equals(item.getName()) && !quest.isCompleted())
+                quest.updateQuest();
+        }
     }
 
     public void addGold(int gold)

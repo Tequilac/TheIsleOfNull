@@ -5,7 +5,7 @@ import items.Item;
 import java.util.ArrayList;
 
 
-public class Quest
+public abstract class Quest
 {
     protected String name;
 
@@ -28,6 +28,10 @@ public class Quest
         this.itemsReward = itemsReward;
         this.questStatus = QuestStatus.Available;
     }
+
+    public abstract void updateQuest();
+
+    public abstract boolean isCompleted();
 
     public String getName()
     {
@@ -62,5 +66,12 @@ public class Quest
     public void setQuestStatus(QuestStatus questStatus)
     {
         this.questStatus = questStatus;
+    }
+
+    @Override
+    public String toString()
+    {
+        return  name + "<br>" +
+                description;
     }
 }

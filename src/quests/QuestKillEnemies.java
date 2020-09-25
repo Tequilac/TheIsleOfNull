@@ -7,9 +7,9 @@ import java.util.LinkedList;
 
 public class QuestKillEnemies extends Quest
 {
-    private String targetName;
+    private final String targetName;
 
-    private int requiredAmount;
+    private final int requiredAmount;
 
     private int currentAmount;
 
@@ -27,5 +27,31 @@ public class QuestKillEnemies extends Quest
         this.targetName = targetName;
         this.requiredAmount = requiredAmount;
         this.currentAmount = 0;
+    }
+
+    @Override
+    public void updateQuest()
+    {
+        currentAmount++;
+    }
+
+    @Override
+    public boolean isCompleted()
+    {
+        return currentAmount == requiredAmount;
+    }
+
+    public String getTargetName()
+    {
+        return targetName;
+    }
+
+    @Override
+    public String toString()
+    {
+        return super.toString() + "<br>" +
+                "Target: " + targetName + "<br>" +
+                "Required amount: " + requiredAmount + "<br>" +
+                "Current amount: " + currentAmount;
     }
 }

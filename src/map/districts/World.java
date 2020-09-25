@@ -39,11 +39,15 @@ public class World extends District
 
     public boolean isTown(Vector2d position)
     {
+        if(townEntrance == null)
+            return false;
         return townEntrance.equals(position);
     }
 
     public boolean isDungeon(Vector2d position)
     {
+        if(dungeonEntrance == null)
+            return false;
         return dungeonEntrance.equals(position);
     }
 

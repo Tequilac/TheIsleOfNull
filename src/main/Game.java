@@ -329,6 +329,7 @@ public class Game
     public void loadNewWorldMap(String newMap) throws IOException
     {
         boolean isTown = (currentDistrict instanceof Town);
+        boolean isDungeon = (currentDistrict instanceof Dungeon);
         Save.saveGame(this, currentSave);
         Save.parseSave(this, currentSave);
         Save.setCurrentDistrict(this, currentSave, newMap, team.getPosition(), team.getMapDirection());
@@ -336,7 +337,7 @@ public class Game
         Save.parseSave(this, currentSave);
         if(isTown)
             team.setPosition(((World)currentDistrict).getTownEntrance());
-        else
+        if(isDungeon)
             team.setPosition(((World)currentDistrict).getDungeonEntrance());
     }
 
@@ -365,7 +366,7 @@ public class Game
         Group enemies = currentDistrict.findEnemies(team.getPosition());
         if(enemies != null)
         {
-            int experience = enemies.damageAll(team.getTeamMembers().get(currentMember).getDamage());
+            int experience = enemies.damageAll(team, team.getTeamMembers().get(currentMember).getDamage());
             team.distributeExperience(experience, currentMember);
             currentMember = (currentMember + 1) % 4;
             if(enemies.getEntities().size() == 0)

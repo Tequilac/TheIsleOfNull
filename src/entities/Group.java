@@ -47,13 +47,13 @@ public class Group
         entities.get(index).damage(value);
     }
 
-    public int damageAll(int value)
+    public int damageAll(Team team, int value)
     {
         for(Entity entity : entities)
         {
             entity.damage(value);
         }
-        return checkForDead();
+        return checkForDead(team);
     }
 
     private boolean moveSomewhere(MoveDirection moveDirection, District district)
@@ -169,13 +169,14 @@ public class Group
         return new Vector2d(-1, -1);
     }
 
-    public int checkForDead()
+    public int checkForDead(Team team)
     {
         int experience = 0;
         for (int i = entities.size() - 1; i > -1; i--)
         {
             if(entities.get(i).isDead())
             {
+                team.updateKillQuests((Enemy) entities.get(i));
                 experience += kill(i);
             }
         }

@@ -77,13 +77,13 @@ public class QuestParser
                     case "KillEnemies":
                         targetName = jsonObject.get("targetName").getAsString();
                         requiredAmount = jsonObject.get("requiredAmount").getAsInt();
-                        quest = new QuestKillEnemies(name, description, goldReward, experienceReward, itemsReward, targetName, requiredAmount, 0);
+                        quest = new QuestKillEnemies(name, description, goldReward, experienceReward, itemsReward, targetName, requiredAmount);
                         quests.add(quest);
                         break;
                     case "BringItem":
                         requiredItem = jsonObject.get("requiredItem").getAsString();
                         requiredAmount = jsonObject.get("requiredAmount").getAsInt();
-                        quest = new QuestBringItem(name, description, goldReward, experienceReward, itemsReward, requiredItem, requiredAmount, 0);
+                        quest = new QuestBringItem(name, description, goldReward, experienceReward, itemsReward, requiredItem, requiredAmount);
                         quests.add(quest);
                         break;
                 }

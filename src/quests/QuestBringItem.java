@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class QuestBringItem extends Quest
 {
-    private String requiredItem;
+    private final String requiredItem;
 
-    private int requiredAmount;
+    private final int requiredAmount;
 
     private int currentAmount;
 
@@ -26,5 +26,31 @@ public class QuestBringItem extends Quest
         this.requiredItem = targetName;
         this.requiredAmount = requiredAmount;
         this.currentAmount = 0;
+    }
+
+    @Override
+    public void updateQuest()
+    {
+        currentAmount++;
+    }
+
+    @Override
+    public boolean isCompleted()
+    {
+        return currentAmount == requiredAmount;
+    }
+
+    public String getRequiredItem()
+    {
+        return requiredItem;
+    }
+
+    @Override
+    public String toString()
+    {
+        return super.toString() + "<br>" +
+                "Required item: " + requiredItem + "<br>" +
+                "Required amount: " + requiredAmount + "<br>" +
+                "Current amount: " + currentAmount;
     }
 }

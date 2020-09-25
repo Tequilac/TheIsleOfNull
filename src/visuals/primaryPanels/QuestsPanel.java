@@ -37,7 +37,7 @@ public class QuestsPanel extends PrimaryPanel
         {
             quests[i] = new JButton(questGiver.getQuests().get(i).getName());
             quests[i].setBounds(0, 20 + i*20, 250, 20);
-            quests[i].setToolTipText(questGiver.getQuests().get(i).getDescription());
+            quests[i].setToolTipText("<html>" + questGiver.getQuests().get(i).toString() + "</html>");
             int finalI = i;
             quests[i].addActionListener(actionEvent ->
             {
