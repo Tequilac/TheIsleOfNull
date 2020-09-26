@@ -401,6 +401,13 @@ public class Game
         team.addActiveQuest(quest);
     }
 
+    public void completeQuest(QuestGiver questGiver, int index)
+    {
+        questGiver.getQuests().get(index).transferRewards(team);
+        team.completeQuest(questGiver.getQuests().get(index));
+        questGiver.removeQuest(index);
+    }
+
     public void transferItem(Item item)
     {
         openedChest.getItems().remove(item);

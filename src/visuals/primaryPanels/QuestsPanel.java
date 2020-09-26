@@ -2,6 +2,7 @@ package visuals.primaryPanels;
 
 import main.Game;
 import map.Chest;
+import quests.Quest;
 import quests.QuestGiver;
 import visuals.Frame;
 
@@ -23,6 +24,7 @@ public class QuestsPanel extends PrimaryPanel
         setLayout(null);
         this.questGiver = questGiver;
 
+
         closeButton = new JButton(new ImageIcon("res/graphics/exit.png"));
         closeButton.addActionListener(actionEvent ->
         {
@@ -32,18 +34,45 @@ public class QuestsPanel extends PrimaryPanel
         closeButton.setBounds(750, 10, 40, 40);
         add(closeButton);
 
+        drawQuests();
+    }
+
+    public void drawQuests()
+    {
+        if(quests != null)
+        {
+            for(JButton quest : quests)
+            {
+                remove(quest);
+            }
+            repaint();
+        }
         this.quests = new JButton[questGiver.getQuests().size()];
         for (int i = 0; i < questGiver.getQuests().size(); i++)
         {
-            quests[i] = new JButton(questGiver.getQuests().get(i).getName());
+            Quest quest = questGiver.getQuests().get(i);
+            quests[i] = new JButton(quest.getName());
             quests[i].setBounds(0, 20 + i*20, 250, 20);
-            quests[i].setToolTipText("<html>" + questGiver.getQuests().get(i).toString() + "</html>");
+            quests[i].setToolTipText("<html>" + quest.toString() + "</html>");
             int finalI = i;
-            quests[i].addActionListener(actionEvent ->
+            if(!quest.isCompleted())
             {
-                frame.getGame().takeQuest(questGiver.getQuests().get(finalI));
-                frame.requestFocus();
-            });
+                quests[i].addActionListener(actionEvent ->
+                {
+                    game.takeQuest(questGiver.getQuests().get(finalI));
+                    frame.requestFocus();
+                });
+            }
+            else
+            {
+                quests[i].setBackground(Color.GREEN);
+                quests[i].addActionListener(actionEvent ->
+                {
+                    game.completeQuest(questGiver, finalI);
+                    drawQuests();
+                    frame.requestFocus();
+                });
+            }
             add(quests[i]);
         }
     }

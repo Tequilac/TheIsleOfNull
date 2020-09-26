@@ -19,6 +19,11 @@ public class QuestGiver
         this.position = position;
     }
 
+    public void removeQuest(int index)
+    {
+        quests.remove(index);
+    }
+
     public ArrayList<Quest> getQuests()
     {
         return quests;

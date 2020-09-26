@@ -27,6 +27,7 @@ public class TeamStatisticsPanel extends PrimaryPanel
         JLabel level = new JLabel("Level: " + character.getLevel());
         JLabel experience = new JLabel("Experience: " + character.getExperience());
         JLabel magicUsage = new JLabel("Can" + ((character.getCharacterClass().usesMagic())? "" : "'t") + " use magic");
+        JLabel teamGold = new JLabel("Team gold: " + game.getTeam().getGold());
         name.setBounds(50, 50, 120, 30);
         add(name);
         characterClass.setBounds(50, 80, 120, 30);
@@ -37,10 +38,14 @@ public class TeamStatisticsPanel extends PrimaryPanel
         add(level);
         experience.setBounds(50, 170, 120, 30);
         add(experience);
-        drawAttributes(character, magicUsage);
+        magicUsage.setBounds(50, 410, 120, 30);
+        add(magicUsage);
+        teamGold.setBounds(50, 440, 120, 30);
+        add(teamGold);
+        drawAttributes(character);
     }
 
-    public void drawAttributes(Character character, JLabel magicUsage)
+    public void drawAttributes(Character character)
     {
 
         JLabel[] attributes = new JLabel[7];
@@ -57,9 +62,5 @@ public class TeamStatisticsPanel extends PrimaryPanel
         attributes[4].setText("Accuracy: " + character.getAccuracy());
         attributes[5].setText("Speed: " + character.getSpeed());
         attributes[6].setText("Luck: " + character.getLuck());
-
-        magicUsage = new JLabel();
-        magicUsage.setBounds(50, 410, 120, 30);
-        add(magicUsage);
     }
 }

@@ -2,6 +2,7 @@ package visuals.primaryPanels;
 
 import entities.Team;
 import main.Game;
+import quests.Quest;
 import quests.QuestGiver;
 import visuals.Frame;
 import visuals.secondaryPanels.SecondaryPanel;
@@ -23,10 +24,11 @@ public class ActiveQuestsPanel extends PrimaryPanel
         this.quests = new JButton[team.getActiveQuests().size()];
         for (int i = 0; i < team.getActiveQuests().size(); i++)
         {
-            quests[i] = new JButton(team.getActiveQuests().get(i).getName());
+            Quest quest = team.getActiveQuests().get(i);
+            quests[i] = new JButton(quest.getName());
             quests[i].setBounds(0, 20 + i*20, 250, 20);
-            quests[i].setToolTipText("<html>" + team.getActiveQuests().get(i).toString() + "</html>");
-            if(team.getActiveQuests().get(i).isCompleted())
+            quests[i].setToolTipText("<html>" + quest.toString() + "</html>");
+            if(quest.isCompleted())
                 quests[i].setBackground(Color.GREEN);
             quests[i].addActionListener(actionEvent ->
                     frame.requestFocus());

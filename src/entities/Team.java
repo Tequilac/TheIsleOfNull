@@ -20,6 +20,8 @@ public class Team extends Group
 
     private LinkedList<Quest> activeQuests;
 
+    private LinkedList<Quest> completedQuests;
+
     private ArrayList<Item> itemsInInventory;
 
     public Team(Vector2d position, MapDirection mapDirection, ArrayList<Character> teamMembers)
@@ -28,21 +30,35 @@ public class Team extends Group
         this.entities = teamMembers;
         this.gold = 200;
         this.activeQuests = new LinkedList<>();
+        this.completedQuests = new LinkedList<>();
         this.itemsInInventory = new ArrayList<>();
     }
 
-    public Team(Vector2d position, MapDirection mapDirection, ArrayList<Character> teamMembers, LinkedList<Quest> quests, ArrayList<Item> items)
+    public Team(Vector2d position, MapDirection mapDirection, ArrayList<Character> teamMembers, LinkedList<Quest> activeQuests, LinkedList<Quest> completedQuests, ArrayList<Item> items)
     {
         super(position, mapDirection);
         this.entities = teamMembers;
         this.gold = 200;
         this.activeQuests = new LinkedList<>();
-        this.activeQuests = Objects.requireNonNullElseGet(quests, LinkedList::new);
+        this.activeQuests = Objects.requireNonNullElseGet(activeQuests, LinkedList::new);
+        this.completedQuests = Objects.requireNonNullElseGet(completedQuests, LinkedList::new);
         this.itemsInInventory = Objects.requireNonNullElseGet(items, ArrayList::new);
     }
 
     public void distributeExperience(int experience, int currentMember)
     {
+        if(currentMember == -1)
+        {
+            int leftMembers = 4;
+            int restOfExperience = experience;
+            for (int i = 0; i < 4; i++)
+            {
+                entities.get(i).addExperience(restOfExperience / leftMembers);
+                restOfExperience -= restOfExperience / leftMembers;
+                leftMembers--;
+            }
+            return;
+        }
         int experienceForKiller = 2 * experience / 5;
         int leftMembers = 3;
         int restOfExperience = experience - experienceForKiller;
@@ -108,6 +124,21 @@ public class Team extends Group
             if(quest instanceof QuestBringItem && ((QuestBringItem) quest).getRequiredItem().equals(item.getName()) && !quest.isCompleted())
                 quest.updateQuest();
         }
+    }
+
+    public void completeQuest(Quest quest)
+    {
+        int toRemove = -1;
+        for(int i = 0; i < activeQuests.size(); i++)
+        {
+            if(quest.getName().equals(activeQuests.get(i).getName()))
+            {
+                toRemove = i;
+                break;
+            }
+        }
+        activeQuests.remove(toRemove);
+        completedQuests.add(quest);
     }
 
     public void addGold(int gold)

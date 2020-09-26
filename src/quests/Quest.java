@@ -1,5 +1,6 @@
 package quests;
 
+import entities.Team;
 import items.Item;
 
 import java.util.ArrayList;
@@ -32,6 +33,25 @@ public abstract class Quest
     public abstract void updateQuest();
 
     public abstract boolean isCompleted();
+
+    public void transferRewards(Team team)
+    {
+        if(goldReward != 0)
+        {
+            team.addGold(goldReward);
+        }
+        if(experienceReward != 0)
+        {
+            team.distributeExperience(experienceReward, -1);
+        }
+        if(itemsReward != null)
+        {
+            for(Item item : itemsReward)
+            {
+                team.addItemToInventory(item);
+            }
+        }
+    }
 
     public String getName()
     {
