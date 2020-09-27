@@ -61,7 +61,8 @@ public class Character extends Entity
         this.speed = speed;
         this.luck = luck;
         this.skills = characterClass.getSkills();
-        initEquipment();
+        Item[] items = {null, null, null, null};
+        initEquipment(items);
     }
 
     public Character(String name, int health, int maxHealth, int mana, int maxMana, Race race, int level, int experience, Class characterClass, int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck)
@@ -79,7 +80,8 @@ public class Character extends Entity
         this.speed = speed;
         this.luck = luck;
         this.skills = characterClass.getSkills();
-        initEquipment();
+        Item[] items = {null, null, null, null};
+        initEquipment(items);
     }
 
     public Character(String name, int health, Race race, int level, int experience, Class characterClass)
@@ -89,15 +91,16 @@ public class Character extends Entity
         this.maxHealth = 100;
         this.mana = 100;
         this.maxMana = 100;
-        initEquipment();
+        Item[] items = {null, null, null, null};
+        initEquipment(items);
     }
 
-    public void initEquipment()
+    public void initEquipment(Item[] items)
     {
-        leftHand = new Equipment(EquipmentType.LeftHand);
-        rightHand = new Equipment(EquipmentType.RightHand);
-        head = new Equipment(EquipmentType.Head);
-        torso = new Equipment(EquipmentType.Torso);
+        head = new Equipment(EquipmentType.Head, items[0]);
+        leftHand = new Equipment(EquipmentType.LeftHand, items[1]);
+        rightHand = new Equipment(EquipmentType.RightHand, items[2]);
+        torso = new Equipment(EquipmentType.Torso, items[3]);
     }
 
     public int getDamage()

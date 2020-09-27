@@ -9,23 +9,10 @@ public class QuestKillEnemies extends Quest
 {
     private final String targetName;
 
-    private final int requiredAmount;
-
-    private int currentAmount;
-
-    public QuestKillEnemies(String name, String description, int goldReward, int experienceReward, ArrayList<Item> itemsReward, String targetName, int requiredAmount, int currentAmount)
+    public QuestKillEnemies(String name, String description, int goldReward, int experienceReward, ArrayList<Item> itemsReward, String targetName, int requiredAmount, QuestStatus status)
     {
-        super(name, description, goldReward, experienceReward, itemsReward);
+        super(name, description, goldReward, experienceReward, itemsReward, status, requiredAmount);
         this.targetName = targetName;
-        this.requiredAmount = requiredAmount;
-        this.currentAmount = currentAmount;
-    }
-
-    public QuestKillEnemies(String name, String description, int goldReward, int experienceReward, ArrayList<Item> itemsReward, String targetName, int requiredAmount)
-    {
-        super(name, description, goldReward, experienceReward, itemsReward);
-        this.targetName = targetName;
-        this.requiredAmount = requiredAmount;
         this.currentAmount = 0;
     }
 

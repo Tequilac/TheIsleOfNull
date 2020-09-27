@@ -11,6 +11,7 @@ import map.districts.Town;
 import map.districts.World;
 import quests.Quest;
 import quests.QuestGiver;
+import quests.QuestStatus;
 import saves.Save;
 import skills.Skill;
 import skills.SkillParser;
@@ -399,12 +400,14 @@ public class Game
     public void takeQuest(Quest quest)
     {
         team.addActiveQuest(quest);
+        quest.setQuestStatus(QuestStatus.Active);
     }
 
     public void completeQuest(QuestGiver questGiver, int index)
     {
         questGiver.getQuests().get(index).transferRewards(team);
         team.completeQuest(questGiver.getQuests().get(index));
+        questGiver.getQuests().get(index).setQuestStatus(QuestStatus.Completed);
         questGiver.removeQuest(index);
     }
 

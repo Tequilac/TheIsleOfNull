@@ -4,10 +4,12 @@ import main.Game;
 import map.Chest;
 import quests.Quest;
 import quests.QuestGiver;
+import quests.QuestStatus;
 import visuals.Frame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class QuestsPanel extends PrimaryPanel
 {
@@ -47,10 +49,12 @@ public class QuestsPanel extends PrimaryPanel
             }
             repaint();
         }
-        this.quests = new JButton[questGiver.getQuests().size()];
-        for (int i = 0; i < questGiver.getQuests().size(); i++)
+        ArrayList<Quest> availableQuests = questGiver.getQuests();
+        availableQuests.removeIf(quest -> quest.getQuestStatus().equals(QuestStatus.Completed));
+        this.quests = new JButton[availableQuests.size()];
+        for (int i = 0; i < availableQuests.size(); i++)
         {
-            Quest quest = questGiver.getQuests().get(i);
+            Quest quest = availableQuests.get(i);
             quests[i] = new JButton(quest.getName());
             quests[i].setBounds(0, 20 + i*20, 250, 20);
             quests[i].setToolTipText("<html>" + quest.toString() + "</html>");

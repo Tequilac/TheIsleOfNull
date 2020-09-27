@@ -8,26 +8,31 @@ import java.util.ArrayList;
 
 public abstract class Quest
 {
-    protected String name;
+    protected final String name;
 
-    protected String description;
+    protected final String description;
 
-    protected int goldReward;
+    protected final int goldReward;
 
-    protected int experienceReward;
+    protected final int experienceReward;
 
-    protected ArrayList<Item> itemsReward;
+    protected final ArrayList<Item> itemsReward;
 
     protected QuestStatus questStatus;
 
-    public Quest(String name, String description, int goldReward, int experienceReward, ArrayList<Item> itemsReward)
+    protected final int requiredAmount;
+
+    protected int currentAmount;
+
+    public Quest(String name, String description, int goldReward, int experienceReward, ArrayList<Item> itemsReward, QuestStatus status, int requiredAmount)
     {
         this.name = name;
         this.description = description;
         this.goldReward = goldReward;
         this.experienceReward = experienceReward;
         this.itemsReward = itemsReward;
-        this.questStatus = QuestStatus.Available;
+        this.questStatus = status;
+        this.requiredAmount = requiredAmount;
     }
 
     public abstract void updateQuest();
@@ -83,9 +88,19 @@ public abstract class Quest
         return itemsReward;
     }
 
+    public int getCurrentAmount()
+    {
+        return currentAmount;
+    }
+
     public void setQuestStatus(QuestStatus questStatus)
     {
         this.questStatus = questStatus;
+    }
+
+    public void setCurrentAmount(int currentAmount)
+    {
+        this.currentAmount = currentAmount;
     }
 
     @Override

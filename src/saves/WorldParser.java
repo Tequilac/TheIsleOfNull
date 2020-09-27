@@ -126,6 +126,12 @@ public class WorldParser implements IDistrictParser
                 for (QuestGiver questGiver : questGivers)
                 {
                     ArrayList<Quest> quests = questGiver.getQuests();
+                    for(int i = 0; i < quests.size(); i++)
+                    {
+                        Quest newQuest = game.getTeam().findQuest(quests.get(i).getName());
+                        if(newQuest != null)
+                            quests.set(i, newQuest);
+                    }
                     for (Quest quest : quests)
                     {
                         questStatus = QuestStatus.valueOf(br.readLine());

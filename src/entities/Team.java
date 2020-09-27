@@ -141,6 +141,21 @@ public class Team extends Group
         completedQuests.add(quest);
     }
 
+    public Quest findQuest(String name)
+    {
+        for(Quest quest : activeQuests)
+        {
+            if(quest.getName().equals(name))
+                return quest;
+        }
+        for(Quest quest : completedQuests)
+        {
+            if(quest.getName().equals(name))
+                return quest;
+        }
+        return null;
+    }
+
     public void addGold(int gold)
     {
         this.gold += gold;
@@ -164,6 +179,11 @@ public class Team extends Group
     public LinkedList<Quest> getActiveQuests()
     {
         return activeQuests;
+    }
+
+    public LinkedList<Quest> getCompletedQuests()
+    {
+        return completedQuests;
     }
 
     public ArrayList<Item> getItemsInInventory()

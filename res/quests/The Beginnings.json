@@ -1,0 +1,11 @@
+{
+  "type": "KillEnemies",
+  "description": "Your adventure begins here. Prove your strength by killing some rats.",
+  "goldReward": 100,
+  "experienceReward": 200,
+  "itemsRewardAmount": 0,
+  "itemsReward":
+  [],
+  "targetName": "Rat",
+  "requiredAmount": 3
+}

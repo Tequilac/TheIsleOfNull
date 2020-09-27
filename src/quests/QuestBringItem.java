@@ -8,23 +8,10 @@ public class QuestBringItem extends Quest
 {
     private final String requiredItem;
 
-    private final int requiredAmount;
-
-    private int currentAmount;
-
-    public QuestBringItem(String name, String description, int goldReward, int experienceReward, ArrayList<Item> itemsReward, String targetName, int requiredAmount, int currentAmount)
+    public QuestBringItem(String name, String description, int goldReward, int experienceReward, ArrayList<Item> itemsReward, String targetName, int requiredAmount, QuestStatus status)
     {
-        super(name, description, goldReward, experienceReward, itemsReward);
+        super(name, description, goldReward, experienceReward, itemsReward, status, requiredAmount);
         this.requiredItem = targetName;
-        this.requiredAmount = requiredAmount;
-        this.currentAmount = currentAmount;
-    }
-
-    public QuestBringItem(String name, String description, int goldReward, int experienceReward, ArrayList<Item> itemsReward, String targetName, int requiredAmount)
-    {
-        super(name, description, goldReward, experienceReward, itemsReward);
-        this.requiredItem = targetName;
-        this.requiredAmount = requiredAmount;
         this.currentAmount = 0;
     }
 

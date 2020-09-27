@@ -13,6 +13,12 @@ public class Equipment
         this.type = type;
     }
 
+    public Equipment(EquipmentType type, Item item)
+    {
+        this.type = type;
+        this.item = item;
+    }
+
     public boolean addItem(Item item)
     {
         if(this.item == null && type.compatibleWith(item))

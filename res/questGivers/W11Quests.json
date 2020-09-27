@@ -1,0 +1,16 @@
+{
+  "amount": 1,
+  "questGivers":
+  [
+    {
+      "name": "Test",
+      "x": 10,
+      "y": 10,
+      "questsAmount": 1,
+      "quests":
+      [
+        "The Beginnings"
+      ]
+    }
+  ]
+}

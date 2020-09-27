@@ -3,6 +3,8 @@ package saves;
 import entities.*;
 import entities.Character;
 import entities.Class;
+import equipment.Equipment;
+import equipment.EquipmentType;
 import items.Item;
 import items.ItemParser;
 import main.Game;
@@ -12,9 +14,12 @@ import map.districts.Town;
 import map.districts.World;
 import quests.Quest;
 import quests.QuestGiver;
+import quests.QuestParser;
+import quests.QuestStatus;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Save
 {
@@ -65,13 +70,19 @@ public class Save
                 int level;
                 int experience;
                 int [] attributes = new int[7];
+                Character character;
+                Item[] itemsInInventory = new Item[4];
+                String itemInInventoryName;
 
+                //position
                 posX = Integer.parseInt(br.readLine());
                 teamInfo.append(posX).append("\n");
                 posY = Integer.parseInt(br.readLine());
                 teamInfo.append(posY).append("\n");
                 mapDirection = MapDirection.valueOf(br.readLine());
                 teamInfo.append(mapDirection).append("\n");
+
+                //info, attributes, equipped items
                 for (int i = 0; i < 4; i++)
                 {
                     name = br.readLine();
@@ -97,10 +108,31 @@ public class Save
                         attributes[j] = Integer.parseInt(br.readLine());
                         teamInfo.append(attributes[j]).append("\n");
                     }
-                    characters.add(new Character(name, health, maxHealth, mana, maxMana, race, level, experience, characterClass,
-                            attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6]));
+
+                    for(int j = 0; j < 4; j++)
+                    {
+                        itemInInventoryName = br.readLine();
+                        if(itemInInventoryName.equals("null"))
+                        {
+                            itemsInInventory[j] = null;
+                            teamInfo.append("null").append("\n");
+                        }
+                        else
+                        {
+                            itemsInInventory[j] = ItemParser.parseItem(itemInInventoryName);
+                            teamInfo.append(itemsInInventory[j].getName()).append("\n");
+                        }
+                    }
+
+                    character = new Character(name, health, maxHealth, mana, maxMana, race, level, experience, characterClass,
+                            attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6]);
+
+                    character.initEquipment(itemsInInventory);
+
+                    characters.add(character);
                 }
 
+                //items in inventory
                 int itemsAmount = Integer.parseInt(br.readLine());
                 teamInfo.append(itemsAmount).append("\n");
                 ArrayList<Item> items = new ArrayList<>(itemsAmount);
@@ -112,9 +144,40 @@ public class Save
                     items.add(ItemParser.parseItem(itemName));
                 }
 
+                int currentAmount;
+                Quest quest;
+
+                //active quests
+                int activeQuestsAmount = Integer.parseInt(br.readLine());
+                teamInfo.append(activeQuestsAmount).append("\n");
+                LinkedList<Quest> activeQuests = new LinkedList<>();
+                String activeQuestName;
+                for(int i = 0; i < activeQuestsAmount; i++)
+                {
+                    activeQuestName = br.readLine();
+                    teamInfo.append(activeQuestName).append("\n");
+                    currentAmount = Integer.parseInt(br.readLine());
+                    teamInfo.append(currentAmount).append("\n");
+                    quest = QuestParser.parseQuest(activeQuestName, QuestStatus.Active);
+                    quest.setCurrentAmount(currentAmount);
+                    activeQuests.add(quest);
+                }
+
+                //completed quests
+                int completedQuestsAmount = Integer.parseInt(br.readLine());
+                teamInfo.append(completedQuestsAmount).append("\n");
+                LinkedList<Quest> completedQuests = new LinkedList<>();
+                String completedQuestName;
+                for(int i = 0; i < completedQuestsAmount; i++)
+                {
+                    completedQuestName = br.readLine();
+                    teamInfo.append(completedQuestName).append("\n");
+                    activeQuests.add(QuestParser.parseQuest(completedQuestName, QuestStatus.Completed));
+                }
+
                 game.setCharacters(characters);
                 game.setCurrentMember(0);
-                game.setTeam(new Team(new Vector2d(posX, posY), mapDirection, characters, null, null, items));
+                game.setTeam(new Team(new Vector2d(posX, posY), mapDirection, characters, activeQuests, completedQuests, items));
                 game.setTeamInfo(teamInfo.toString());
             }
         }
@@ -184,7 +247,16 @@ public class Save
             bw.newLine();
             bw.write(String.valueOf(character.getLuck()));
             bw.newLine();
+            for(int i = 0; i < 4; i++)
+            {
+                bw.write("null");
+                bw.newLine();
+            }
         }
+        bw.write("0");
+        bw.newLine();
+        bw.write("0");
+        bw.newLine();
         bw.write("0");
         bw.newLine();
         bw.flush();
@@ -193,11 +265,16 @@ public class Save
     public static void saveCharacters(Game game, File file) throws IOException
     {
         StringBuilder newInfo = new StringBuilder();
+        Team team = game.getTeam();
 
         newInfo.append("C\n");
-        newInfo.append(game.getTeam().getPosition().getX()).append("\n");
-        newInfo.append(game.getTeam().getPosition().getY()).append("\n");
-        newInfo.append(game.getTeam().getMapDirection()).append("\n");
+
+        //position
+        newInfo.append(team.getPosition().getX()).append("\n");
+        newInfo.append(team.getPosition().getY()).append("\n");
+        newInfo.append(team.getMapDirection()).append("\n");
+
+        //info, attributes, equipped items
         for (Character character : game.getCharacters())
         {
             newInfo.append(character.getName()).append("\n");
@@ -216,11 +293,40 @@ public class Save
             newInfo.append(character.getAccuracy()).append("\n");
             newInfo.append(character.getSpeed()).append("\n");
             newInfo.append(character.getLuck()).append("\n");
+            Equipment[] equipments = {character.getHead(), character.getLeftHand(), character.getRightHand(), character.getTorso()};
+            for(Equipment equipment : equipments)
+            {
+                if(equipment.getItem() != null)
+                {
+                    newInfo.append(equipment.getItem().getName()).append("\n");
+                }
+                else
+                {
+                    newInfo.append("null").append("\n");
+                }
+            }
         }
-        newInfo.append(game.getTeam().getItemsInInventory().size()).append("\n");
-        for(Item item : game.getTeam().getItemsInInventory())
+
+        //items in inventory
+        newInfo.append(team.getItemsInInventory().size()).append("\n");
+        for(Item item : team.getItemsInInventory())
         {
             newInfo.append(item.getName()).append("\n");
+        }
+
+        //active quests
+        newInfo.append(team.getActiveQuests().size()).append("\n");
+        for(Quest quest : team.getActiveQuests())
+        {
+            newInfo.append(quest.getName()).append("\n");
+            newInfo.append(quest.getCurrentAmount()).append("\n");
+        }
+
+        //completed quests
+        newInfo.append(team.getCompletedQuests().size()).append("\n");
+        for(Quest quest : team.getCompletedQuests())
+        {
+            newInfo.append(quest.getName()).append("\n");
         }
 
         BufferedReader br = new BufferedReader(new FileReader(file));
