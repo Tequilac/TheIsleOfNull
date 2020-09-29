@@ -20,7 +20,6 @@ public class ChestParser
         JsonArray jsonArray;
 
         int chestsCount = jsonObject.get("chestsCount").getAsInt();
-        jsonArray = jsonObject.get("chests").getAsJsonArray();
 
         ArrayList<Chest> chests = new ArrayList<>();
         int x;
@@ -44,7 +43,6 @@ public class ChestParser
             {
                 itemName = jsonArray.get(j).getAsString();
                 items.add(ItemParser.parseItem(itemName));
-
             }
             chests.add(new Chest(new Vector2d(x, y), gold, items));
         }
