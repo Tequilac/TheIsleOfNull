@@ -16,4 +16,19 @@ public class Inhabitant
         this.description = description;
         this.position = position;
     }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public Vector2d getPosition()
+    {
+        return position;
+    }
 }

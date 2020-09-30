@@ -5,6 +5,9 @@ import entities.Enemy;
 import entities.Entity;
 import entities.Group;
 import entities.MonsterParser;
+import inhabitants.Inhabitant;
+import inhabitants.MerchantParser;
+import inhabitants.TrainerParser;
 import items.*;
 import map.districts.District;
 import map.districts.Dungeon;
@@ -110,6 +113,20 @@ public class MapParser
                 return new World(filename, height, width, tiles, visibleTiles, enemyGroups, chests, questGivers, town, dungeon);
             return new Dungeon(filename, height, width, tiles, visibleTiles, enemyGroups, chests, questGivers);
         }
-        return new Town(filename, height, width, tiles, enemyGroups, chests, questGivers, null);
+
+        int merchantsAmount = jsonObject.get("merchantsAmount").getAsInt();
+        int trainersAmount = jsonObject.get("trainersAmount").getAsInt();
+        ArrayList<Inhabitant> inhabitants = new ArrayList<>(merchantsAmount + trainersAmount);
+        jsonArray = jsonObject.get("merchants").getAsJsonArray();
+        for (int i = 0; i < merchantsAmount; i++)
+        {
+            inhabitants.add(MerchantParser.parseMerchant(jsonArray.get(i).getAsString()));
+        }
+        jsonArray = jsonObject.get("trainers").getAsJsonArray();
+        for (int i = 0; i < trainersAmount; i++)
+        {
+            inhabitants.add(TrainerParser.parseTrainer(jsonArray.get(i).getAsString()));
+        }
+        return new Town(filename, height, width, tiles, enemyGroups, chests, questGivers, inhabitants);
     }
 }

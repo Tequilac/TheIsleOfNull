@@ -1,5 +1,8 @@
 package visuals.primaryPanels;
 
+import inhabitants.Inhabitant;
+import inhabitants.Merchant;
+import inhabitants.Trainer;
 import main.Game;
 import map.Chest;
 import map.Vector2d;
@@ -26,6 +29,10 @@ public class MapPanel extends PrimaryPanel
     private final Image chestImage;
 
     private final Image questGiverImage;
+
+    private final Image merchantImage;
+
+    private final Image trainerImage;
 
     private final Image[] worldTileGraphics;
 
@@ -109,6 +116,12 @@ public class MapPanel extends PrimaryPanel
         ImageIcon iiQuestGiver = new ImageIcon("res/graphics/quest_giver.png");
         questGiverImage = iiQuestGiver.getImage();
 
+        ImageIcon iiMerchant = new ImageIcon("res/graphics/merchant.png");
+        merchantImage = iiMerchant.getImage();
+
+        ImageIcon iiTrainer = new ImageIcon("res/graphics/trainer.png");
+        trainerImage = iiTrainer.getImage();
+
         ImageIcon iiBackground = new ImageIcon("res/graphics/map_background.png");
         mapBackgroundImage = iiBackground.getImage();
 
@@ -162,8 +175,24 @@ public class MapPanel extends PrimaryPanel
                 g.drawImage(dungeonImage, dungeon.getX()*20, dungeon.getY()*20, this);
         }
 
+        if(game.getCurrentDistrict() instanceof Town)
+        {
+            ArrayList<Inhabitant> inhabitants = ((Town) game.getCurrentDistrict()).getInhabitants();
+            for(Inhabitant inhabitant : inhabitants)
+            {
+                if(inhabitant instanceof Merchant)
+                {
+                    g.drawImage(merchantImage, inhabitant.getPosition().getX()*20, inhabitant.getPosition().getY()*20, this);
+                }
+                if(inhabitant instanceof Trainer)
+                {
+                    g.drawImage(trainerImage, inhabitant.getPosition().getX()*20, inhabitant.getPosition().getY()*20, this);
+                }
+            }
+        }
+
         ArrayList<Chest> chests = game.getCurrentDistrict().getChests();
-        if (chests != null)
+        if(chests != null)
         {
             for (Chest chest : chests)
             {

@@ -114,7 +114,6 @@ public class Game
     {
         if (this.team == null)
         {
-            System.out.println("creating team");
             this.team = new Team(new Vector2d(32, 34), MapDirection.North, characters);
             ((World) currentDistrict).updateVisibleTiles(team.getPosition());
         }

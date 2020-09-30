@@ -19,7 +19,7 @@ public enum EquipmentType
             case Head:
                 return item.getType().equals("Helmet");
             case Torso:
-                return item.getType().equals("Chest");
+                return item.getType().equals("Armor");
             default:
                 throw new IllegalStateException("Unexpected value: " + this);
         }

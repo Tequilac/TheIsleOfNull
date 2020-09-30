@@ -5,9 +5,12 @@
   "monsters": [],
   "hasChests": false,
   "hasQuestGivers": false,
-  "inhabitantsCount": 3,
-  "inhabitants":
+  "merchantsAmount": 1,
+  "merchants":
   [
-
-  ]
+    "Johan"
+  ],
+  "trainersAmount": 0,
+  "trainers":
+  []
 }

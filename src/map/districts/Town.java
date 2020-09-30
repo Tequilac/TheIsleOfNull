@@ -23,4 +23,9 @@ public class Town extends District
     {
         return true;
     }
+
+    public ArrayList<Inhabitant> getInhabitants()
+    {
+        return inhabitants;
+    }
 }

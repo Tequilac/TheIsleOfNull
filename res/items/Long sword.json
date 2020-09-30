@@ -1,0 +1,8 @@
+{
+  "itemType": "OffensiveItem",
+  "type": "Sword",
+  "cost": 75,
+  "minDamage": 7,
+  "maxDamage": 12,
+  "ranged": false
+}
