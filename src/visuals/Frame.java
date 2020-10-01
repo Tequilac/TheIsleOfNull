@@ -1,5 +1,7 @@
 package visuals;
 
+import inhabitants.Merchant;
+import inhabitants.Trainer;
 import main.Game;
 import map.Chest;
 import map.MoveDirection;
@@ -98,6 +100,15 @@ public class Frame extends JFrame implements KeyListener
     public void meetQuestGiver()
     {
         mainPanel.addPrimaryPanel(new QuestsPanel(game, game.getMetQuestGiver(), this));
+        pack();
+    }
+
+    public void meetInhabitant()
+    {
+        if(game.getMetInhabitant() instanceof Merchant)
+            mainPanel.addPrimaryPanel(new MerchantPanel(game,this, (Merchant) game.getMetInhabitant()));
+        else
+            mainPanel.addPrimaryPanel(new TrainerPanel(game, this, (Trainer) game.getMetInhabitant()));
         pack();
     }
 

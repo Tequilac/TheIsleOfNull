@@ -14,4 +14,9 @@ public class Merchant extends Inhabitant
         super(name, description, position);
         this.offeredItems = offeredItems;
     }
+
+    public ArrayList<Item> getOfferedItems()
+    {
+        return offeredItems;
+    }
 }

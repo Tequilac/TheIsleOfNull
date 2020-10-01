@@ -3,6 +3,8 @@ package main;
 import entities.Character;
 import entities.Class;
 import entities.*;
+import inhabitants.Inhabitant;
+import inhabitants.Merchant;
 import items.Item;
 import map.*;
 import map.districts.District;
@@ -44,6 +46,8 @@ public class Game
     private Chest openedChest;
 
     private QuestGiver metQuestGiver;
+
+    private Inhabitant metInhabitant;
 
     private Group chosenEnemies;
 
@@ -221,6 +225,7 @@ public class Game
         if(currentDistrict instanceof World || currentDistrict instanceof Town)
         {
             if(currentDistrict.getQuestGivers() != null)
+            {
                 for(QuestGiver questGiver : currentDistrict.getQuestGivers())
                 {
                     if(questGiver.getPosition().equals(team.getPosition()))
@@ -229,6 +234,18 @@ public class Game
                         return;
                     }
                 }
+            }
+        }
+        if(currentDistrict instanceof Town)
+        {
+            for(Inhabitant inhabitant : ((Town) currentDistrict).getInhabitants())
+            {
+                if(inhabitant.getPosition().equals(team.getPosition()))
+                {
+                    onObject = true;
+                    return;
+                }
+            }
         }
         onObject = false;
     }
@@ -299,15 +316,31 @@ public class Game
                 frame.meetQuestGiver();
             }
         }
+        if(metInhabitant != null)
+        {
+            frame.openMapPanel();
+            metInhabitant = null;
+        }
+        else
+        {
+            checkForInhabitant();
+            if(metInhabitant != null)
+            {
+                frame.meetInhabitant();
+            }
+        }
     }
 
     public void checkForChest()
     {
         Chest currentChest = null;
-        for(Chest chest : currentDistrict.getChests())
+        if(currentDistrict.getChests() != null)
         {
-            if(chest.getPosition().equals(team.getPosition()))
-                currentChest = chest;
+            for(Chest chest : currentDistrict.getChests())
+            {
+                if(chest.getPosition().equals(team.getPosition()))
+                    currentChest = chest;
+            }
         }
         openedChest = currentChest;
     }
@@ -324,6 +357,23 @@ public class Game
             }
         }
         metQuestGiver = currentQuestGiver;
+    }
+
+    public void checkForInhabitant()
+    {
+        Inhabitant currentInhabitant = null;
+        if(currentDistrict instanceof Town)
+        {
+            if (((Town) currentDistrict).getInhabitants() != null)
+            {
+                for(Inhabitant inhabitant : ((Town) currentDistrict).getInhabitants())
+                {
+                    if(inhabitant.getPosition().equals(team.getPosition()))
+                        currentInhabitant = inhabitant;
+                }
+            }
+        }
+        metInhabitant = currentInhabitant;
     }
 
     public void loadNewWorldMap(String newMap) throws IOException
@@ -509,6 +559,11 @@ public class Game
     public QuestGiver getMetQuestGiver()
     {
         return metQuestGiver;
+    }
+
+    public Inhabitant getMetInhabitant()
+    {
+        return metInhabitant;
     }
 
     public Group getChosenEnemies()

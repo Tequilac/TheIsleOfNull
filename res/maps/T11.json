@@ -10,7 +10,9 @@
   [
     "Johan"
   ],
-  "trainersAmount": 0,
+  "trainersAmount": 1,
   "trainers":
-  []
+  [
+    "Anders"
+  ]
 }

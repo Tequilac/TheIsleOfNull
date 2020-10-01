@@ -14,4 +14,9 @@ public class Trainer extends Inhabitant
         super(name, description, position);
         this.taughtSkills = taughtSkills;
     }
+
+    public ArrayList<TaughtSkill> getTaughtSkills()
+    {
+        return taughtSkills;
+    }
 }

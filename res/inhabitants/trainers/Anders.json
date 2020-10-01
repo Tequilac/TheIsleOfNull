@@ -1,0 +1,19 @@
+{
+  "x": 7,
+  "y": 7,
+  "description": "",
+  "skillsAmount": 2,
+  "skills":
+  [
+    {
+      "name": "Bow",
+      "level": 2,
+      "cost": 100
+    },
+    {
+      "name": "Crossbow",
+      "level": 2,
+      "cost": 100
+    }
+  ]
+}
