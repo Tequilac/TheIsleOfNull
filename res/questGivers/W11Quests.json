@@ -4,8 +4,8 @@
   [
     {
       "name": "Test",
-      "x": 10,
-      "y": 10,
+      "x": 30,
+      "y": 30,
       "questsAmount": 1,
       "quests":
       [

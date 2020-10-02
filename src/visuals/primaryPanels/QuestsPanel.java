@@ -59,15 +59,7 @@ public class QuestsPanel extends PrimaryPanel
             quests[i].setBounds(0, 20 + i*20, 250, 20);
             quests[i].setToolTipText("<html>" + quest.toString() + "</html>");
             int finalI = i;
-            if(!quest.isCompleted())
-            {
-                quests[i].addActionListener(actionEvent ->
-                {
-                    game.takeQuest(questGiver.getQuests().get(finalI));
-                    frame.requestFocus();
-                });
-            }
-            else
+            if(quest.isCompleted())
             {
                 quests[i].setBackground(Color.GREEN);
                 quests[i].addActionListener(actionEvent ->
@@ -76,6 +68,20 @@ public class QuestsPanel extends PrimaryPanel
                     drawQuests();
                     frame.requestFocus();
                 });
+            }
+            else if(quest.getQuestStatus().equals(QuestStatus.Available))
+            {
+                quests[i].addActionListener(actionEvent ->
+                {
+                    game.takeQuest(questGiver.getQuests().get(finalI));
+                    drawQuests();
+                    frame.requestFocus();
+                });
+            }
+            else
+            {
+                quests[i].setBackground(Color.BLUE);
+                quests[i].setEnabled(false);
             }
             add(quests[i]);
         }

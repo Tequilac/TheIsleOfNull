@@ -2,7 +2,6 @@ package visuals;
 
 import visuals.primaryPanels.MapPanel;
 import visuals.primaryPanels.PrimaryPanel;
-import visuals.primaryPanels.TeamPanel;
 import visuals.secondaryPanels.OptionsPanel;
 import visuals.secondaryPanels.SecondaryPanel;
 

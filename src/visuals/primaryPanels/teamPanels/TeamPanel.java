@@ -1,7 +1,8 @@
-package visuals.primaryPanels;
+package visuals.primaryPanels.teamPanels;
 
 import main.Game;
 import visuals.Frame;
+import visuals.primaryPanels.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +12,14 @@ public class TeamPanel extends PrimaryPanel
 {
     private JTabbedPane pane;
 
-    public TeamPanel(Game game, Frame frame)
+    private int currentTab;
+
+    public TeamPanel(Game game, Frame frame, Integer currentTab)
     {
         super(game, frame);
+
+        if(currentTab != null)
+            this.currentTab = currentTab;
 
         createPane();
     }
@@ -38,6 +44,8 @@ public class TeamPanel extends PrimaryPanel
         pane.addTab("Quests", new ActiveQuestsPanel(game, frame));
         pane.setMnemonicAt(3, KeyEvent.VK_4);
 
+        pane.setSelectedIndex(currentTab);
+
         add(pane);
     }
 
@@ -45,5 +53,10 @@ public class TeamPanel extends PrimaryPanel
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+    }
+
+    public int getCurrentTab()
+    {
+        return pane.getSelectedIndex();
     }
 }

@@ -172,7 +172,7 @@ public class Save
                 {
                     completedQuestName = br.readLine();
                     teamInfo.append(completedQuestName).append("\n");
-                    activeQuests.add(QuestParser.parseQuest(completedQuestName, QuestStatus.Completed));
+                    completedQuests.add(QuestParser.parseQuest(completedQuestName, QuestStatus.Completed));
                 }
 
                 game.setCharacters(characters);
@@ -431,23 +431,6 @@ public class Save
                 }
             }
         }
-
-        if(game.getCurrentDistrict() instanceof World || game.getCurrentDistrict() instanceof Town)
-        {
-
-            if(game.getCurrentDistrict().getQuestGivers() != null)
-            {
-                for (QuestGiver questGiver : game.getCurrentDistrict().getQuestGivers())
-                {
-                    for (Quest quest : questGiver.getQuests())
-                    {
-                        newInfo.append(quest.getQuestStatus()).append("\n");
-                    }
-                }
-            }
-        }
-
-        newInfo.setLength(newInfo.length() - 1);
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         StringBuilder inputBuffer = new StringBuilder();

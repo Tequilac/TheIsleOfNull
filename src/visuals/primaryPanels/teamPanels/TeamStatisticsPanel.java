@@ -1,9 +1,10 @@
-package visuals.primaryPanels;
+package visuals.primaryPanels.teamPanels;
 
 import entities.Character;
 import entities.MagicCharacter;
 import main.Game;
 import visuals.Frame;
+import visuals.primaryPanels.PrimaryPanel;
 
 import javax.swing.*;
 import java.awt.*;

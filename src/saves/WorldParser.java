@@ -120,7 +120,6 @@ public class WorldParser implements IDistrictParser
             }
 
             ArrayList<QuestGiver> questGivers = district.getQuestGivers();
-            QuestStatus questStatus;
             if (questGivers != null)
             {
                 for (QuestGiver questGiver : questGivers)
@@ -132,12 +131,7 @@ public class WorldParser implements IDistrictParser
                         if(newQuest != null)
                             quests.set(i, newQuest);
                     }
-                    for (Quest quest : quests)
-                    {
-                        questStatus = QuestStatus.valueOf(br.readLine());
-                        currentDistrictInfo.append("\n").append(questStatus);
-                        quest.setQuestStatus(questStatus);
-                    }
+                    quests.removeIf(Quest::isCompleted);
                 }
             }
         }

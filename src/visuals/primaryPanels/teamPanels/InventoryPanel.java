@@ -1,4 +1,4 @@
-package visuals.primaryPanels;
+package visuals.primaryPanels.teamPanels;
 
 import entities.Team;
 import items.Item;
@@ -7,6 +7,7 @@ import main.Game;
 import quests.QuestGiver;
 import visuals.*;
 import visuals.Frame;
+import visuals.primaryPanels.PrimaryPanel;
 
 import javax.swing.*;
 import java.awt.*;

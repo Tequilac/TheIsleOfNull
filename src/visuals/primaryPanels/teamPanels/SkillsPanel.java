@@ -1,9 +1,10 @@
-package visuals.primaryPanels;
+package visuals.primaryPanels.teamPanels;
 
 import entities.Character;
 import main.Game;
 import skills.Skill;
 import visuals.Frame;
+import visuals.primaryPanels.PrimaryPanel;
 
 import javax.swing.*;
 import java.util.ArrayList;

@@ -7,12 +7,12 @@
   [
     {
       "name": "Bow",
-      "level": 2,
+      "level": 1,
       "cost": 100
     },
     {
       "name": "Crossbow",
-      "level": 2,
+      "level": 1,
       "cost": 100
     }
   ]

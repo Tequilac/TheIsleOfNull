@@ -52,7 +52,8 @@ public class CharacterInfoPanel extends JPanel
                 public void mouseClicked(MouseEvent mouseEvent)
                 {
                     game.setCurrentCharacter(character);
-                    frame.openTeamView();
+                    Integer currentTab = frame.getCurrentTab();
+                    frame.openTeamView(currentTab);
                     frame.getMainPanel().repaint();
                 }
 

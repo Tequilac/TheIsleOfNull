@@ -1,10 +1,11 @@
-package visuals.primaryPanels;
+package visuals.primaryPanels.teamPanels;
 
 import entities.Team;
 import main.Game;
 import quests.Quest;
 import quests.QuestGiver;
 import visuals.Frame;
+import visuals.primaryPanels.PrimaryPanel;
 import visuals.secondaryPanels.SecondaryPanel;
 
 import javax.swing.*;

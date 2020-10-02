@@ -3,17 +3,15 @@ package visuals;
 import inhabitants.Merchant;
 import inhabitants.Trainer;
 import main.Game;
-import map.Chest;
 import map.MoveDirection;
-import quests.QuestGiver;
 import visuals.primaryPanels.*;
+import visuals.primaryPanels.QuestsPanel;
+import visuals.primaryPanels.teamPanels.TeamPanel;
 import visuals.secondaryPanels.BlankPanel;
-import visuals.secondaryPanels.CharacterInfoPanel;
 import visuals.secondaryPanels.CharactersInfoPanel;
 import visuals.secondaryPanels.OptionsPanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
@@ -117,12 +115,12 @@ public class Frame extends JFrame implements KeyListener
         if(mainPanel.getPrimaryPanel() instanceof TeamPanel)
             openMapPanel();
         else
-            openTeamView();
+            openTeamView(0);
     }
 
-    public void openTeamView()
+    public void openTeamView(Integer currentTab)
     {
-        mainPanel.addPrimaryPanel(new TeamPanel(game, this));
+        mainPanel.addPrimaryPanel(new TeamPanel(game, this, currentTab));
         pack();
     }
 
@@ -146,6 +144,13 @@ public class Frame extends JFrame implements KeyListener
     public void updateButtons(boolean onObject, boolean onEntrance)
     {
         mainPanel.updateButtons(onObject, onEntrance);
+    }
+
+    public Integer getCurrentTab()
+    {
+        if(mainPanel.getPrimaryPanel() instanceof TeamPanel)
+            return ((TeamPanel) mainPanel.getPrimaryPanel()).getCurrentTab();
+        return null;
     }
 
     @Override

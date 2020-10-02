@@ -2,7 +2,7 @@ package visuals;
 
 import entities.Team;
 import items.ItemParser;
-import visuals.primaryPanels.InventoryPanel;
+import visuals.primaryPanels.teamPanels.InventoryPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,9 +35,9 @@ public class TeamInventoryPanel extends JPanel implements DragGestureListener
 
         if(this.items != null)
         {
-            for(int i = 0; i < items.length; i++)
+            for(JLabel item : items)
             {
-                remove(items[i]);
+                remove(item);
             }
         }
         updateUI();

@@ -3,7 +3,7 @@ package visuals;
 import entities.Character;
 import entities.Team;
 import items.Item;
-import visuals.primaryPanels.InventoryPanel;
+import visuals.primaryPanels.teamPanels.InventoryPanel;
 
 import javax.swing.*;
 import java.awt.*;
