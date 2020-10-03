@@ -9,6 +9,7 @@ import items.Item;
 import items.ItemParser;
 import main.Game;
 import map.*;
+import map.districts.AbstractHiddenDistrict;
 import map.districts.Dungeon;
 import map.districts.Town;
 import map.districts.World;
@@ -374,15 +375,11 @@ public class Save
 
         newInfo = new StringBuilder(game.getCurrentDistrict().getName() + "\n");
         newInfo.append("V").append("\n");
-        if (game.getCurrentDistrict() instanceof  World || game.getCurrentDistrict() instanceof Dungeon)
+        if (game.getCurrentDistrict() instanceof AbstractHiddenDistrict)
         {
             for(int i = 0; i < game.getCurrentDistrict().getHeight(); i++)
             {
-                boolean[][] visTiles;
-                if(game.getCurrentDistrict() instanceof World)
-                    visTiles = ((World) game.getCurrentDistrict()).getVisibleTiles();
-                else
-                    visTiles = ((Dungeon) game.getCurrentDistrict()).getVisibleTiles();
+                boolean[][] visTiles = ((AbstractHiddenDistrict) game.getCurrentDistrict()).getVisibleTiles();
                 for(int j = 0; j < game.getCurrentDistrict().getWidth(); j++)
                 {
                     if(visTiles[j][i])

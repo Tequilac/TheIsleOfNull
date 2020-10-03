@@ -11,7 +11,7 @@ import java.util.LinkedList;
 
 public class Town extends District
 {
-    private ArrayList<Inhabitant> inhabitants;
+    private final ArrayList<Inhabitant> inhabitants;
 
     public Town(String name, int height, int width, int[][] tiles, LinkedList<Group> enemies, ArrayList<Chest> chests, ArrayList<QuestGiver> questGivers, ArrayList<Inhabitant> inhabitants)
     {

@@ -54,7 +54,8 @@ public class SaveGamesPanel extends PrimaryPanel
                 try
                 {
                     game.loadSaveGame(files.get(finalI));
-                } catch (IOException e)
+                }
+                catch(IOException e)
                 {
                     e.printStackTrace();
                 }

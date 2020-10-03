@@ -6,6 +6,7 @@ import inhabitants.Trainer;
 import main.Game;
 import map.Chest;
 import map.Vector2d;
+import map.districts.AbstractHiddenDistrict;
 import map.districts.Dungeon;
 import map.districts.Town;
 import map.districts.World;
@@ -286,7 +287,7 @@ public class MapPanel extends PrimaryPanel
         for (int i = 0; i < game.getCurrentDistrict().getEnemies().size(); i++)
         {
             Vector2d position = game.getCurrentDistrict().getEnemies().get(i).getPosition();
-            if(game.getCurrentDistrict() instanceof World && ((World) game.getCurrentDistrict()).isVisible(position))
+            if(game.getCurrentDistrict() instanceof AbstractHiddenDistrict && ((AbstractHiddenDistrict) game.getCurrentDistrict()).isVisible(position))
             {
                 enemiesStats[i] = new JLabel();
                 enemiesStats[i].setFocusable(false);

@@ -76,7 +76,7 @@ public class ChestPanel extends PrimaryPanel
                 @Override
                 public void mouseClicked(MouseEvent mouseEvent)
                 {
-                    frame.getGame().transferItem(chest.getItems().get(finalI));
+                    game.transferItem(chest.getItems().get(finalI));
                     remove(items[finalI]);
                     setChestContent();
                 }

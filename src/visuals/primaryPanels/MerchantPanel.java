@@ -68,9 +68,13 @@ public class MerchantPanel extends PrimaryPanel
                 @Override
                 public void mouseClicked(MouseEvent mouseEvent)
                 {
-                    frame.getGame().transferItem(merchant.getOfferedItems().get(finalI));
-                    remove(items[finalI]);
-                    drawOfferedItem();
+                    if(merchant.getOfferedItems().get(finalI).canBeBought(game.getTeam().getGold()))
+                    {
+                        game.getTeam().removeGold(merchant.getOfferedItems().get(finalI).getCost());
+                        game.buyItem(merchant.getOfferedItems().get(finalI));
+                        remove(items[finalI]);
+                        drawOfferedItem();
+                    }
                 }
 
                 @Override

@@ -17,6 +17,11 @@ public abstract class Item
         this.type = type;
     }
 
+    public boolean canBeBought(int gold)
+    {
+        return gold >= cost;
+    }
+
     public abstract int getValue();
 
     public int getCost()

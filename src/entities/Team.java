@@ -161,6 +161,11 @@ public class Team extends Group
         this.gold += gold;
     }
 
+    public void removeGold(int gold)
+    {
+        this.gold -= gold;
+    }
+
     public ArrayList<Character> getTeamMembers()
     {
         return entities;
@@ -189,10 +194,5 @@ public class Team extends Group
     public ArrayList<Item> getItemsInInventory()
     {
         return itemsInInventory;
-    }
-
-    public void setGold(int gold)
-    {
-        this.gold = gold;
     }
 }

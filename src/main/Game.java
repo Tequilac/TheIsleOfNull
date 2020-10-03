@@ -274,7 +274,7 @@ public class Game
     {
         if(currentDistrict instanceof World && ((World) currentDistrict).isTown(team.getPosition()))
         {
-            loadNewTownMap("T" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2));
+            loadNewInnerMap("T" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2));
             frame.getMainPanel().repaint();
         }
     }
@@ -283,7 +283,7 @@ public class Game
     {
         if(currentDistrict instanceof World && ((World) currentDistrict).isDungeon(team.getPosition()))
         {
-            loadNewDungeonMap("D" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2));
+            loadNewInnerMap("D" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2));
             frame.getMainPanel().repaint();
         }
     }
@@ -391,17 +391,7 @@ public class Game
             team.setPosition(((World)currentDistrict).getDungeonEntrance());
     }
 
-    public void loadNewTownMap(String newMap) throws IOException
-    {
-        Save.saveGame(this, currentSave);
-        Save.parseSave(this, currentSave);
-        Save.setCurrentDistrict(this, currentSave, newMap, team.getPosition(), team.getMapDirection());
-        currentDistrict = MapParser.parseMap(newMap);
-        Save.parseSave(this, currentSave);
-        team.setPosition(new Vector2d(currentDistrict.getWidth() - 1, currentDistrict.getHeight() - 1));
-    }
-
-    public void loadNewDungeonMap(String newMap) throws IOException
+    private void loadNewInnerMap(String newMap) throws IOException
     {
         Save.saveGame(this, currentSave);
         Save.parseSave(this, currentSave);
@@ -458,6 +448,12 @@ public class Game
         team.completeQuest(questGiver.getQuests().get(index));
         questGiver.getQuests().get(index).setQuestStatus(QuestStatus.Completed);
         questGiver.removeQuest(index);
+    }
+
+    public void buyItem(Item item)
+    {
+        ((Merchant)metInhabitant).getOfferedItems().remove(item);
+        team.addItemToInventory(item);
     }
 
     public void transferItem(Item item)

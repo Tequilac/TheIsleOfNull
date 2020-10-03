@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class Chest
 {
-    private Vector2d position;
+    private final Vector2d position;
 
     private int gold;
 
