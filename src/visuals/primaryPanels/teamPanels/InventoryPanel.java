@@ -29,7 +29,7 @@ public class InventoryPanel extends PrimaryPanel
         setLayout(null);
 
         MyDropTargetListener mtl;
-        this.teamInventoryPanel = new TeamInventoryPanel(this, game.getTeam());
+        this.teamInventoryPanel = new TeamInventoryPanel(game, this, game.getTeam());
         mtl = new MyDropTargetListener(teamInventoryPanel);
         teamInventoryPanel.setBounds(0, 0, 400, 800);
         add(teamInventoryPanel);

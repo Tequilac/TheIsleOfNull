@@ -22,10 +22,7 @@ import visuals.Frame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Game
 {
@@ -97,7 +94,7 @@ public class Game
     {
         for (int i = 0; i < 4; i++)
         {
-            Character character = new Character("Choose name", 100, knownRaces.get("Human"), 0, 0, knownClasses.get("Knight"));
+            Character character = new Character("Choose name", knownRaces.get("Human"), 0, 0, knownClasses.get("Knight"));
             characters.add(character);
         }
     }
@@ -116,8 +113,15 @@ public class Game
 
     public void createTeam()
     {
-        if (this.team == null)
+        if(this.team == null)
         {
+            for(int i = 0; i < 4; i++)
+            {
+                if(characters.get(i).getCharacterClass().usesMagic())
+                {
+                    characters.set(i, new MagicCharacter(characters.get(i)));
+                }
+            }
             this.team = new Team(new Vector2d(32, 34), MapDirection.North, characters);
             ((World) currentDistrict).updateVisibleTiles(team.getPosition());
         }

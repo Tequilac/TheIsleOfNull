@@ -76,7 +76,6 @@ public class Frame extends JFrame implements KeyListener
 
     public void openMapPanel()
     {
-        game.createTeam();
         game.update();
         mainPanel.addPrimaryPanel(new MapPanel(game, this));
         mainPanel.addLeftPanel(new OptionsPanel(game, this));

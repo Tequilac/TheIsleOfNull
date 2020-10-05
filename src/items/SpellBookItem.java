@@ -10,6 +10,11 @@ public class SpellBookItem extends Item
         this.spellName = spellName;
     }
 
+    public String getSpellName()
+    {
+        return spellName;
+    }
+
     @Override
     public int getValue()
     {

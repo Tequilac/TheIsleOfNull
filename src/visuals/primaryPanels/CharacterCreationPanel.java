@@ -143,13 +143,13 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
         }
         game.setCurrentSave(new File("saveGames/" + saveName.getText() + ".txt"));
         game.createTeam();
-        try
+        /*try
         {
             game.saveGame();
         } catch (IOException ex)
         {
             ex.printStackTrace();
-        }
+        }*/
         frame.openMapPanel();
     }
 }

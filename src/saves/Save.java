@@ -126,7 +126,7 @@ public class Save
                     }
 
                     character = new Character(name, health, maxHealth, mana, maxMana, race, level, experience, characterClass,
-                            attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6]);
+                            attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6], 0);
 
                     character.initEquipment(itemsInInventory);
 

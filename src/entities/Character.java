@@ -2,15 +2,12 @@ package entities;
 
 import equipment.Equipment;
 import equipment.EquipmentType;
-import items.DefensiveItem;
 import items.Item;
 import items.OffensiveItem;
 import skills.ItemSkill;
-import skills.OffensiveItemSkill;
 import skills.Skill;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Character extends Entity
 {
@@ -46,26 +43,10 @@ public class Character extends Entity
 
     private ArrayList<Skill> skills;
 
-    public Character(String name, int health, Race race, int level, int experience, Class characterClass, int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck)
-    {
-        super(name, health, race, level, experience);
-        this.characterClass = characterClass;
-        this.maxHealth = 100;
-        this.mana = 100;
-        this.maxMana = 100;
-        this.might = might;
-        this.intellect = intellect;
-        this.personality = personality;
-        this.endurance = endurance;
-        this.accuracy = accuracy;
-        this.speed = speed;
-        this.luck = luck;
-        this.skills = characterClass.getSkills();
-        Item[] items = {null, null, null, null};
-        initEquipment(items);
-    }
+    private int skillPoints;
 
-    public Character(String name, int health, int maxHealth, int mana, int maxMana, Race race, int level, int experience, Class characterClass, int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck)
+    public Character(String name, int health, int maxHealth, int mana, int maxMana, Race race, int level, int experience, Class characterClass,
+                     int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck, int skillPoints)
     {
         super(name, health, race, level, experience);
         this.characterClass = characterClass;
@@ -80,17 +61,20 @@ public class Character extends Entity
         this.speed = speed;
         this.luck = luck;
         this.skills = characterClass.getSkills();
+        this.skillPoints = skillPoints;
         Item[] items = {null, null, null, null};
         initEquipment(items);
     }
 
-    public Character(String name, int health, Race race, int level, int experience, Class characterClass)
+    public Character(String name, Race race, int level, int experience, Class characterClass)
     {
-        super(name, health, race, level, experience);
+        super(name, 0, race, level, experience);
         this.setClass(characterClass);
+        this.health = 100;
         this.maxHealth = 100;
         this.mana = 100;
         this.maxMana = 100;
+        this.skillPoints = 0;
         Item[] items = {null, null, null, null};
         initEquipment(items);
     }
@@ -234,6 +218,11 @@ public class Character extends Entity
         return torso;
     }
 
+    public int getSkillPoints()
+    {
+        return skillPoints;
+    }
+
     public void setMana(int mana)
     {
         this.mana = mana;
@@ -295,11 +284,6 @@ public class Character extends Entity
         this.speed = characterClass.getSpeed() + race.getSpeedModifier();
         this.luck = characterClass.getLuck() + race.getLuckModifier();
         this.skills = characterClass.getSkills();
-    }
-
-    public void setCharacterClass(Class characterClass)
-    {
-        this.characterClass = characterClass;
     }
 
     public void setRace(Race race)
