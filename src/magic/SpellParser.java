@@ -19,16 +19,24 @@ public class SpellParser
         int manaCost = jsonObject.get("cost").getAsInt();
         int spellLevel = jsonObject.get("level").getAsInt();
         int value;
+        boolean multiple;
 
         Spell spell = null;
 
-        switch (jsonObject.get("type").getAsString())
+        switch(jsonObject.get("type").getAsString())
         {
             case "DamageSpell":
                 value = jsonObject.get("value").getAsInt();
-                spell = new DamageSpell();
+                spell = new DamageSpell(magicSchool, filename, description, manaCost, spellLevel, value);
                 break;
-
+            case "HealSpell":
+                value = jsonObject.get("value").getAsInt();
+                multiple = jsonObject.get("multiple").getAsBoolean();
+                spell = new HealSpell(magicSchool, filename, description, manaCost, spellLevel, value, multiple);
+                break;
+            case "EffectSpell":
+                spell = new EffectSpell(magicSchool, filename, description, manaCost, spellLevel);
+                break;
         }
         return spell;
     }

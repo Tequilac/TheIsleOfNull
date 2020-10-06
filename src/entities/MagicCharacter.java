@@ -34,4 +34,9 @@ public class MagicCharacter extends Character
     {
         spells.add(spell);
     }
+
+    public LinkedList<Spell> getSpells()
+    {
+        return spells;
+    }
 }

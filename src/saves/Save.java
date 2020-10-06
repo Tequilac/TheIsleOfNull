@@ -7,6 +7,8 @@ import equipment.Equipment;
 import equipment.EquipmentType;
 import items.Item;
 import items.ItemParser;
+import magic.Spell;
+import magic.SpellParser;
 import main.Game;
 import map.*;
 import map.districts.AbstractHiddenDistrict;
@@ -125,8 +127,26 @@ public class Save
                         }
                     }
 
-                    character = new Character(name, health, maxHealth, mana, maxMana, race, level, experience, characterClass,
-                            attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6], 0);
+                    if(characterClass.usesMagic())
+                    {
+                        int spellAmount = Integer.parseInt(br.readLine());
+                        teamInfo.append(spellAmount).append("\n");
+                        LinkedList<Spell> spells = new LinkedList<>();
+                        String spellName;
+                        for(int j = 0; j < spellAmount; j++)
+                        {
+                            spellName = br.readLine();
+                            spells.add(SpellParser.parseSpell(spellName));
+                            teamInfo.append(spellName).append("\n");
+                        }
+                        character = new MagicCharacter(name, health, maxHealth, mana, maxMana, race, level, experience, characterClass,
+                                attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6], spells, 0);
+                    }
+                    else
+                    {
+                        character = new Character(name, health, maxHealth, mana, maxMana, race, level, experience, characterClass,
+                                attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6], 0);
+                    }
 
                     character.initEquipment(itemsInInventory);
 
@@ -253,6 +273,11 @@ public class Save
                 bw.write("null");
                 bw.newLine();
             }
+            if(character instanceof MagicCharacter)
+            {
+                bw.write("0");
+                bw.newLine();
+            }
         }
         bw.write("0");
         bw.newLine();
@@ -304,6 +329,15 @@ public class Save
                 else
                 {
                     newInfo.append("null").append("\n");
+                }
+            }
+            if(character instanceof MagicCharacter)
+            {
+                LinkedList<Spell> spells = ((MagicCharacter) character).getSpells();
+                newInfo.append(spells.size()).append("\n");
+                for(Spell spell : spells)
+                {
+                    newInfo.append(spell.getName()).append("\n");
                 }
             }
         }

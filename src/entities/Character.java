@@ -133,6 +133,11 @@ public class Character extends Entity
         }
     }
 
+    public void decreaseSkillPoints(int amount)
+    {
+        skillPoints -= amount;
+    }
+
     public void levelUp()
     {
         level++;

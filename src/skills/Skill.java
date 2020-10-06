@@ -22,6 +22,16 @@ public class Skill
         this.level = level;
     }
 
+    public void increaseValue()
+    {
+        value++;
+    }
+
+    public void increaseLevel()
+    {
+        level++;
+    }
+
     public String getName()
     {
         return name;
