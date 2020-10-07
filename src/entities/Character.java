@@ -49,7 +49,7 @@ public class Character extends Entity
                      int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck, int skillPoints)
     {
         super(name, health, race, level, experience);
-        this.characterClass = characterClass;
+        this.setClass(characterClass);
         this.maxHealth = maxHealth;
         this.mana = mana;
         this.maxMana = maxMana;
@@ -60,7 +60,6 @@ public class Character extends Entity
         this.accuracy = accuracy;
         this.speed = speed;
         this.luck = luck;
-        this.skills = characterClass.getSkills();
         this.skillPoints = skillPoints;
         Item[] items = {null, null, null, null};
         initEquipment(items);
@@ -74,7 +73,7 @@ public class Character extends Entity
         this.maxHealth = 100;
         this.mana = 100;
         this.maxMana = 100;
-        this.skillPoints = 0;
+        this.skillPoints = 5;
         Item[] items = {null, null, null, null};
         initEquipment(items);
     }
@@ -141,6 +140,7 @@ public class Character extends Entity
     public void levelUp()
     {
         level++;
+        skillPoints += level;
     }
 
     public Class getCharacterClass()
@@ -288,7 +288,11 @@ public class Character extends Entity
         this.accuracy = characterClass.getAccuracy() + race.getAccuracyModifier();
         this.speed = characterClass.getSpeed() + race.getSpeedModifier();
         this.luck = characterClass.getLuck() + race.getLuckModifier();
-        this.skills = characterClass.getSkills();
+        this.skills = new ArrayList<>(characterClass.getSkills().size());
+        for(Skill skill : characterClass.getSkills())
+        {
+            this.skills.add(skill.cloneSkill());
+        }
     }
 
     public void setRace(Race race)

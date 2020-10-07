@@ -14,4 +14,9 @@ public class MagicSchoolSkill extends Skill
         super(name, classes, value, level);
         this.magicSchool = magicSchool;
     }
+
+    public Skill cloneSkill()
+    {
+        return new MagicSchoolSkill(this.name, this.classes, this.value, this.level, this.magicSchool);
+    }
 }

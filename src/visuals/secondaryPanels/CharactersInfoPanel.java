@@ -29,10 +29,12 @@ public class CharactersInfoPanel extends SecondaryPanel
                 add(characterInfoPanels[i]);
             }
         }
-
-        for(int i = 0; i < 4; i++)
+        else
         {
-            characterInfoPanels[i].repaint();
+            for(int i = 0; i < 4; i++)
+            {
+                characterInfoPanels[i].repaint();
+            }
         }
 
     }

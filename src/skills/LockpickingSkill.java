@@ -10,4 +10,10 @@ public class LockpickingSkill extends Skill
     {
         super(name, classes, value, level);
     }
+
+    @Override
+    public Skill cloneSkill()
+    {
+        return new LockpickingSkill(this.name, this.classes, this.value, this.level);
+    }
 }

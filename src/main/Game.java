@@ -125,7 +125,7 @@ public class Game
             this.team = new Team(new Vector2d(32, 34), MapDirection.North, characters);
             ((World) currentDistrict).updateVisibleTiles(team.getPosition());
         }
-        currentCharacter = team.getTeamMembers().get(0);
+        currentCharacter = characters.get(0);
     }
 
     public boolean move(MoveDirection direction)

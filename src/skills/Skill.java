@@ -4,7 +4,7 @@ import entities.Class;
 
 import java.util.ArrayList;
 
-public class Skill
+public abstract class Skill
 {
     protected String name;
 
@@ -21,6 +21,8 @@ public class Skill
         this.value = value;
         this.level = level;
     }
+
+    public abstract Skill cloneSkill();
 
     public void increaseValue()
     {
@@ -45,5 +47,10 @@ public class Skill
     public int getLevel()
     {
         return level;
+    }
+
+    public ArrayList<String> getClasses()
+    {
+        return classes;
     }
 }

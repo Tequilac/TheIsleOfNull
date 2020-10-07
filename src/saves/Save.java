@@ -72,6 +72,7 @@ public class Save
                 int maxMana;
                 int level;
                 int experience;
+                int skillPoints;
                 int [] attributes = new int[7];
                 Character character;
                 Item[] itemsInInventory = new Item[4];
@@ -106,6 +107,8 @@ public class Save
                     teamInfo.append(level).append("\n");
                     experience = Integer.parseInt(br.readLine());
                     teamInfo.append(experience).append("\n");
+                    skillPoints = Integer.parseInt(br.readLine());
+                    teamInfo.append(skillPoints).append("\n");
                     for (int j = 0; j < 7; j++)
                     {
                         attributes[j] = Integer.parseInt(br.readLine());
@@ -140,12 +143,12 @@ public class Save
                             teamInfo.append(spellName).append("\n");
                         }
                         character = new MagicCharacter(name, health, maxHealth, mana, maxMana, race, level, experience, characterClass,
-                                attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6], spells, 0);
+                                attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6], spells, skillPoints);
                     }
                     else
                     {
                         character = new Character(name, health, maxHealth, mana, maxMana, race, level, experience, characterClass,
-                                attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6], 0);
+                                attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6], skillPoints);
                     }
 
                     character.initEquipment(itemsInInventory);
@@ -197,6 +200,7 @@ public class Save
                 }
 
                 game.setCharacters(characters);
+                game.setCurrentCharacter(characters.get(0));
                 game.setCurrentMember(0);
                 game.setTeam(new Team(new Vector2d(posX, posY), mapDirection, characters, activeQuests, completedQuests, items));
                 game.setTeamInfo(teamInfo.toString());
@@ -253,6 +257,8 @@ public class Save
             bw.write(String.valueOf(character.getLevel()));
             bw.newLine();
             bw.write(String.valueOf(character.getExperience()));
+            bw.newLine();
+            bw.write(String.valueOf(character.getSkillPoints()));
             bw.newLine();
             bw.write(String.valueOf(character.getMight()));
             bw.newLine();
@@ -312,6 +318,7 @@ public class Save
             newInfo.append(character.getMaxMana()).append("\n");
             newInfo.append(character.getLevel()).append("\n");
             newInfo.append(character.getExperience()).append("\n");
+            newInfo.append(character.getSkillPoints()).append("\n");
             newInfo.append(character.getMight()).append("\n");
             newInfo.append(character.getIntellect()).append("\n");
             newInfo.append(character.getPersonality()).append("\n");

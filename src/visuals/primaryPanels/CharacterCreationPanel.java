@@ -146,7 +146,8 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
         try
         {
             game.saveGame();
-        } catch (IOException ex)
+        }
+        catch (IOException ex)
         {
             ex.printStackTrace();
         }
