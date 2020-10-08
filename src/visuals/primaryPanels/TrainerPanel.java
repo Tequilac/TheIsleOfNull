@@ -18,7 +18,6 @@ public class TrainerPanel extends PrimaryPanel
     {
         super(game, frame);
 
-        setLayout(null);
         this.trainer = trainer;
 
         closeButton = new JButton(new ImageIcon("res/graphics/exit.png"));

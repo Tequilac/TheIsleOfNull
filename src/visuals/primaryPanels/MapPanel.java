@@ -53,7 +53,6 @@ public class MapPanel extends PrimaryPanel
     {
         super(game, frame);
 
-        setLayout(null);
 
         worldTileGraphics = new Image[10];
         ImageIcon iiWater = new ImageIcon("res/graphics/worldGraphics/water.png");

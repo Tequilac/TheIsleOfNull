@@ -15,12 +15,10 @@ public class TeamStatisticsPanel extends PrimaryPanel
     {
         super(game, frame);
 
-        setLayout(null);
-
         drawCharacter(game.getCurrentCharacter());
     }
 
-    public void drawCharacter(Character character)
+    private void drawCharacter(Character character)
     {
         JLabel name = new JLabel(character.getName());
         JLabel characterClass = new JLabel("Class: " + character.getCharacterClass().getName());
@@ -46,7 +44,7 @@ public class TeamStatisticsPanel extends PrimaryPanel
         drawAttributes(character);
     }
 
-    public void drawAttributes(Character character)
+    private void drawAttributes(Character character)
     {
 
         JLabel[] attributes = new JLabel[7];

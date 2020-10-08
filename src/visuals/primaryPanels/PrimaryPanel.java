@@ -17,6 +17,8 @@ public class PrimaryPanel extends JPanel
         this.game = game;
         this.frame = frame;
 
+        setLayout(null);
+
         setPreferredSize(new Dimension(800, 800));
     }
 }

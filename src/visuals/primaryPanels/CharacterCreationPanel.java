@@ -25,7 +25,6 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
     {
         super(game, frame);
         setFocusable(true);
-        setLayout(null);
         drawCharacters(game);
         JButton submitButton = new JButton("Submit");
         submitButton.setBounds(1200, 700, 100, 20);

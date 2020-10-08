@@ -1,5 +1,7 @@
 package magic;
 
+import javax.swing.*;
+
 public class Spell
 {
     protected MagicSchool magicSchool;
@@ -44,5 +46,13 @@ public class Spell
     public int getSpellLevel()
     {
         return spellLevel;
+    }
+
+    public JLabel getLabel()
+    {
+        String path = "res/graphics/spells/" + magicSchool.toString().toLowerCase() + ".png";
+        JLabel label = new JLabel(new ImageIcon(path));
+        label.setToolTipText("<html>" + toString() + "</html>");
+        return label;
     }
 }

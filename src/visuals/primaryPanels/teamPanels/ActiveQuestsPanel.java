@@ -13,16 +13,17 @@ import java.awt.*;
 
 public class ActiveQuestsPanel extends PrimaryPanel
 {
-    private Team team;
-
-    private JButton[] quests;
-
     public ActiveQuestsPanel(Game game, Frame frame)
     {
         super(game, frame);
-        this.team = game.getTeam();
 
-        this.quests = new JButton[team.getActiveQuests().size()];
+        drawQuests();
+    }
+
+    private void drawQuests()
+    {
+        Team team = game.getTeam();
+        JButton[] quests = new JButton[team.getActiveQuests().size()];
         for (int i = 0; i < team.getActiveQuests().size(); i++)
         {
             Quest quest = team.getActiveQuests().get(i);

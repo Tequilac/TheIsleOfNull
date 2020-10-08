@@ -25,7 +25,6 @@ public class ChestPanel extends PrimaryPanel
     {
         super(game, frame);
 
-        setLayout(null);
         this.chest = chest;
 
         closeButton = new JButton(new ImageIcon("res/graphics/exit.png"));

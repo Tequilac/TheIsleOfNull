@@ -18,6 +18,8 @@ public class TeamPanel extends PrimaryPanel
     {
         super(game, frame);
 
+        setLayout(new FlowLayout());
+
         if(currentTab != null)
             this.currentTab = currentTab;
 
@@ -43,6 +45,9 @@ public class TeamPanel extends PrimaryPanel
 
         pane.addTab("Quests", new ActiveQuestsPanel(game, frame));
         pane.setMnemonicAt(3, KeyEvent.VK_4);
+
+        pane.addTab("Spells", new KnownSpellsPanel(game, frame));
+        pane.setMnemonicAt(4, KeyEvent.VK_5);
 
         pane.setSelectedIndex(currentTab);
 

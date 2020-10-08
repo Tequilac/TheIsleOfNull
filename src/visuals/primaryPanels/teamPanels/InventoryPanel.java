@@ -26,8 +26,6 @@ public class InventoryPanel extends PrimaryPanel
     {
         super(game, frame);
 
-        setLayout(null);
-
         MyDropTargetListener mtl;
         this.teamInventoryPanel = new TeamInventoryPanel(game, this, game.getTeam());
         mtl = new MyDropTargetListener(teamInventoryPanel);

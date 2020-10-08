@@ -22,11 +22,11 @@ public class SkillsPanel extends PrimaryPanel
     public SkillsPanel(Game game, Frame frame)
     {
         super(game, frame);
-        setLayout(null);
+
         displaySkills(game.getCurrentCharacter());
     }
 
-    public void displaySkills(Character character)
+    private void displaySkills(Character character)
     {
         if(skillPoints != null)
         {

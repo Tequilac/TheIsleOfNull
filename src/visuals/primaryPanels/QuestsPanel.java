@@ -23,7 +23,6 @@ public class QuestsPanel extends PrimaryPanel
     {
         super(game, frame);
 
-        setLayout(null);
         this.questGiver = questGiver;
 
 

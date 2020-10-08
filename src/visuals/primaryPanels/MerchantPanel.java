@@ -22,7 +22,6 @@ public class MerchantPanel extends PrimaryPanel
     {
         super(game, frame);
 
-        setLayout(null);
         this.merchant = merchant;
 
         closeButton = new JButton(new ImageIcon("res/graphics/exit.png"));
