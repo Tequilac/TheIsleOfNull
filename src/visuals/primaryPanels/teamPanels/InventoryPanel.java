@@ -22,12 +22,12 @@ public class InventoryPanel extends PrimaryPanel
 
     private EquipmentComponent equipmentComponent;
 
-    public InventoryPanel(Game game, Frame frame)
+    public InventoryPanel(Game game, Frame frame, TeamPanel teamPanel)
     {
         super(game, frame);
 
         MyDropTargetListener mtl;
-        this.teamInventoryPanel = new TeamInventoryPanel(game, this, game.getTeam());
+        this.teamInventoryPanel = new TeamInventoryPanel(game, teamPanel, game.getTeam());
         mtl = new MyDropTargetListener(teamInventoryPanel);
         teamInventoryPanel.setBounds(0, 0, 400, 800);
         add(teamInventoryPanel);

@@ -1,0 +1,8 @@
+{
+  "type": "EffectSpell",
+  "school": "Earth",
+  "description": "Protection for one team member.",
+  "cost": 10,
+  "level": 1,
+  "value": 5
+}

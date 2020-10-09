@@ -55,4 +55,14 @@ public class Spell
         label.setToolTipText("<html>" + toString() + "</html>");
         return label;
     }
+
+    @Override
+    public String toString()
+    {
+        return  name + "<br>" +
+                description + "<br>" +
+                "Magic school: " + magicSchool + "<br>" +
+                "Mana cost: " + manaCost + "<br>" +
+                "Level: " + spellLevel;
+    }
 }

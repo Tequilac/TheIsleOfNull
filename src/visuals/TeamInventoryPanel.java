@@ -8,6 +8,7 @@ import items.SpellBookItem;
 import magic.SpellParser;
 import main.Game;
 import visuals.primaryPanels.teamPanels.InventoryPanel;
+import visuals.primaryPanels.teamPanels.TeamPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,17 +24,17 @@ public class TeamInventoryPanel extends JPanel implements DragGestureListener
 {
     private Game game;
 
-    private InventoryPanel inventoryPanel;
+    private TeamPanel teamPanel;
 
     private Team team;
 
     private JLabel[] items;
 
-    public TeamInventoryPanel(Game game, InventoryPanel inventoryPanel, Team team)
+    public TeamInventoryPanel(Game game, TeamPanel teamPanel, Team team)
     {
         super();
         this.game = game;
-        this.inventoryPanel = inventoryPanel;
+        this.teamPanel = teamPanel;
         this.team = team;
 
         drawItems();
@@ -74,6 +75,7 @@ public class TeamInventoryPanel extends JPanel implements DragGestureListener
                                 ((MagicCharacter) game.getCurrentCharacter()).learnSpell(SpellParser.parseSpell(((SpellBookItem)team.getItemsInInventory().get(finalI)).getSpellName()));
                                 team.removeItemFromInventory(team.getItemsInInventory().get(finalI));
                                 drawItems();
+                                teamPanel.updateSpellsPanel();
                             }
                             catch(IOException ioException)
                             {

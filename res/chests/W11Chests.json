@@ -16,11 +16,12 @@
       "x": 30,
       "y": 32,
       "gold": 50,
-      "itemsCount": 2,
+      "itemsCount": 3,
       "items":
       [
         "Basic shield",
-        "Basic Fire Spell"
+        "Basic Fire Spell",
+        "Basic Earth Spell"
       ]
     },
     {
