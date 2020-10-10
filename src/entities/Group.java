@@ -123,35 +123,55 @@ public class Group
     public void makeDecision(Vector2d teamPosition, District district)
     {
         Vector2d relativePosition = isNear(teamPosition);
-        if(!(relativePosition).equals(new Vector2d(-1, -1)))
+        if(!(relativePosition).equals(new Vector2d(-10, -10)))
         {
             if(relativePosition.getY() < 0)
             {
                 if(mapDirection == MapDirection.South)
                     move(MoveDirection.Front, district);
                 else
-                    move(MoveDirection.TurnLeft, district);
+                {
+                    if(relativePosition.getX() >= 0)
+                        move(MoveDirection.TurnLeft, district);
+                    else
+                        move(MoveDirection.TurnRight, district);
+                }
             }
             else if(relativePosition.getY() > 0)
             {
                 if(mapDirection == MapDirection.North)
                     move(MoveDirection.Front, district);
                 else
-                    move(MoveDirection.TurnLeft, district);
+                {
+                    if(relativePosition.getX() <= 0)
+                        move(MoveDirection.TurnLeft, district);
+                    else
+                        move(MoveDirection.TurnRight, district);
+                }
             }
             else if(relativePosition.getX() < 0)
             {
                 if(mapDirection == MapDirection.East)
                     move(MoveDirection.Front, district);
                 else
-                    move(MoveDirection.TurnLeft, district);
+                {
+                    if(relativePosition.getY() >= 0)
+                        move(MoveDirection.TurnLeft, district);
+                    else
+                        move(MoveDirection.TurnRight, district);
+                }
             }
             else if(relativePosition.getX() > 0)
             {
                 if(mapDirection == MapDirection.West)
                     move(MoveDirection.Front, district);
                 else
-                    move(MoveDirection.TurnLeft, district);
+                {
+                    if(relativePosition.getY() <= 0)
+                        move(MoveDirection.TurnLeft, district);
+                    else
+                        move(MoveDirection.TurnRight, district);
+                }
             }
         }
     }
@@ -166,7 +186,7 @@ public class Group
                     return new Vector2d(i, j);
             }
         }
-        return new Vector2d(-1, -1);
+        return new Vector2d(-10, -10);
     }
 
     public int checkForDead(Team team)

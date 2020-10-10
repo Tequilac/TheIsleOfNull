@@ -9,4 +9,11 @@ public class DamageSpell extends Spell
         super(magicSchool, name, description, manaCost, spellLevel);
         this.value = value;
     }
+
+    @Override
+    public String toString()
+    {
+        return super.toString() + "<br>" +
+                "Value: " + value;
+    }
 }
