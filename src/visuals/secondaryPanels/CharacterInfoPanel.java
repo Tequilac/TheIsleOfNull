@@ -1,6 +1,7 @@
 package visuals.secondaryPanels;
 
 import entities.Character;
+import entities.MagicCharacter;
 import main.Game;
 import visuals.Frame;
 
@@ -104,14 +105,14 @@ public class CharacterInfoPanel extends JPanel
         {
             g.setColor(new Color(0, 0, 255));
             g.drawRect(10, 70, 280, 20);
-            g.fillRect(10, 70, 280 * character.getMana() / character.getMaxMana(), 20);
+            g.fillRect(10, 70, 280 * ((MagicCharacter)character).getMana() / ((MagicCharacter)character).getMaxMana(), 20);
         }
 
         characterHealthStats.setText(character.getHealth() + "/" + character.getMaxHealth());
 
         if(character.getCharacterClass().usesMagic())
         {
-            characterManaStats.setText(character.getMana() + "/" + character.getMaxMana());
+            characterManaStats.setText(((MagicCharacter)character).getMana() + "/" + ((MagicCharacter)character).getMaxMana());
         }
     }
 

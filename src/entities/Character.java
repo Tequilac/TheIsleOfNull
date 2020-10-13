@@ -15,10 +15,6 @@ public class Character extends Entity
 
     private int maxHealth;
 
-    private int mana;
-
-    private int maxMana;
-
     private int might;
 
     private int intellect;
@@ -45,14 +41,12 @@ public class Character extends Entity
 
     private int skillPoints;
 
-    public Character(String name, int health, int maxHealth, int mana, int maxMana, Race race, int level, int experience, Class characterClass,
+    public Character(String name, int health, int maxHealth, Race race, int level, int experience, Class characterClass,
                      int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck, int skillPoints)
     {
         super(name, health, race, level, experience);
         this.setClass(characterClass);
         this.maxHealth = maxHealth;
-        this.mana = mana;
-        this.maxMana = maxMana;
         this.might = might;
         this.intellect = intellect;
         this.personality = personality;
@@ -71,8 +65,6 @@ public class Character extends Entity
         this.setClass(characterClass);
         this.health = 100;
         this.maxHealth = 100;
-        this.mana = 100;
-        this.maxMana = 100;
         this.skillPoints = 5;
         Item[] items = {null, null, null, null};
         initEquipment(items);
@@ -148,11 +140,6 @@ public class Character extends Entity
         return characterClass;
     }
 
-    public int getMana()
-    {
-        return mana;
-    }
-
     public int getMight()
     {
         return might;
@@ -193,11 +180,6 @@ public class Character extends Entity
         return maxHealth;
     }
 
-    public int getMaxMana()
-    {
-        return maxMana;
-    }
-
     public ArrayList<Skill> getSkills()
     {
         return skills;
@@ -226,11 +208,6 @@ public class Character extends Entity
     public int getSkillPoints()
     {
         return skillPoints;
-    }
-
-    public void setMana(int mana)
-    {
-        this.mana = mana;
     }
 
     public void setMight(int might)
@@ -271,11 +248,6 @@ public class Character extends Entity
     public void setMaxHealth(int maxHealth)
     {
         this.maxHealth = maxHealth;
-    }
-
-    public void setMaxMana(int maxMana)
-    {
-        this.maxMana = maxMana;
     }
 
     public void setClass(Class characterClass)

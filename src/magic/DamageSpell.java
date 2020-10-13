@@ -10,6 +10,11 @@ public class DamageSpell extends Spell
         this.value = value;
     }
 
+    public int getValue()
+    {
+        return value;
+    }
+
     @Override
     public String toString()
     {

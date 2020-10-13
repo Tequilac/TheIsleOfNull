@@ -147,7 +147,7 @@ public class Save
                     }
                     else
                     {
-                        character = new Character(name, health, maxHealth, mana, maxMana, race, level, experience, characterClass,
+                        character = new Character(name, health, maxHealth, race, level, experience, characterClass,
                                 attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6], skillPoints);
                     }
 
@@ -250,10 +250,6 @@ public class Save
             bw.newLine();
             bw.write(String.valueOf(character.getMaxHealth()));
             bw.newLine();
-            bw.write(String.valueOf(character.getMana()));
-            bw.newLine();
-            bw.write(String.valueOf(character.getMaxMana()));
-            bw.newLine();
             bw.write(String.valueOf(character.getLevel()));
             bw.newLine();
             bw.write(String.valueOf(character.getExperience()));
@@ -281,6 +277,10 @@ public class Save
             }
             if(character instanceof MagicCharacter)
             {
+                bw.write(String.valueOf(((MagicCharacter)character).getMana()));
+                bw.newLine();
+                bw.write(String.valueOf(((MagicCharacter)character).getMaxMana()));
+                bw.newLine();
                 bw.write("0");
                 bw.newLine();
             }
@@ -314,8 +314,6 @@ public class Save
             newInfo.append(character.getRace().getName()).append("\n");
             newInfo.append(character.getHealth()).append("\n");
             newInfo.append(character.getMaxHealth()).append("\n");
-            newInfo.append(character.getMana()).append("\n");
-            newInfo.append(character.getMaxMana()).append("\n");
             newInfo.append(character.getLevel()).append("\n");
             newInfo.append(character.getExperience()).append("\n");
             newInfo.append(character.getSkillPoints()).append("\n");
@@ -340,6 +338,8 @@ public class Save
             }
             if(character instanceof MagicCharacter)
             {
+                newInfo.append(((MagicCharacter)character).getMana()).append("\n");
+                newInfo.append(((MagicCharacter)character).getMaxMana()).append("\n");
                 LinkedList<Spell> spells = ((MagicCharacter) character).getSpells();
                 newInfo.append(spells.size()).append("\n");
                 for(Spell spell : spells)

@@ -2,7 +2,7 @@ package magic;
 
 import javax.swing.*;
 
-public class Spell
+public abstract class Spell
 {
     protected MagicSchool magicSchool;
 

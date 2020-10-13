@@ -6,6 +6,8 @@ import entities.*;
 import inhabitants.Inhabitant;
 import inhabitants.Merchant;
 import items.Item;
+import magic.DamageSpell;
+import magic.Spell;
 import map.*;
 import map.districts.District;
 import map.districts.Dungeon;
@@ -416,17 +418,7 @@ public class Game
             if(enemies.getEntities().size() == 0)
                 currentDistrict.removeGroup(enemies);
         }
-        for (Group enemyGroup : currentDistrict.getEnemies())
-        {
-            if(enemyGroup.getPosition().equals(team.getPosition()))
-            {
-                for(Entity enemy : enemyGroup.getEntities())
-                {
-                    team.getTeamMembers().get(currentMember).damage(((Enemy) enemy).getDamage());
-                    currentMember = (currentMember+1)%4;
-                }
-            }
-        }
+        retaliate();
     }
 
     public void update()
@@ -470,6 +462,36 @@ public class Game
     {
         team.addGold(openedChest.getGold());
         openedChest.setGold(0);
+    }
+
+    public void castDamageSpell(DamageSpell spell)
+    {
+        Group enemies = currentDistrict.findEnemies(team.getPosition());
+        if(enemies != null)
+        {
+            int experience = enemies.damageAll(team, spell.getValue());
+            team.distributeExperience(experience, currentMember);
+            currentMember = (currentMember + 1) % 4;
+            if(enemies.getEntities().size() == 0)
+                currentDistrict.removeGroup(enemies);
+            ((MagicCharacter)currentCharacter).removeMana(spell.getManaCost());
+        }
+
+    }
+
+    public void retaliate()
+    {
+        for (Group enemyGroup : currentDistrict.getEnemies())
+        {
+            if(enemyGroup.getPosition().equals(team.getPosition()))
+            {
+                for(Entity enemy : enemyGroup.getEntities())
+                {
+                    team.getTeamMembers().get(currentMember).damage(((Enemy) enemy).getDamage());
+                    currentMember = (currentMember+1)%4;
+                }
+            }
+        }
     }
 
     public Race getEnemyRace(String raceName) throws FileNotFoundException
