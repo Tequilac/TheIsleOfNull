@@ -99,10 +99,6 @@ public class Save
                     teamInfo.append(health).append("\n");
                     maxHealth = Integer.parseInt(br.readLine());
                     teamInfo.append(maxHealth).append("\n");
-                    mana = Integer.parseInt(br.readLine());
-                    teamInfo.append(mana).append("\n");
-                    maxMana = Integer.parseInt(br.readLine());
-                    teamInfo.append(maxMana).append("\n");
                     level = Integer.parseInt(br.readLine());
                     teamInfo.append(level).append("\n");
                     experience = Integer.parseInt(br.readLine());
@@ -132,6 +128,11 @@ public class Save
 
                     if(characterClass.usesMagic())
                     {
+
+                        mana = Integer.parseInt(br.readLine());
+                        teamInfo.append(mana).append("\n");
+                        maxMana = Integer.parseInt(br.readLine());
+                        teamInfo.append(maxMana).append("\n");
                         int spellAmount = Integer.parseInt(br.readLine());
                         teamInfo.append(spellAmount).append("\n");
                         LinkedList<Spell> spells = new LinkedList<>();

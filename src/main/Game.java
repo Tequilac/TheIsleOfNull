@@ -96,7 +96,7 @@ public class Game
     {
         for (int i = 0; i < 4; i++)
         {
-            Character character = new Character("Choose name", knownRaces.get("Human"), 0, 0, knownClasses.get("Knight"));
+            Character character = new Character("Choose name", knownRaces.get("Human"), 0, 0, knownClasses.get("Archer"));
             characters.add(character);
         }
     }
@@ -181,8 +181,7 @@ public class Game
 
         checkForMonsters();
 
-        if(chosenEnemies != null)
-            frame.updateEnemies();
+        frame.updateEnemies();
 
         checkForObjects();
 
@@ -210,11 +209,12 @@ public class Game
                     chosenEnemies = group;
                     return;
                 }
-                left = left.add(direction.toVector2d());
-                position = position.add(direction.toVector2d());
-                right = right.add(direction.toVector2d());
             }
+            left = left.add(direction.toVector2d());
+            position = position.add(direction.toVector2d());
+            right = right.add(direction.toVector2d());
         }
+        chosenEnemies = null;
     }
 
     public void checkForObjects()
@@ -395,6 +395,7 @@ public class Game
             team.setPosition(((World)currentDistrict).getTownEntrance());
         if(isDungeon)
             team.setPosition(((World)currentDistrict).getDungeonEntrance());
+        frame.openMapPanel();
     }
 
     private void loadNewInnerMap(String newMap) throws IOException
@@ -405,6 +406,7 @@ public class Game
         currentDistrict = MapParser.parseMap(newMap);
         Save.parseSave(this, currentSave);
         team.setPosition(new Vector2d(currentDistrict.getWidth() - 1, currentDistrict.getHeight() - 1));
+        frame.openMapPanel();
     }
 
     public void teamHit()
@@ -527,7 +529,7 @@ public class Game
         return aClass;
     }
 
-    public Skill getSkill(String skillName) throws IOException
+    public Skill getSkill(String skillName)
     {
         Skill skill = knownSkills.get(skillName);
         if(skill == null)

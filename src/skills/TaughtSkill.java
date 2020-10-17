@@ -15,6 +15,22 @@ public class TaughtSkill
         this.cost = cost;
     }
 
+    public boolean canBeTaught(Skill characterSkill)
+    {
+        switch(levelTaught)
+        {
+            case 1:
+                return false;
+            case 2:
+                return characterSkill.getLevel() == 1 && characterSkill.getValue() > 3;
+            case 3:
+                return characterSkill.getLevel() == 2 && characterSkill.getValue() > 6;
+            case 4:
+                return characterSkill.getLevel() == 3 && characterSkill.getValue() > 9;
+        }
+        return false;
+    }
+
     public String getName()
     {
         return name;

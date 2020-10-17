@@ -64,6 +64,18 @@ public class MainPanel extends JPanel
             ((OptionsPanel) leftPanel).updateButtons(onObject, onEntrance);
     }
 
+    @Override
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        if(leftPanel != null)
+            leftPanel.repaint();
+        if(primaryPanel != null)
+            primaryPanel.repaint();
+        if(rightPanel != null)
+            rightPanel.repaint();
+    }
+
     public boolean mapOpened()
     {
         return primaryPanel instanceof MapPanel;
