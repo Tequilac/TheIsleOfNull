@@ -14,6 +14,6 @@ public class LockpickingSkill extends Skill
     @Override
     public Skill cloneSkill()
     {
-        return new LockpickingSkill(this.name, this.classes, this.value, this.level);
+        return new LockpickingSkill(this.name, this.grandmasterClasses, this.value, this.level);
     }
 }

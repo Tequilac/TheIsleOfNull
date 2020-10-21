@@ -2,7 +2,7 @@
   "type": "MagicSchoolSkill",
   "MagicSchool": "Air",
   "classNumber": 1,
-  "classes":
+  "grandmasterClasses":
   [
     "Mage"
   ]

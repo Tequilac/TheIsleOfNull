@@ -27,29 +27,29 @@ public class SkillParser
             Skill skill;
 
             int classNumber = jsonObject.get("classNumber").getAsInt();
-            JsonArray jsonArray = jsonObject.get("classes").getAsJsonArray();
+            JsonArray jsonArray = jsonObject.get("grandmasterClasses").getAsJsonArray();
 
-            ArrayList<String> classes = new ArrayList<>(classNumber);
+            ArrayList<String> grandmasterClasses = new ArrayList<>(classNumber);
 
             for(int i = 0; i < classNumber; i++)
             {
-                classes.add(jsonArray.get(i).getAsString());
+                grandmasterClasses.add(jsonArray.get(i).getAsString());
             }
 
             type = jsonObject.get("type").getAsString();
             switch(type)
             {
                 case "OffensiveItemSkill":
-                    skill = new OffensiveItemSkill(name, classes, 1, 1);
+                    skill = new OffensiveItemSkill(name, grandmasterClasses, 1, 1);
                     break;
                 case "DefensiveItemSkill":
-                    skill = new DefensiveItemSkill(name, classes, 1, 1);
+                    skill = new DefensiveItemSkill(name, grandmasterClasses, 1, 1);
                     break;
                 case "MagicSchoolSkill":
-                    skill = new MagicSchoolSkill(name, classes, 1, 1, MagicSchool.valueOf(jsonObject.get("MagicSchool").getAsString()));
+                    skill = new MagicSchoolSkill(name, grandmasterClasses, 1, 1, MagicSchool.valueOf(jsonObject.get("MagicSchool").getAsString()));
                     break;
                 case "LockpickingSkill":
-                    skill = new LockpickingSkill(name, classes, 1, 1);
+                    skill = new LockpickingSkill(name, grandmasterClasses, 1, 1);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + type);

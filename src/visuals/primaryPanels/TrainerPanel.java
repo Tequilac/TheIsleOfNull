@@ -8,6 +8,9 @@ import skills.TaughtSkill;
 import visuals.Frame;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class TrainerPanel extends PrimaryPanel
@@ -69,17 +72,38 @@ public class TrainerPanel extends PrimaryPanel
 
             learnButtons[i] = new JButton(new ImageIcon("res/graphics/upgrade_skill.png"));
             learnButtons[i].setBounds(100, i*50 + 10, 40, 40);
-            boolean canBeTaught = false;
+            boolean canBeTaught;
+            Skill existingSkill = null;
             for(Skill characterSkill : character.getSkills())
             {
                 if(characterSkill.getName().equals(taughtSkill.getName()))
-                    canBeTaught = taughtSkill.canBeTaught(characterSkill);
+                    existingSkill = characterSkill;
             }
-            canBeTaught = canBeTaught || (taughtSkill.getLevelTaught() == 1 && game.getSkill(taughtSkill.getName()).getClasses().contains(character.getCharacterClass().getName()));
+            if(existingSkill != null)
+                canBeTaught = taughtSkill.canBeTaught(existingSkill);
+            else
+                canBeTaught = (taughtSkill.getLevelTaught() == 1);
             learnButtons[i].setEnabled(canBeTaught);
+            int finalI = i;
+            learnButtons[i].addActionListener(e ->
+            {
+                if(taughtSkill.getLevelTaught() == 1)
+                    character.getSkills().add(game.getSkill(taughtSkill.getName()).cloneSkill());
+                else
+                    character.getSkills().get(finalI).increaseLevel();
+
+                drawTaughtSkills(character);
+                updateUI();
+            });
             add(learnButtons[i]);
         }
-        updateUI();
         frame.requestFocus();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        drawTaughtSkills(game.getCurrentCharacter());
     }
 }

@@ -15,7 +15,7 @@ public class OffensiveItemSkill extends ItemSkill
     @Override
     public Skill cloneSkill()
     {
-        return new OffensiveItemSkill(this.name, this.classes, this.value, this.level);
+        return new OffensiveItemSkill(this.name, this.grandmasterClasses, this.value, this.level);
     }
 
     @Override

@@ -54,7 +54,8 @@ public class CharacterInfoPanel extends JPanel
                 {
                     game.setCurrentCharacter(character);
                     Integer currentTab = frame.getCurrentTab();
-                    frame.openTeamView(currentTab);
+                    if(frame.getMainPanel().inventoryOpened())
+                        frame.openTeamView(currentTab);
                     frame.getMainPanel().repaint();
                 }
 

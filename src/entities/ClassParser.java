@@ -30,7 +30,7 @@ public class ClassParser
         usesMagic = jsonObject.get("usesMagic").getAsBoolean();
 
         ArrayList<Skill> skills = new ArrayList<>(3);
-        JsonArray jsonArray = jsonObject.get("skills").getAsJsonArray();
+        JsonArray jsonArray = jsonObject.get("startingSkills").getAsJsonArray();
         for(int i = 0; i < 3; i++)
         {
             skills.add(game.getSkill(jsonArray.get(i).getAsString()));

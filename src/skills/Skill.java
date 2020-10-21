@@ -8,16 +8,16 @@ public abstract class Skill
 {
     protected String name;
 
-    protected ArrayList<String> classes;
+    protected ArrayList<String> grandmasterClasses;
 
     protected int value;
 
     protected int level;
 
-    public Skill(String name, ArrayList<String> classes, int value, int level)
+    public Skill(String name, ArrayList<String> grandmasterClasses, int value, int level)
     {
         this.name = name;
-        this.classes = classes;
+        this.grandmasterClasses = grandmasterClasses;
         this.value = value;
         this.level = level;
     }
@@ -49,8 +49,8 @@ public abstract class Skill
         return level;
     }
 
-    public ArrayList<String> getClasses()
+    public ArrayList<String> getGrandmasterClasses()
     {
-        return classes;
+        return grandmasterClasses;
     }
 }

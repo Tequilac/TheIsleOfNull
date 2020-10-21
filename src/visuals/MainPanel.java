@@ -2,6 +2,7 @@ package visuals;
 
 import visuals.primaryPanels.MapPanel;
 import visuals.primaryPanels.PrimaryPanel;
+import visuals.primaryPanels.teamPanels.TeamPanel;
 import visuals.secondaryPanels.OptionsPanel;
 import visuals.secondaryPanels.SecondaryPanel;
 
@@ -79,6 +80,11 @@ public class MainPanel extends JPanel
     public boolean mapOpened()
     {
         return primaryPanel instanceof MapPanel;
+    }
+
+    public boolean inventoryOpened()
+    {
+        return primaryPanel instanceof TeamPanel;
     }
 
     public PrimaryPanel getPrimaryPanel()

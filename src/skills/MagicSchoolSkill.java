@@ -17,6 +17,6 @@ public class MagicSchoolSkill extends Skill
 
     public Skill cloneSkill()
     {
-        return new MagicSchoolSkill(this.name, this.classes, this.value, this.level, this.magicSchool);
+        return new MagicSchoolSkill(this.name, this.grandmasterClasses, this.value, this.level, this.magicSchool);
     }
 }
