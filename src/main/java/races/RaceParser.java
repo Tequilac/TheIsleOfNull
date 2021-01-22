@@ -1,4 +1,4 @@
-package entities;
+package races;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -9,10 +9,19 @@ import java.io.FileReader;
 
 public class RaceParser
 {
-    public static Race parseRace(String name) throws FileNotFoundException
+    public static Race parseRace(boolean characterRace, String name) throws FileNotFoundException
     {
         int [] attributes = new int[7];
-        JsonElement jsonElement = JsonParser.parseReader(new FileReader("src/main/resources/races/" + name));
+        String fileName;
+        if(characterRace)
+        {
+            fileName = "src/main/resources/races/" + name + ".json";
+        }
+        else
+        {
+            fileName = "src/main/resources/enemyRaces/" + name + ".json";
+        }
+        JsonElement jsonElement = JsonParser.parseReader(new FileReader(fileName));
         JsonObject jsonObject = jsonElement.getAsJsonObject();
 
         attributes[0] = jsonObject.get("might").getAsInt();
@@ -22,6 +31,6 @@ public class RaceParser
         attributes[4] = jsonObject.get("accuracy").getAsInt();
         attributes[5] = jsonObject.get("speed").getAsInt();
         attributes[6] = jsonObject.get("luck").getAsInt();
-        return new Race(name.substring(0, name.length()-5), attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6]);
+        return new Race(name, attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6]);
     }
 }

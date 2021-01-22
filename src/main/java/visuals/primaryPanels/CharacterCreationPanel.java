@@ -1,11 +1,11 @@
 package visuals.primaryPanels;
 
-import entities.Race;
+import races.Race;
 import game.Game;
 import skills.Skill;
 import visuals.Frame;
 import entities.Character;
-import entities.Class;
+import classes.Class;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

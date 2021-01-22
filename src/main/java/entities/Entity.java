@@ -1,6 +1,8 @@
 package entities;
 
 
+import races.Race;
+
 public class Entity
 {
     protected String name;

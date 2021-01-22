@@ -1,6 +1,8 @@
 package entities;
 
+import classes.Class;
 import magic.Spell;
+import races.Race;
 
 import java.util.LinkedList;
 

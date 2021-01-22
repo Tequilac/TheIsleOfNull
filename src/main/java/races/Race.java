@@ -1,4 +1,4 @@
-package entities;
+package races;
 
 public class  Race
 {

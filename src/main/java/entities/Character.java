@@ -1,9 +1,11 @@
 package entities;
 
+import classes.Class;
 import equipment.Equipment;
 import equipment.EquipmentType;
 import items.Item;
 import items.OffensiveItem;
+import races.Race;
 import skills.ItemSkill;
 import skills.Skill;
 

@@ -1,5 +1,7 @@
 package entities;
 
+import races.Race;
+
 public class Enemy extends Entity
 {
     private int minDamage;

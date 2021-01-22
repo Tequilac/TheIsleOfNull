@@ -1,6 +1,5 @@
 package skills;
 
-import entities.Class;
 import magic.MagicSchool;
 
 import java.util.ArrayList;

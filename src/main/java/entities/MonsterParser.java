@@ -3,6 +3,8 @@ package entities;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import races.Race;
+import races.RaceParser;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,7 +21,7 @@ public class MonsterParser
         int health = jsonObject.get("health").getAsInt();
         attributes.add(health);
         String raceStr = jsonObject.get("race").getAsString();
-        Race race = EnemyRaceParser.parseRace(raceStr);
+        Race race = RaceParser.parseRace(false, raceStr);
         attributes.add(race);
         int minDamage = jsonObject.get("minDamage").getAsInt();
         attributes.add(minDamage);

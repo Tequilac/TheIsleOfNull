@@ -1,11 +1,11 @@
-package entities;
+package classes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import game.Game;
 import skills.Skill;
+import skills.SkillsRepository;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class ClassParser
 {
-    public static Class parseClass(Game game, String name) throws IOException
+    public static Class parseClass(SkillsRepository skillsRepository, String name) throws IOException
     {
         int [] attributes = new int[7];
         boolean usesMagic;
@@ -33,7 +33,7 @@ public class ClassParser
         JsonArray jsonArray = jsonObject.get("startingSkills").getAsJsonArray();
         for(int i = 0; i < 3; i++)
         {
-            skills.add(game.getSkill(jsonArray.get(i).getAsString()));
+            skills.add(skillsRepository.getSkill(jsonArray.get(i).getAsString()));
         }
 
         return new Class(name.substring(0, name.length()-5), attributes[0], attributes[1], attributes[2], attributes[3], attributes[4], attributes[5], attributes[6], usesMagic, skills);

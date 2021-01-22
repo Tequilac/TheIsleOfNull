@@ -1,7 +1,5 @@
 package skills;
 
-import entities.Class;
-
 import java.util.ArrayList;
 
 public class DefensiveItemSkill extends ItemSkill

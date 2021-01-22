@@ -20,9 +20,11 @@ public class Team extends Group
 
     private LinkedList<Quest> activeQuests;
 
-    private LinkedList<Quest> completedQuests;
+    private final LinkedList<Quest> completedQuests;
 
-    private ArrayList<Item> itemsInInventory;
+    private final ArrayList<Item> itemsInInventory;
+
+    private String teamInfo;
 
     public Team(Vector2d position, MapDirection mapDirection, ArrayList<Character> teamMembers)
     {
@@ -194,5 +196,15 @@ public class Team extends Group
     public ArrayList<Item> getItemsInInventory()
     {
         return itemsInInventory;
+    }
+
+    public String getTeamInfo()
+    {
+        return teamInfo;
+    }
+
+    public void setTeamInfo(String teamInfo)
+    {
+        this.teamInfo = teamInfo;
     }
 }

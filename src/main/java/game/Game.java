@@ -1,7 +1,8 @@
 package game;
 
+import classes.ClassesRepository;
 import entities.Character;
-import entities.Class;
+import classes.Class;
 import entities.*;
 import inhabitants.Inhabitant;
 import inhabitants.Merchant;
@@ -12,11 +13,13 @@ import map.districts.*;
 import quests.Quest;
 import quests.QuestGiver;
 import quests.QuestStatus;
+import races.*;
 import saves.Save;
 import skills.Skill;
-import skills.SkillParser;
+import skills.SkillsRepository;
 import visuals.Frame;
 
+import com.google.inject.Inject;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,13 +33,9 @@ public class Game
 
     private District currentDistrict;
 
-    private ArrayList<Character> characters;
-
     private Team team;
 
     private int currentMember;
-
-    private String teamInfo;
 
     private Chest openedChest;
 
@@ -48,21 +47,25 @@ public class Game
 
     private Character currentCharacter;
 
-    private Map<String, Race> knownRaces = new HashMap<>();
+    private final RacesRepository racesRepository;
 
-    private Map<String, Race> knownEnemyRaces = new HashMap<>();
+    private final EnemyRacesRepository enemyRacesRepository;
 
-    private Map<String, Class> knownClasses = new HashMap<>();
+    private final ClassesRepository classesRepository;
 
-    private Map<String, Skill> knownSkills = new HashMap<>();
+    private final SkillsRepository skillsRepository;
 
     private boolean onObject;
 
     private boolean onEntrance;
 
-    public Game() throws IOException
+    @Inject
+    public Game(RacesRepository racesRepository, EnemyRacesRepository enemyRacesRepository, ClassesRepository classesRepository, SkillsRepository skillsRepository) throws IOException
     {
-        characters = new ArrayList<>(4);
+        this.racesRepository = racesRepository;
+        this.enemyRacesRepository = enemyRacesRepository;
+        this.classesRepository = classesRepository;
+        this.skillsRepository = skillsRepository;
         loadClasses(new File("src/main/resources/classes"));
         loadRaces(new File("src/main/resources/races"));
         createStartingCharacters();
@@ -88,20 +91,22 @@ public class Game
         }
     }
 
-    public void createStartingCharacters()
+    public void createStartingCharacters() throws IOException
     {
+        ArrayList<Character> characters = new ArrayList<>(4);
         for (int i = 0; i < 4; i++)
         {
-            Character character = new Character("Choose name", knownRaces.get("Human"), 0, 0, knownClasses.get("Archer"));
+            Character character = new Character("Choose name", racesRepository.getRace("Human"), 0, 0, classesRepository.getClass("Archer"));
             characters.add(character);
         }
+        team = new Team(new Vector2d(32, 34), MapDirection.North, characters);
     }
 
     public void loadSaveGame(File filename) throws IOException
     {
         this.currentSave = filename;
         Save.parseSave(this, filename);
-        this.currentCharacter = characters.get(0);
+        this.currentCharacter = team.getTeamMembers().get(0);
     }
 
     public void saveGame() throws IOException
@@ -111,19 +116,8 @@ public class Game
 
     public void createTeam()
     {
-        if(this.team == null)
-        {
-            for(int i = 0; i < 4; i++)
-            {
-                if(characters.get(i).getCharacterClass().usesMagic())
-                {
-                    characters.set(i, new MagicCharacter(characters.get(i)));
-                }
-            }
-            this.team = new Team(new Vector2d(32, 34), MapDirection.North, characters);
-            ((World) currentDistrict).updateVisibleTiles(team.getPosition());
-        }
-        currentCharacter = characters.get(0);
+        ((World) currentDistrict).updateVisibleTiles(team.getPosition());
+        currentCharacter = team.getTeamMembers().get(0);
     }
 
     public boolean move(MoveDirection direction)
@@ -495,46 +489,22 @@ public class Game
 
     public Race getEnemyRace(String raceName) throws FileNotFoundException
     {
-        Race race = knownEnemyRaces.get(raceName);
-        if(race == null)
-        {
-            race = EnemyRaceParser.parseRace(raceName);
-            knownEnemyRaces.put(raceName, race);
-        }
-        return race;
+        return enemyRacesRepository.getEnemyRace(raceName);
     }
 
     public Race getRace(String raceName) throws FileNotFoundException
     {
-        Race race = knownRaces.get(raceName);
-        if(race == null)
-        {
-            race = RaceParser.parseRace(raceName + ".json");
-            knownRaces.put(raceName, race);
-        }
-        return race;
+        return racesRepository.getRace(raceName);
     }
 
     public Class getClass(String className) throws IOException
     {
-        Class aClass = knownClasses.get(className);
-        if(aClass == null)
-        {
-            aClass = ClassParser.parseClass(this, className + ".json");
-            knownClasses.put(className, aClass);
-        }
-        return aClass;
+        return classesRepository.getClass(className);
     }
 
     public Skill getSkill(String skillName)
     {
-        Skill skill = knownSkills.get(skillName);
-        if(skill == null)
-        {
-            skill = SkillParser.parseSkill(this, skillName);
-            knownSkills.put(skillName, skill);
-        }
-        return skill;
+        return skillsRepository.getSkill(skillName);
     }
 
     public Character getCurrentCharacter()
@@ -549,17 +519,17 @@ public class Game
 
     public Map<String, Class> getClasses()
     {
-        return knownClasses;
+        return classesRepository.getAllClasses();
     }
 
     public Map<String, Race> getRaces()
     {
-        return knownRaces;
+        return racesRepository.getAllRaces();
     }
 
     public ArrayList<Character> getCharacters()
     {
-        return characters;
+        return team.getTeamMembers();
     }
 
     public Team getTeam()
@@ -569,7 +539,7 @@ public class Game
 
     public String getTeamInfo()
     {
-        return teamInfo;
+        return team.getTeamInfo();
     }
 
     public Chest getOpenedChest()
@@ -607,11 +577,6 @@ public class Game
         this.currentDistrict = currentDistrict;
     }
 
-    public void setCharacters(ArrayList<Character> characters)
-    {
-        this.characters = characters;
-    }
-
     public void setTeam(Team team)
     {
         this.team = team;
@@ -619,7 +584,7 @@ public class Game
 
     public void setTeamInfo(String teamInfo)
     {
-        this.teamInfo = teamInfo;
+        this.team.setTeamInfo(teamInfo);
     }
 
     public void setCurrentMember(int currentMember)

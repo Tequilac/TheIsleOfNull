@@ -1,4 +1,4 @@
-package entities;
+package classes;
 
 import skills.Skill;
 

@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import magic.MagicSchool;
-import game.Game;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 
 public class SkillParser
 {
-    public static Skill parseSkill(Game game, String name)
+    public static Skill parseSkill(String name)
     {
         try
         {
@@ -34,23 +33,14 @@ public class SkillParser
             }
 
             type = jsonObject.get("type").getAsString();
-            switch(type)
-            {
-                case "OffensiveItemSkill":
-                    skill = new OffensiveItemSkill(name, grandmasterClasses, 1, 1);
-                    break;
-                case "DefensiveItemSkill":
-                    skill = new DefensiveItemSkill(name, grandmasterClasses, 1, 1);
-                    break;
-                case "MagicSchoolSkill":
-                    skill = new MagicSchoolSkill(name, grandmasterClasses, 1, 1, MagicSchool.valueOf(jsonObject.get("MagicSchool").getAsString()));
-                    break;
-                case "LockpickingSkill":
-                    skill = new LockpickingSkill(name, grandmasterClasses, 1, 1);
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + type);
-            }
+            skill = switch(type)
+                    {
+                        case "OffensiveItemSkill" -> new OffensiveItemSkill(name, grandmasterClasses, 1, 1);
+                        case "DefensiveItemSkill" -> new DefensiveItemSkill(name, grandmasterClasses, 1, 1);
+                        case "MagicSchoolSkill" -> new MagicSchoolSkill(name, grandmasterClasses, 1, 1, MagicSchool.valueOf(jsonObject.get("MagicSchool").getAsString()));
+                        case "LockpickingSkill" -> new LockpickingSkill(name, grandmasterClasses, 1, 1);
+                        default -> throw new IllegalStateException("Unexpected value: " + type);
+                    };
             return skill;
         }
         catch(FileNotFoundException ex)

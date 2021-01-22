@@ -2,7 +2,7 @@ package saves;
 
 import entities.*;
 import entities.Character;
-import entities.Class;
+import classes.Class;
 import equipment.Equipment;
 import game.Game;
 import items.Item;
@@ -14,6 +14,7 @@ import map.districts.AbstractHiddenDistrict;
 import quests.Quest;
 import quests.QuestParser;
 import quests.QuestStatus;
+import races.Race;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -26,21 +27,13 @@ public class Save
         parseCharacters(game, file);
         BufferedReader br = new BufferedReader(new FileReader(file));
         String currentDistrict = br.readLine();
-        IDistrictParser districtParser;
-        switch (currentDistrict.charAt(0))
-        {
-            case 'W':
-                districtParser = new WorldParser();
-                break;
-            case 'T':
-                districtParser = new TownParser();
-                break;
-            case 'D':
-                districtParser = new DungeonParser();
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + currentDistrict.charAt(0));
-        }
+        IDistrictParser districtParser = switch(currentDistrict.charAt(0))
+                {
+                    case 'W' -> new WorldParser();
+                    case 'T' -> new TownParser();
+                    case 'D' -> new DungeonParser();
+                    default -> throw new IllegalStateException("Unexpected value: " + currentDistrict.charAt(0));
+                };
         districtParser.parseDistrict(game, file);
     }
 
@@ -195,7 +188,6 @@ public class Save
                     completedQuests.add(QuestParser.parseQuest(completedQuestName, QuestStatus.Completed));
                 }
 
-                game.setCharacters(characters);
                 game.setCurrentCharacter(characters.get(0));
                 game.setCurrentMember(0);
                 game.setTeam(new Team(new Vector2d(posX, posY), mapDirection, characters, activeQuests, completedQuests, items));
