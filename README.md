@@ -1,2 +1,2 @@
 # TheIsleOfNull
-Personal project - RPG game in Java
+Personal project - RPG main in Java
