@@ -1,6 +1,6 @@
 package visuals.primaryPanels.teamPanels;
 
-import game.Game;
+import model.game.Game;
 import visuals.Frame;
 import visuals.primaryPanels.*;
 

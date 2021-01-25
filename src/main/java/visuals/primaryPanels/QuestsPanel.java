@@ -1,9 +1,9 @@
 package visuals.primaryPanels;
 
-import game.Game;
-import quests.Quest;
-import quests.QuestGiver;
-import quests.QuestStatus;
+import model.game.Game;
+import model.quests.Quest;
+import model.quests.QuestGiver;
+import model.quests.QuestStatus;
 import visuals.Frame;
 
 import javax.swing.*;
@@ -28,7 +28,7 @@ public class QuestsPanel extends PrimaryPanel
         closeButton = new JButton(new ImageIcon("src/main/resources/graphics/exit.png"));
         closeButton.addActionListener(actionEvent ->
         {
-            game.doAction();
+            //game.doAction();
             frame.updateButtons(true, false);
         });
         closeButton.setBounds(750, 10, 40, 40);

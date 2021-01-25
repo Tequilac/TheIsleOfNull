@@ -1,6 +1,6 @@
 package visuals.primaryPanels;
 
-import game.Game;
+import model.game.Game;
 import visuals.Frame;
 
 import javax.swing.*;

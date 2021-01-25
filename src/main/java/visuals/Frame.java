@@ -1,9 +1,9 @@
 package visuals;
 
-import game.Game;
-import inhabitants.Merchant;
-import inhabitants.Trainer;
-import map.MoveDirection;
+import model.game.Game;
+import model.inhabitants.Merchant;
+import model.inhabitants.Trainer;
+import model.map.MoveDirection;
 import visuals.primaryPanels.*;
 import visuals.primaryPanels.QuestsPanel;
 import visuals.primaryPanels.teamPanels.TeamPanel;
@@ -28,7 +28,7 @@ public class Frame extends JFrame implements KeyListener
         addKeyListener(this);
         setFocusable(true);
 
-        game.setFrame(this);
+        //game.setFrame(this);
         this.game = game;
         mainPanel = new MainPanel(this);
         add(mainPanel);
@@ -90,23 +90,23 @@ public class Frame extends JFrame implements KeyListener
 
     public void openChest()
     {
-        mainPanel.addPrimaryPanel(new ChestPanel(game, game.getOpenedChest(), this));
+        //mainPanel.addPrimaryPanel(new ChestPanel(game, game.getOpenedChest(), this));
         pack();
     }
 
     public void meetQuestGiver()
     {
-        mainPanel.addPrimaryPanel(new QuestsPanel(game, game.getMetQuestGiver(), this));
+        //mainPanel.addPrimaryPanel(new QuestsPanel(game, game.getMetQuestGiver(), this));
         pack();
     }
 
     public void meetInhabitant()
     {
-        if(game.getMetInhabitant() instanceof Merchant)
-            mainPanel.addPrimaryPanel(new MerchantPanel(game,this, (Merchant) game.getMetInhabitant()));
-        else
-            mainPanel.addPrimaryPanel(new TrainerPanel(game, this, (Trainer) game.getMetInhabitant()));
-        pack();
+//        if(game.getMetInhabitant() instanceof Merchant)
+//            mainPanel.addPrimaryPanel(new MerchantPanel(game,this, (Merchant) game.getMetInhabitant()));
+//        else
+//            mainPanel.addPrimaryPanel(new TrainerPanel(game, this, (Trainer) game.getMetInhabitant()));
+//        pack();
     }
 
     public void toggleTeamView()

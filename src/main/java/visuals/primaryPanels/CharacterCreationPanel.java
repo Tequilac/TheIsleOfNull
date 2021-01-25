@@ -1,11 +1,11 @@
 package visuals.primaryPanels;
 
-import races.Race;
-import game.Game;
-import skills.Skill;
+import model.races.Race;
+import model.game.Game;
+import model.skills.Skill;
 import visuals.Frame;
-import entities.Character;
-import classes.Class;
+import model.entities.Character;
+import model.classes.Class;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -29,7 +29,7 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
         submitButton.setBounds(1200, 700, 100, 20);
         submitButton.addActionListener(this);
         add(submitButton);
-        JLabel saveLabel = new JLabel("Save game name:");
+        JLabel saveLabel = new JLabel("Save model.game name:");
         saveLabel.setBounds(1000, 600, 150, 20);
         add(saveLabel);
         saveName = new JTextField("save");
@@ -113,7 +113,7 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
             magicUsage[i].setBounds(i*400 + 50,410, 120,30);
             add(magicUsage[i]);
         }
-        magicUsage[i].setText("Can" + (character.getCharacterClass().usesMagic()? "" : "'t") + " use magic");
+        magicUsage[i].setText("Can" + (character.getCharacterClass().usesMagic()? "" : "'t") + " use model.magic");
 
         if(skills[i*3] == null)
         {

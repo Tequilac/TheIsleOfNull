@@ -1,10 +1,10 @@
 package visuals.primaryPanels;
 
-import entities.Character;
-import game.Game;
-import inhabitants.Trainer;
-import skills.Skill;
-import skills.TaughtSkill;
+import model.entities.Character;
+import model.game.Game;
+import model.inhabitants.Trainer;
+import model.skills.Skill;
+import model.skills.TaughtSkill;
 import visuals.Frame;
 
 import javax.swing.*;
@@ -32,7 +32,7 @@ public class TrainerPanel extends PrimaryPanel
         closeButton = new JButton(new ImageIcon("src/main/resources/graphics/exit.png"));
         closeButton.addActionListener(actionEvent ->
         {
-            game.doAction();
+            //game.doAction();
             frame.updateButtons(true, false);
         });
         closeButton.setBounds(750, 10, 40, 40);

@@ -1,6 +1,6 @@
 package visuals;
 
-import items.Item;
+import model.items.Item;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;

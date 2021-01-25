@@ -1,8 +1,8 @@
 package visuals.secondaryPanels;
 
-import entities.Character;
-import entities.MagicCharacter;
-import game.Game;
+import model.entities.Character;
+import model.entities.MagicCharacter;
+import model.game.Game;
 import visuals.Frame;
 
 import javax.swing.*;

@@ -1,8 +1,8 @@
 package visuals.primaryPanels.teamPanels;
 
-import entities.Team;
-import game.Game;
-import quests.Quest;
+import model.entities.Team;
+import model.game.Game;
+import model.quests.Quest;
 import visuals.Frame;
 import visuals.primaryPanels.PrimaryPanel;
 

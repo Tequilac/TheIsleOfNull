@@ -1,7 +1,7 @@
 package visuals.secondaryPanels;
 
-import entities.Group;
-import game.Game;
+import model.entities.Group;
+import model.game.Game;
 import visuals.Frame;
 
 import javax.swing.*;
@@ -38,7 +38,7 @@ public class OptionsPanel extends SecondaryPanel
         actionButton = new JButton(new ImageIcon("src/main/resources/graphics/action.png"));
         actionButton.addActionListener(actionEvent ->
         {
-            game.doAction();
+            //game.doAction();
             frame.requestFocus();
         });
         actionButton.setBounds(5, 5, 40, 40);
@@ -61,14 +61,7 @@ public class OptionsPanel extends SecondaryPanel
         enterButton = new JButton(new ImageIcon("src/main/resources/graphics/entrance.png"));
         enterButton.addActionListener(actionEvent ->
         {
-            try
-            {
-                game.enterLocation();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
+            //game.enterLocation();
             frame.updateButtons(false, false);
             frame.getMainPanel().repaint();
             frame.requestFocus();

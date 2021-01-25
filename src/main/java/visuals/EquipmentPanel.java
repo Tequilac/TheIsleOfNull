@@ -1,8 +1,8 @@
 package visuals;
 
-import equipment.Equipment;
-import items.Item;
-import items.ItemParser;
+import model.equipment.Equipment;
+import model.items.Item;
+import model.items.ItemParser;
 
 import javax.swing.*;
 import java.awt.*;

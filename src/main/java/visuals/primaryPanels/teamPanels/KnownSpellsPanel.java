@@ -1,9 +1,9 @@
 package visuals.primaryPanels.teamPanels;
 
-import entities.Character;
-import entities.MagicCharacter;
-import game.Game;
-import magic.Spell;
+import model.entities.Character;
+import model.entities.MagicCharacter;
+import model.game.Game;
+import model.magic.Spell;
 import visuals.Frame;
 import visuals.primaryPanels.PrimaryPanel;
 
@@ -47,7 +47,7 @@ public class KnownSpellsPanel extends PrimaryPanel
         }
         else
         {
-            info = new JLabel("This character doesn't use magic.");
+            info = new JLabel("This character doesn't use model.magic.");
             info.setBounds(10, 10, 200, 20);
             add(info);
         }

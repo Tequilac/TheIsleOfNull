@@ -1,7 +1,7 @@
 package visuals.primaryPanels;
 
-import game.Game;
-import map.Chest;
+import model.game.Game;
+import model.map.Chest;
 import visuals.Frame;
 
 import javax.swing.*;
@@ -27,7 +27,7 @@ public class ChestPanel extends PrimaryPanel
         closeButton = new JButton(new ImageIcon("src/main/resources/graphics/exit.png"));
         closeButton.addActionListener(actionEvent ->
         {
-            game.doAction();
+            //game.doAction();
             frame.updateButtons(true, false);
         });
         closeButton.setBounds(750, 10, 40, 40);

@@ -1,8 +1,8 @@
 package visuals;
 
-import entities.Character;
-import entities.Team;
-import items.Item;
+import model.entities.Character;
+import model.entities.Team;
+import model.items.Item;
 import visuals.primaryPanels.teamPanels.InventoryPanel;
 
 import javax.swing.*;

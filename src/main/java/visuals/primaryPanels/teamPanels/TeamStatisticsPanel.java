@@ -1,7 +1,7 @@
 package visuals.primaryPanels.teamPanels;
 
-import entities.Character;
-import game.Game;
+import model.entities.Character;
+import model.game.Game;
 import visuals.Frame;
 import visuals.primaryPanels.PrimaryPanel;
 
@@ -23,7 +23,7 @@ public class TeamStatisticsPanel extends PrimaryPanel
         JLabel race = new JLabel("Race: " + character.getRace().getName());
         JLabel level = new JLabel("Level: " + character.getLevel());
         JLabel experience = new JLabel("Experience: " + character.getExperience());
-        JLabel magicUsage = new JLabel("Can" + ((character.getCharacterClass().usesMagic())? "" : "'t") + " use magic");
+        JLabel magicUsage = new JLabel("Can" + ((character.getCharacterClass().usesMagic())? "" : "'t") + " use model.magic");
         JLabel teamGold = new JLabel("Team gold: " + game.getTeam().getGold());
         name.setBounds(50, 50, 120, 30);
         add(name);

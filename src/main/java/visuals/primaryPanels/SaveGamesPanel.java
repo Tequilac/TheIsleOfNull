@@ -1,6 +1,6 @@
 package visuals.primaryPanels;
 
-import game.Game;
+import model.game.Game;
 import visuals.Frame;
 
 import javax.swing.*;
@@ -27,7 +27,7 @@ public class SaveGamesPanel extends PrimaryPanel
         setFocusable(true);
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        closeButton = new JButton("Exit to game.Main Menu");
+        closeButton = new JButton("Exit to Main Menu");
         closeButton.addActionListener(actionEvent ->
                 frame.openStartingPanel());
         closeButton.setBackground(Color.GRAY);

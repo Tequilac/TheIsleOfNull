@@ -1,7 +1,7 @@
 package visuals.primaryPanels.teamPanels;
 
-import items.Item;
-import game.Game;
+import model.items.Item;
+import model.game.Game;
 import visuals.*;
 import visuals.Frame;
 import visuals.primaryPanels.PrimaryPanel;

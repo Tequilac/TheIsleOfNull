@@ -1,11 +1,11 @@
 package visuals;
 
-import entities.MagicCharacter;
-import entities.Team;
-import game.Game;
-import items.ItemParser;
-import items.SpellBookItem;
-import magic.SpellParser;
+import model.entities.MagicCharacter;
+import model.entities.Team;
+import model.game.Game;
+import model.items.ItemParser;
+import model.items.SpellBookItem;
+import model.magic.SpellParser;
 import visuals.primaryPanels.teamPanels.TeamPanel;
 
 import javax.swing.*;
