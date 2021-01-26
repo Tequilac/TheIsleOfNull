@@ -8,13 +8,12 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            minHeight="600.0" minWidth="1000.0"
-            fx:controller="controllers.StartViewController"
+            fx:controller="controllers.LoadSaveController"
             prefHeight="400.0" prefWidth="600.0">
     <center>
         <VBox alignment="CENTER">
-            <Button text="New game" onMouseClicked="#handleNewGame" />
-            <Button text="Load game" onMouseClicked="#handleLoadGame"/>
+            <Button text="New game" />
+            <Button text="Load game" />
         </VBox>
     </center>
 

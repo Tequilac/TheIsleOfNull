@@ -1,5 +1,7 @@
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Singleton;
+import controllers.Controller;
 import controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,14 +16,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class Main extends Application
+public class MainApp extends Application
 {
 
     @Override
     public void start(Stage primaryStage)
     {
         Injector injector = Guice.createInjector(new GameModule());
-        Game game = injector.getInstance(Game.class);
+        MainController mainController = injector.getInstance(MainController.class);
 
         var fxmlLoader = new FXMLLoader(getClass().getResource("view/StartView.fxml"));
 
@@ -39,16 +41,7 @@ public class Main extends Application
 
 
         // add layout to a scene and show them all
-        configureStage(primaryStage, rootLayout);
+        mainController.configureStage(primaryStage, rootLayout);
         primaryStage.show();
-    }
-
-    private void configureStage(Stage primaryStage, BorderPane rootLayout)
-    {
-        var scene = new Scene(rootLayout);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("The Isle of Null");
-        primaryStage.minWidthProperty().bind(rootLayout.minWidthProperty());
-        primaryStage.minHeightProperty().bind(rootLayout.minHeightProperty());
     }
 }

@@ -13,7 +13,7 @@ repositories {
 }
 
 application {
-    mainClassName = 'Main'
+    mainClassName = 'MainApp'
 }
 
 dependencies {
