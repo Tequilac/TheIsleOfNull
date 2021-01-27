@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoadSaveController">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoadSaveController">
     <center>
-        <VBox alignment="CENTER">
-            <Button text="XD" />
+        <VBox alignment="CENTER" fx:id="savesBox">
         </VBox>
     </center>
-
+    <bottom>
+        <Button text="Back" onMouseClicked="#handleBack"/>
+    </bottom>
 </BorderPane>
