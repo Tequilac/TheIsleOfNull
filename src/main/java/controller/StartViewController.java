@@ -1,10 +1,8 @@
-package controllers;
+package controller;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,9 +11,8 @@ import java.util.ResourceBundle;
 public class StartViewController extends Controller
 {
     @Inject
-    public StartViewController(MainController mainController)
+    public StartViewController()
     {
-        this.mainController = mainController;
     }
 
     @Override

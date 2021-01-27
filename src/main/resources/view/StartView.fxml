@@ -6,11 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            minHeight="600.0" minWidth="1000.0"
-            fx:controller="controllers.StartViewController"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StartViewController">
     <center>
         <VBox alignment="CENTER">
             <Button text="New game" onMouseClicked="#handleNewGame" />
