@@ -2,7 +2,9 @@ package model.races;
 
 import com.google.inject.Singleton;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Singleton
@@ -21,8 +23,8 @@ public class RacesRepository
         return race;
     }
 
-    public Map<String, Race> getAllRaces()
+    public List<Race> getAllRaces()
     {
-        return knownRaces;
+        return new ArrayList<>(knownRaces.values());
     }
 }

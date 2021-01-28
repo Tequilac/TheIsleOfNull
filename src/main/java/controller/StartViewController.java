@@ -23,7 +23,7 @@ public class StartViewController extends Controller
     @FXML
     public void handleNewGame()
     {
-        System.out.println("New Game");
+        mainController.openCreationView();
     }
 
     @FXML

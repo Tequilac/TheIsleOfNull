@@ -10,4 +10,8 @@ public abstract class Controller implements Initializable
     {
         this.mainController = mainController;
     }
+
+    public void initView()
+    {
+    }
 }

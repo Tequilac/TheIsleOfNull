@@ -236,12 +236,12 @@ public class Game
         return currentCharacter;
     }
 
-    public Map<String, Class> getClasses()
+    public List<Class> getClasses()
     {
         return classesRepository.getAllClasses();
     }
 
-    public Map<String, Race> getRaces()
+    public List<Race> getRaces()
     {
         return racesRepository.getAllRaces();
     }

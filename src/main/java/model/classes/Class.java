@@ -89,4 +89,10 @@ public class Class
     {
         return skills;
     }
+
+    @Override
+    public String toString()
+    {
+        return name;
+    }
 }

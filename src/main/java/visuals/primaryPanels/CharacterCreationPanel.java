@@ -42,7 +42,7 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
         names = new JTextField[4];
 
         String[] classes = new String[game.getClasses().size()];
-        Object[] classesArray = game.getClasses().values().toArray();
+        Object[] classesArray = game.getClasses().toArray();
         for (int i = 0; i < game.getClasses().size(); i++)
         {
             classes[i] = ((Class)(classesArray[i])).getName();
@@ -50,7 +50,7 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
         JComboBox[] classChoosers = new JComboBox[4];
 
         String[] races = new String[game.getRaces().size()];
-        Object[] racesArray = game.getRaces().values().toArray();
+        Object[] racesArray = game.getRaces().toArray();
         for (int i = 0; i < game.getRaces().size(); i++)
         {
             races[i] = ((Race)(racesArray[i])).getName();
@@ -69,7 +69,7 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
             int finalI = i;
             classChoosers[i].addActionListener(actionEvent ->
             {
-                game.getCharacters().get(finalI).setClass(game.getClasses().get(classes[classChoosers[finalI].getSelectedIndex()]));
+                game.getCharacters().get(finalI).setClass(game.getClasses().get(Integer.parseInt(classes[classChoosers[finalI].getSelectedIndex()])));
                 drawAttributes(game, attributes, magicUsage, skills, finalI);
             });
             classChoosers[i].setBounds(i*400 + 50,100, 120,30);
@@ -78,7 +78,7 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
             int finalI1 = i;
             raceChoosers[i].addActionListener(actionEvent ->
             {
-                game.getCharacters().get(finalI1).setRace(game.getRaces().get(races[raceChoosers[finalI1].getSelectedIndex()]));
+                game.getCharacters().get(finalI1).setRace(game.getRaces().get(Integer.parseInt(races[raceChoosers[finalI1].getSelectedIndex()])));
                 drawAttributes(game, attributes, magicUsage, skills, finalI1);
             });
             raceChoosers[i].setBounds(i*400 + 50,150, 120,30);

@@ -5,7 +5,9 @@ import model.skills.SkillsRepository;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Singleton
@@ -32,8 +34,8 @@ public class ClassesRepository
         return aClass;
     }
 
-    public Map<String, Class> getAllClasses()
+    public List<Class> getAllClasses()
     {
-        return knownClasses;
+        return new ArrayList<>(knownClasses.values());
     }
 }
