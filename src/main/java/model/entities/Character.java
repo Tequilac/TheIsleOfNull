@@ -43,12 +43,11 @@ public class Character extends Entity
 
     private int skillPoints;
 
-    public Character(String name, int health, int maxHealth, Race race, int level, int experience, Class characterClass,
-                     int might, int intellect, int personality, int endurance, int accuracy, int speed, int luck, int skillPoints)
+    public Character(String name, int health, int maxHealth, Race race, int level, int experience,
+                     Class characterClass, int might, int intellect, int personality, int endurance,
+                     int accuracy, int speed, int luck, int skillPoints)
     {
-        super(name, health, race, level, experience);
-        this.setClass(characterClass);
-        this.maxHealth = maxHealth;
+        this(name, health, maxHealth, race, level, experience, characterClass, skillPoints);
         this.might = might;
         this.intellect = intellect;
         this.personality = personality;
@@ -56,20 +55,28 @@ public class Character extends Entity
         this.accuracy = accuracy;
         this.speed = speed;
         this.luck = luck;
+    }
+
+    public Character(String name, int health, int maxHealth, Race race, int level,
+                     int experience, Class characterClass, int skillPoints)
+    {
+        super(name, health, race, level, experience);
+        this.setClass(characterClass);
+        this.maxHealth = maxHealth;
         this.skillPoints = skillPoints;
+
         Item[] items = {null, null, null, null};
         initEquipment(items);
     }
 
     public Character(String name, Race race, int level, int experience, Class characterClass)
     {
-        super(name, 0, race, level, experience);
-        this.setClass(characterClass);
-        this.health = 100;
-        this.maxHealth = 100;
-        this.skillPoints = 5;
-        Item[] items = {null, null, null, null};
-        initEquipment(items);
+        this(name, 100, 100, race, level, experience, characterClass, 5);
+    }
+
+    public Character(String name, Race race, Class characterClass)
+    {
+        this(name, race, 0, 0, characterClass);
     }
 
     public void initEquipment(Item[] items)

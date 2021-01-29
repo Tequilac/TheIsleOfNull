@@ -10,4 +10,11 @@
     <center>
         <HBox fx:id="charactersBox"/>
     </center>
+    <bottom>
+        <HBox>
+            <Label text="Save game name:"/>
+            <TextField text="save" fx:id="saveNameField"/>
+            <Button text="Submit" fx:id="submitButton" onMouseClicked="#handleSubmit"/>
+        </HBox>
+    </bottom>
 </BorderPane>

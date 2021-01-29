@@ -15,11 +15,6 @@ public class StartViewController extends Controller
     {
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
-    }
-
     @FXML
     public void handleNewGame()
     {

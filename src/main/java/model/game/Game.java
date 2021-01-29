@@ -61,7 +61,6 @@ public class Game
         this.skillsRepository = skillsRepository;
         loadClasses(new File("src/main/resources/classes"));
         loadRaces(new File("src/main/resources/races"));
-        createStartingCharacters();
         currentMember = 0;
     }
 
@@ -81,17 +80,6 @@ public class Game
         }
     }
 
-    public void createStartingCharacters() throws IOException
-    {
-        ArrayList<Character> characters = new ArrayList<>(4);
-        for (int i = 0; i < 4; i++)
-        {
-            Character character = new Character("Choose name", racesRepository.getRace("Human"), 0, 0, classesRepository.getClass("Archer"));
-            characters.add(character);
-        }
-        team = new Team(new Vector2d(32, 34), MapDirection.North, characters);
-    }
-
     public void loadSaveGame(File filename) throws IOException
     {
         this.currentSave = filename;
@@ -104,10 +92,17 @@ public class Game
         Save.saveGame(this, currentSave);
     }
 
-    public void createTeam()
+    public void createTeam(List<String> names, List<Class> classes, List<Race> races)
     {
-        mapSystem.updateMapTiles(team.getPosition());
-        currentCharacter = team.getTeamMembers().get(0);
+        ArrayList<Character> characters = new ArrayList<>(4);
+        for (int i = 0; i < 4; i++)
+        {
+            Character character = new Character(names.get(i), races.get(i), classes.get(i));
+            characters.add(character);
+        }
+        team = new Team(new Vector2d(32, 34), MapDirection.North, characters);
+//        mapSystem.updateMapTiles(team.getPosition());
+//        currentCharacter = team.getTeamMembers().get(0);
     }
 
     public void tick(MoveDirection direction) throws IOException

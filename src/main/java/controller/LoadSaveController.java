@@ -26,8 +26,10 @@ public class LoadSaveController extends Controller
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources)
+    public void initView()
     {
+        super.initView();
+
         File folder = new File("saveGames");
         for (final File fileEntry : Objects.requireNonNull(folder.listFiles()))
         {

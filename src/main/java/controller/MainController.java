@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @Singleton
-public class MainController implements Initializable
+public class MainController
 {
     private final Injector injector;
 
@@ -36,11 +36,6 @@ public class MainController implements Initializable
     {
         openStartView();
         stage.show();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
     }
 
     public void changeStage(String name)
@@ -100,5 +95,15 @@ public class MainController implements Initializable
     public List<Race> getRaces()
     {
         return game.getRaces();
+    }
+
+    public boolean saveExists(String saveName)
+    {
+        return false;
+    }
+
+    public void createTeam(List<String> names, List<Class> classes, List<Race> races)
+    {
+        game.createTeam(names, classes, races);
     }
 }
