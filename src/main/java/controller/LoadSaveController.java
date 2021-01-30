@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -30,8 +31,8 @@ public class LoadSaveController extends Controller
     {
         super.initView();
 
-        File folder = new File("saveGames");
-        for (final File fileEntry : Objects.requireNonNull(folder.listFiles()))
+        List<File> saveFiles = mainController.getSaveSystem().getSaves();
+        for (final File fileEntry : saveFiles)
         {
             Button button = new Button(fileEntry.getName());
             button.setOnAction(event -> showSaveInfo(fileEntry));

@@ -29,7 +29,6 @@ import java.util.*;
 @Singleton
 public class Game
 {
-    private File currentSave;
 
     private Team team;
 
@@ -41,6 +40,8 @@ public class Game
 
     private final MapSystem mapSystem;
 
+    private final SaveSystem saveSystem;
+
     private final RacesRepository racesRepository;
 
     private final EnemyRacesRepository enemyRacesRepository;
@@ -50,11 +51,12 @@ public class Game
     private final SkillsRepository skillsRepository;
 
     @Inject
-    public Game(MapSystem mapSystem,
+    public Game(MapSystem mapSystem, SaveSystem saveSystem,
                 RacesRepository racesRepository, EnemyRacesRepository enemyRacesRepository,
                 ClassesRepository classesRepository, SkillsRepository skillsRepository) throws IOException
     {
         this.mapSystem = mapSystem;
+        this.saveSystem = saveSystem;
         this.racesRepository = racesRepository;
         this.enemyRacesRepository = enemyRacesRepository;
         this.classesRepository = classesRepository;
@@ -78,18 +80,6 @@ public class Game
         {
             getRace(fileEntry.getName().substring(0, fileEntry.getName().length() - 5));
         }
-    }
-
-    public void loadSaveGame(File filename) throws IOException
-    {
-        this.currentSave = filename;
-        Save.parseSave(this, filename);
-        this.currentCharacter = team.getTeamMembers().get(0);
-    }
-
-    public void saveGame() throws IOException
-    {
-        Save.saveGame(this, currentSave);
     }
 
     public void createTeam(List<String> names, List<Class> classes, List<Race> races)
@@ -226,6 +216,16 @@ public class Game
         return skillsRepository.getSkill(skillName);
     }
 
+    public MapSystem getMapSystem()
+    {
+        return mapSystem;
+    }
+
+    public SaveSystem getSaveSystem()
+    {
+        return saveSystem;
+    }
+
     public Character getCurrentCharacter()
     {
         return currentCharacter;
@@ -259,11 +259,6 @@ public class Game
     public Group getChosenEnemies()
     {
         return chosenEnemies;
-    }
-
-    public void setCurrentSave(File currentSave)
-    {
-        this.currentSave = currentSave;
     }
 
     public void setTeam(Team team)

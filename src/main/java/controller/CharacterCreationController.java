@@ -2,6 +2,7 @@ package controller;
 
 import com.google.inject.Inject;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -45,13 +46,13 @@ public class CharacterCreationController extends Controller
 
         submitButton.setDisable(true);
 
-        saveNameField.textProperty().addListener(((value, oldValue, newValue) -> updateSubmitButton(newValue)));
+        saveNameField.textProperty().addListener(((value, oldValue, newValue) -> updateSubmitButton()));
 
         for(int i = 0; i < 4; i++)
         {
             TextField name = new TextField("Choose name");
-            ComboBox<Class> characterClass = new ComboBox<>(FXCollections.observableList(mainController.getClasses()));
-            ComboBox<Race> characterRace = new ComboBox<>(FXCollections.observableList(mainController.getRaces()));
+            ComboBox<Class> characterClass = new ComboBox<>(FXCollections.observableList(mainController.getGame().getClasses()));
+            ComboBox<Race> characterRace = new ComboBox<>(FXCollections.observableList(mainController.getGame().getRaces()));
 
             namesFields.add(name);
             classesBoxes.add(characterClass);
@@ -60,11 +61,21 @@ public class CharacterCreationController extends Controller
             charactersBox.getChildren().add(characterBox);
         }
 
+        classesBoxes.forEach(box -> box.getSelectionModel().selectedItemProperty().addListener((
+                (value, oldValue, newValue) -> updateSubmitButton())));
+        racesBoxes.forEach(box -> box.getSelectionModel().selectedItemProperty().addListener((
+                (value, oldValue, newValue) -> updateSubmitButton())));
     }
 
-    private void updateSubmitButton(String newValue)
+    private void updateSubmitButton()
     {
-        submitButton.setDisable(mainController.saveExists(newValue));
+        submitButton.setDisable(mainController.getSaveSystem().saveExists(saveNameField.getText()) || !boxesFilled());
+    }
+
+    private boolean boxesFilled()
+    {
+        return classesBoxes.stream().allMatch(box -> box.getSelectionModel().getSelectedItem() != null)
+                && racesBoxes.stream().allMatch(box -> box.getSelectionModel().getSelectedItem() != null);
     }
 
     @FXML

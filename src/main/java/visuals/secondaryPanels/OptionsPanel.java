@@ -91,13 +91,7 @@ public class OptionsPanel extends SecondaryPanel
         exitButton = new JButton(new ImageIcon("src/main/resources/graphics/exit.png"));
         exitButton.addActionListener(actionEvent ->
         {
-            try
-            {
-                game.saveGame();
-            } catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+            //game.saveGame();
             frame.exitGame();
         });
         exitButton.setBounds(230, 5, 40, 40);

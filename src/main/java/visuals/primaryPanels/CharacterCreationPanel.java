@@ -133,22 +133,22 @@ public class CharacterCreationPanel extends PrimaryPanel implements ActionListen
 
     public void actionPerformed(ActionEvent e)
     {
-        String[] nameTexts = new String[4];
-        for (int i = 0; i < 4; i++)
-        {
-            nameTexts[i] = names[i].getText();
-            game.getCharacters().get(i).setName(nameTexts[i]);
-        }
-        game.setCurrentSave(new File("saveGames/" + saveName.getText() + ".txt"));
-        game.createTeam();
-        try
-        {
-            game.saveGame();
-        }
-        catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
-        frame.openMapPanel();
+//        String[] nameTexts = new String[4];
+//        for (int i = 0; i < 4; i++)
+//        {
+//            nameTexts[i] = names[i].getText();
+//            game.getCharacters().get(i).setName(nameTexts[i]);
+//        }
+//        game.setCurrentSave(new File("saveGames/" + saveName.getText() + ".txt"));
+//        //game.createTeam();
+//        try
+//        {
+//            game.saveGame();
+//        }
+//        catch (IOException ex)
+//        {
+//            ex.printStackTrace();
+//        }
+//        frame.openMapPanel();
     }
 }

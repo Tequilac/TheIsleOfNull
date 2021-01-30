@@ -9,6 +9,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.classes.Class;
 import model.game.Game;
+import model.game.MapSystem;
+import model.game.SaveSystem;
 import model.races.Race;
 
 import java.io.File;
@@ -25,11 +27,17 @@ public class MainController
 
     private final Game game;
 
+    private final MapSystem mapSystem;
+
+    private final SaveSystem saveSystem;
+
     public MainController(Injector injector, Stage primaryStage)
     {
         this.injector = injector;
         this.stage = primaryStage;
         this.game = injector.getInstance(Game.class);
+        this.mapSystem = game.getMapSystem();
+        this.saveSystem = game.getSaveSystem();
     }
 
     public void initRootLayout()
@@ -87,19 +95,19 @@ public class MainController
         System.out.println(saveFile);
     }
 
-    public List<Class> getClasses()
+    public Game getGame()
     {
-        return game.getClasses();
+        return game;
     }
 
-    public List<Race> getRaces()
+    public MapSystem getMapSystem()
     {
-        return game.getRaces();
+        return mapSystem;
     }
 
-    public boolean saveExists(String saveName)
+    public SaveSystem getSaveSystem()
     {
-        return false;
+        return saveSystem;
     }
 
     public void createTeam(List<String> names, List<Class> classes, List<Race> races)

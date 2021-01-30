@@ -47,14 +47,7 @@ public class SaveGamesPanel extends PrimaryPanel
             int finalI = i;
             buttons[i].addActionListener(actionEvent ->
             {
-                try
-                {
-                    game.loadSaveGame(files.get(finalI));
-                }
-                catch(IOException e)
-                {
-                    e.printStackTrace();
-                }
+                //game.loadSaveGame(files.get(finalI));
                 frame.openMapPanel();
             });
             buttons[i].setAlignmentX(CENTER_ALIGNMENT);
