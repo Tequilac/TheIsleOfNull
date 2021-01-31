@@ -3,20 +3,15 @@ package controller;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.classes.Class;
 import model.game.Game;
 import model.game.MapSystem;
 import model.game.SaveSystem;
-import model.races.Race;
 
 import java.io.File;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
 @Singleton
 public class MainController
@@ -79,6 +74,11 @@ public class MainController
         changeStage("CharacterCreationView");
     }
 
+    public void openGameView()
+    {
+        changeStage("GameView");
+    }
+
     public void configureStage(Stage primaryStage, BorderPane rootLayout)
     {
         rootLayout.setMinWidth(800);
@@ -108,10 +108,5 @@ public class MainController
     public SaveSystem getSaveSystem()
     {
         return saveSystem;
-    }
-
-    public void createTeam(List<String> names, List<Class> classes, List<Race> races)
-    {
-        game.createTeam(names, classes, races);
     }
 }

@@ -2,7 +2,6 @@ package controller;
 
 import com.google.inject.Inject;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -61,10 +60,10 @@ public class CharacterCreationController extends Controller
             charactersBox.getChildren().add(characterBox);
         }
 
-        classesBoxes.forEach(box -> box.getSelectionModel().selectedItemProperty().addListener((
-                (value, oldValue, newValue) -> updateSubmitButton())));
-        racesBoxes.forEach(box -> box.getSelectionModel().selectedItemProperty().addListener((
-                (value, oldValue, newValue) -> updateSubmitButton())));
+        classesBoxes.forEach(box -> box.getSelectionModel().selectedItemProperty().addListener(
+                ((value, oldValue, newValue) -> updateSubmitButton())));
+        racesBoxes.forEach(box -> box.getSelectionModel().selectedItemProperty().addListener(
+                ((value, oldValue, newValue) -> updateSubmitButton())));
     }
 
     private void updateSubmitButton()
@@ -99,6 +98,7 @@ public class CharacterCreationController extends Controller
                 .map(box -> box.getSelectionModel().getSelectedItem())
                 .collect(Collectors.toList());
 
-        mainController.createTeam(names, classes, races);
+        mainController.getGame().createTeam(names, classes, races);
+        mainController.openGameView();
     }
 }

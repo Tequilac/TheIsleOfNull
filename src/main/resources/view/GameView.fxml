@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
+    <left>
+        <fx:include source="OptionsPane.fxml"/>
+    </left>
+    <center>
+        <fx:include source="MainPane.fxml"/>
+    </center>
+    <right>
+        <fx:include source="TeamPane.fxml"/>
+    </right>
+</BorderPane>

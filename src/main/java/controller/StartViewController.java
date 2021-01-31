@@ -4,9 +4,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import javafx.fxml.FXML;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 @Singleton
 public class StartViewController extends Controller
 {
