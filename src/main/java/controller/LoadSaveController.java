@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 
+@Singleton
 public class LoadSaveController extends Controller
 {
     @FXML

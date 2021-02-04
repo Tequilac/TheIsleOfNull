@@ -2,7 +2,7 @@
 
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" minHeight="600.0" minWidth="1000.0" fx:controller="controller.GameController">
     <left>
         <fx:include source="OptionsPane.fxml"/>
     </left>

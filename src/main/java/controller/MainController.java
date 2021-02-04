@@ -26,6 +26,8 @@ public class MainController
 
     private final SaveSystem saveSystem;
 
+    private Controller currentController;
+
     public MainController(Injector injector, Stage primaryStage)
     {
         this.injector = injector;
@@ -61,21 +63,22 @@ public class MainController
 
     public void openLoadView()
     {
-        changeStage("LoadSaveView");
+        changeStage("initialViews/LoadSaveView");
     }
 
     public void openStartView()
     {
-        changeStage("StartView");
+        changeStage("initialViews/StartView");
     }
 
     public void openCreationView()
     {
-        changeStage("CharacterCreationView");
+        changeStage("initialViews/CharacterCreationView");
     }
 
     public void openGameView()
     {
+        currentController = injector.getInstance(GameController.class);
         changeStage("GameView");
     }
 
