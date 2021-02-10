@@ -55,6 +55,9 @@ public class CharacterCreationController extends Controller
             ComboBox<Class> characterClass = new ComboBox<>(FXCollections.observableList(mainController.getGame().getClasses()));
             ComboBox<Race> characterRace = new ComboBox<>(FXCollections.observableList(mainController.getGame().getRaces()));
 
+            characterClass.getSelectionModel().select(0);
+            characterRace.getSelectionModel().select(0);
+
             namesFields.add(name);
             classesBoxes.add(characterClass);
             racesBoxes.add(characterRace);
