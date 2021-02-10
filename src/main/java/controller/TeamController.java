@@ -36,6 +36,7 @@ public class TeamController extends Controller
     @Override
     public void initView()
     {
+        charactersBox.setStyle("-fx-background-color: #979797;");
         ArrayList<Character> teamMembers = mainController.getGame().getTeam().getTeamMembers();
         super.initView();
 

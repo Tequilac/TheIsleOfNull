@@ -45,7 +45,7 @@ public class CharacterCreationController extends Controller
     {
         super.initView();
 
-        submitButton.setDisable(true);
+        updateSubmitButton();
 
         saveNameField.textProperty().addListener(((value, oldValue, newValue) -> updateSubmitButton()));
 
