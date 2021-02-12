@@ -1,11 +1,8 @@
 package visuals;
 
 import model.game.Game;
-import model.inhabitants.Merchant;
-import model.inhabitants.Trainer;
 import model.map.MoveDirection;
 import visuals.primaryPanels.*;
-import visuals.primaryPanels.QuestsPanel;
 import visuals.primaryPanels.teamPanels.TeamPanel;
 import visuals.secondaryPanels.BlankPanel;
 import visuals.secondaryPanels.CharactersInfoPanel;
@@ -166,22 +163,22 @@ public class Frame extends JFrame implements KeyListener
             switch (keyEvent.getKeyCode())
             {
                 case KeyEvent.VK_W:
-                    chosenDirection = MoveDirection.Front;
+                    chosenDirection = MoveDirection.FRONT;
                     break;
                 case KeyEvent.VK_A:
-                    chosenDirection = MoveDirection.Left;
+                    chosenDirection = MoveDirection.LEFT;
                     break;
                 case KeyEvent.VK_D:
-                    chosenDirection = MoveDirection.Right;
+                    chosenDirection = MoveDirection.RIGHT;
                     break;
                 case KeyEvent.VK_S:
-                    chosenDirection = MoveDirection.Back;
+                    chosenDirection = MoveDirection.BACK;
                     break;
                 case KeyEvent.VK_Q:
-                    chosenDirection = MoveDirection.TurnLeft;
+                    chosenDirection = MoveDirection.TURN_LEFT;
                     break;
                 case KeyEvent.VK_E:
-                    chosenDirection = MoveDirection.TurnRight;
+                    chosenDirection = MoveDirection.TURN_RIGHT;
                     break;
             }
             if(chosenDirection != null)

@@ -36,7 +36,6 @@ public class MainPaneController extends Controller
         context.fillRect(0, 0, 900, 900);
         context.drawImage(image, 0, 700);
         ImageView imageView = new ImageView(image);
-        //imageView.setPreserveRatio(true);
         Image image2 = new Image("/graphics/mainPane/grass.png", 500, 111, true, true);
         context.drawImage(image2, 200, 590);
 

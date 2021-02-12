@@ -59,16 +59,16 @@ public class Group
         Vector2d newPosition;
         switch(moveDirection)
         {
-            case Front:
+            case FRONT:
                 newPosition = position.add(mapDirection.toVector2d());
                 break;
-            case Back:
+            case BACK:
                 newPosition = position.subtract(mapDirection.toVector2d());
                 break;
-            case Left:
+            case LEFT:
                 newPosition = position.subtract(mapDirection.getNext().toVector2d());
                 break;
-            case Right:
+            case RIGHT:
                 newPosition = position.subtract(mapDirection.getPrevious().toVector2d());
                 break;
             default:
@@ -87,11 +87,11 @@ public class Group
         boolean moved;
         switch (moveDirection)
         {
-            case TurnLeft:
+            case TURN_LEFT:
                 mapDirection = mapDirection.getPrevious();
                 moved = true;
                 break;
-            case TurnRight:
+            case TURN_RIGHT:
                 mapDirection = mapDirection.getNext();
                 moved = true;
                 break;
@@ -106,13 +106,13 @@ public class Group
         MapDirection newPosition = null;
         switch (moveDirection)
         {
-            case Left: newPosition = position.subtract(mapDirection.getNext().toVector2d()).exceeds(district.getWidth(), district.getHeight());
+            case LEFT: newPosition = position.subtract(mapDirection.getNext().toVector2d()).exceeds(district.getWidth(), district.getHeight());
                 break;
-            case Right: newPosition = position.subtract(mapDirection.getPrevious().toVector2d()).exceeds(district.getWidth(), district.getHeight());
+            case RIGHT: newPosition = position.subtract(mapDirection.getPrevious().toVector2d()).exceeds(district.getWidth(), district.getHeight());
                 break;
-            case Front: newPosition = position.add(mapDirection.toVector2d()).exceeds(district.getWidth(), district.getHeight());
+            case FRONT: newPosition = position.add(mapDirection.toVector2d()).exceeds(district.getWidth(), district.getHeight());
                 break;
-            case Back: newPosition = position.subtract(mapDirection.toVector2d()).exceeds(district.getWidth(), district.getHeight());
+            case BACK: newPosition = position.subtract(mapDirection.toVector2d()).exceeds(district.getWidth(), district.getHeight());
                 break;
         }
         return newPosition;
@@ -126,49 +126,49 @@ public class Group
             if(relativePosition.getY() < 0)
             {
                 if(mapDirection == MapDirection.South)
-                    move(MoveDirection.Front, district);
+                    move(MoveDirection.FRONT, district);
                 else
                 {
                     if(relativePosition.getX() >= 0)
-                        move(MoveDirection.TurnLeft, district);
+                        move(MoveDirection.TURN_LEFT, district);
                     else
-                        move(MoveDirection.TurnRight, district);
+                        move(MoveDirection.TURN_RIGHT, district);
                 }
             }
             else if(relativePosition.getY() > 0)
             {
                 if(mapDirection == MapDirection.North)
-                    move(MoveDirection.Front, district);
+                    move(MoveDirection.FRONT, district);
                 else
                 {
                     if(relativePosition.getX() <= 0)
-                        move(MoveDirection.TurnLeft, district);
+                        move(MoveDirection.TURN_LEFT, district);
                     else
-                        move(MoveDirection.TurnRight, district);
+                        move(MoveDirection.TURN_RIGHT, district);
                 }
             }
             else if(relativePosition.getX() < 0)
             {
                 if(mapDirection == MapDirection.East)
-                    move(MoveDirection.Front, district);
+                    move(MoveDirection.FRONT, district);
                 else
                 {
                     if(relativePosition.getY() >= 0)
-                        move(MoveDirection.TurnLeft, district);
+                        move(MoveDirection.TURN_LEFT, district);
                     else
-                        move(MoveDirection.TurnRight, district);
+                        move(MoveDirection.TURN_RIGHT, district);
                 }
             }
             else if(relativePosition.getX() > 0)
             {
                 if(mapDirection == MapDirection.West)
-                    move(MoveDirection.Front, district);
+                    move(MoveDirection.FRONT, district);
                 else
                 {
                     if(relativePosition.getY() <= 0)
-                        move(MoveDirection.TurnLeft, district);
+                        move(MoveDirection.TURN_LEFT, district);
                     else
-                        move(MoveDirection.TurnRight, district);
+                        move(MoveDirection.TURN_RIGHT, district);
                 }
             }
         }

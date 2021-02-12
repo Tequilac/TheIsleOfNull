@@ -2,8 +2,10 @@ package controller;
 
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.game.Game;
@@ -80,6 +82,7 @@ public class MainController
     {
         currentController = injector.getInstance(GameController.class);
         changeStage("GameView");
+        stage.getScene().setOnKeyPressed(event -> ((GameController) currentController).handleKey(event.getCode()));
     }
 
     public void configureStage(Stage primaryStage, BorderPane rootLayout)
