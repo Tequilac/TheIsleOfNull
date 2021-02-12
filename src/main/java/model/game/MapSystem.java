@@ -8,7 +8,6 @@ import model.inhabitants.Inhabitant;
 import model.map.*;
 import model.map.districts.*;
 import model.quests.QuestGiver;
-import model.saves.Save;
 
 import java.io.IOException;
 
@@ -63,17 +62,17 @@ public class MapSystem
         {
             return switch(changeDirection)
                     {
-                        case North -> "W" + currentDistrict.getName().charAt(1) + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(2))) + 1);
-                        case South -> "W" + currentDistrict.getName().charAt(1) + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(2))) - 1);
-                        case West -> "W" + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(1))) + 1) + currentDistrict.getName().charAt(2);
-                        case East -> "W" + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(1))) - 1) + currentDistrict.getName().charAt(2);
+                        case NORTH -> "W" + currentDistrict.getName().charAt(1) + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(2))) + 1);
+                        case SOUTH -> "W" + currentDistrict.getName().charAt(1) + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(2))) - 1);
+                        case WEST -> "W" + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(1))) + 1) + currentDistrict.getName().charAt(2);
+                        case EAST -> "W" + (Integer.parseInt(String.valueOf(currentDistrict.getName().charAt(1))) - 1) + currentDistrict.getName().charAt(2);
                     };
         }
         else
         {
             return switch(changeDirection)
                     {
-                        case North, South, West, East -> "W" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2);
+                        case NORTH, SOUTH, WEST, EAST -> "W" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2);
                     };
         }
     }
@@ -157,7 +156,7 @@ public class MapSystem
     {
         if(currentDistrict instanceof World)
         {
-            if(((World) currentDistrict).isTown(team.getPosition()) || ((World) currentDistrict).isDungeon(team.getPosition()))
+            if(((World) currentDistrict).isTownEntrance(team.getPosition()) || ((World) currentDistrict).isDungeonEntrance(team.getPosition()))
             {
                 onEntrance = true;
                 return;
@@ -174,7 +173,7 @@ public class MapSystem
 
     public void checkForTownEnter() throws IOException
     {
-        if(currentDistrict instanceof World && ((World) currentDistrict).isTown(team.getPosition()))
+        if(currentDistrict instanceof World && ((World) currentDistrict).isTownEntrance(team.getPosition()))
         {
             loadNewInnerMap("T" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2));
         }
@@ -182,7 +181,7 @@ public class MapSystem
 
     public void checkForDungeonEnter() throws IOException
     {
-        if(currentDistrict instanceof World && ((World) currentDistrict).isDungeon(team.getPosition()))
+        if(currentDistrict instanceof World && ((World) currentDistrict).isDungeonEntrance(team.getPosition()))
         {
             loadNewInnerMap("D" + currentDistrict.getName().charAt(1) + currentDistrict.getName().charAt(2));
         }
@@ -293,5 +292,10 @@ public class MapSystem
 //        currentDistrict = MapParser.parseMap(newMap);
 //        Save.parseSave(this, currentSave);
         team.setPosition(new Vector2d(currentDistrict.getWidth() - 1, currentDistrict.getHeight() - 1));
+    }
+
+    public District getCurrentDistrict()
+    {
+        return currentDistrict;
     }
 }

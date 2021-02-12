@@ -27,13 +27,13 @@ public class Vector2d
     public MapDirection exceeds(int width, int height)
     {
         if(x < 0)
-            return MapDirection.West;
+            return MapDirection.WEST;
         if(x > width - 1)
-            return MapDirection.East;
+            return MapDirection.EAST;
         if(y < 0)
-            return MapDirection.North;
+            return MapDirection.NORTH;
         if(y > height - 1)
-            return MapDirection.South;
+            return MapDirection.SOUTH;
         return null;
     }
 

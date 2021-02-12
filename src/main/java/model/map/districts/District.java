@@ -2,6 +2,7 @@ package model.map.districts;
 
 import model.map.Chest;
 import model.map.Vector2d;
+import model.map.tiles.TileType;
 import model.quests.QuestGiver;
 
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public abstract class District
     }
 
     public abstract boolean canMove(Vector2d position);
+
+    public abstract TileType getTileType(Vector2d position);
 
     public void setLoadedInfo(String loadedInfo)
     {

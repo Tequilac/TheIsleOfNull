@@ -2,6 +2,8 @@ package model.map.districts;
 
 import model.entities.Group;
 import model.map.Chest;
+import model.map.Vector2d;
+import model.map.tiles.TileType;
 import model.quests.QuestGiver;
 
 import java.util.ArrayList;
@@ -12,5 +14,10 @@ public class Dungeon extends AbstractHiddenDistrict
     public Dungeon(String name, int height, int width, int[][] tiles, boolean[][] visibleTiles, LinkedList<Group> enemies, ArrayList<Chest> chests, ArrayList<QuestGiver> questGivers)
     {
         super(name, height, width, tiles, visibleTiles, enemies, chests, questGivers);
+    }
+
+    public TileType getTileType(Vector2d position)
+    {
+        return TileType.GRASS;
     }
 }

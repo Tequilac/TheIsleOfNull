@@ -5,20 +5,15 @@ import com.google.inject.Singleton;
 import model.entities.Character;
 import model.classes.Class;
 import model.entities.*;
-import model.inhabitants.Inhabitant;
-import model.inhabitants.Merchant;
 import model.items.Item;
 import model.magic.DamageSpell;
 import model.map.*;
-import model.map.districts.*;
 import model.quests.Quest;
 import model.quests.QuestGiver;
 import model.quests.QuestStatus;
 import model.races.*;
-import model.saves.Save;
 import model.skills.Skill;
 import model.skills.SkillsRepository;
-import visuals.Frame;
 
 import com.google.inject.Inject;
 import java.io.File;
@@ -90,7 +85,7 @@ public class Game
             Character character = new Character(names.get(i), races.get(i), classes.get(i));
             characters.add(character);
         }
-        team = new Team(new Vector2d(32, 34), MapDirection.North, characters);
+        team = new Team(new Vector2d(32, 34), MapDirection.NORTH, characters);
 //        mapSystem.updateMapTiles(team.getPosition());
 //        currentCharacter = team.getTeamMembers().get(0);
     }

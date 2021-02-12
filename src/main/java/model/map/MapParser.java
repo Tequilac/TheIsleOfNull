@@ -82,7 +82,7 @@ public class MapParser
             }
             x = jsonObject.get("x").getAsInt();
             y = jsonObject.get("y").getAsInt();
-            enemyGroups.add(new Group(new Vector2d(x, y), MapDirection.North, enemies));
+            enemyGroups.add(new Group(new Vector2d(x, y), MapDirection.NORTH, enemies));
         }
 
         jsonObject = jsonElement.getAsJsonObject();

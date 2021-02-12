@@ -3,10 +3,13 @@ package model.map.districts;
 import model.entities.Group;
 import model.map.Chest;
 import model.map.Vector2d;
+import model.map.tiles.TileType;
 import model.quests.QuestGiver;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import static model.map.tiles.TileType.*;
 
 public class World extends AbstractHiddenDistrict
 {
@@ -22,14 +25,25 @@ public class World extends AbstractHiddenDistrict
         this.dungeonEntrance = dungeonEntrance;
     }
 
-    public boolean isTown(Vector2d position)
+    public TileType getTileType(Vector2d position)
+    {
+        return switch(tiles[position.getX()][position.getY()])
+                {
+                    case 0 -> WATER;
+                    case 1 -> GRASS;
+                    case 2 -> SAND;
+                    default -> throw new IllegalStateException("Unexpected value: " + tiles[position.getX()][position.getY()]);
+                };
+    }
+
+    public boolean isTownEntrance(Vector2d position)
     {
         if(townEntrance == null)
             return false;
         return townEntrance.equals(position);
     }
 
-    public boolean isDungeon(Vector2d position)
+    public boolean isDungeonEntrance(Vector2d position)
     {
         if(dungeonEntrance == null)
             return false;

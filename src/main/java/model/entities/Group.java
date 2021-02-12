@@ -125,7 +125,7 @@ public class Group
         {
             if(relativePosition.getY() < 0)
             {
-                if(mapDirection == MapDirection.South)
+                if(mapDirection == MapDirection.SOUTH)
                     move(MoveDirection.FRONT, district);
                 else
                 {
@@ -137,7 +137,7 @@ public class Group
             }
             else if(relativePosition.getY() > 0)
             {
-                if(mapDirection == MapDirection.North)
+                if(mapDirection == MapDirection.NORTH)
                     move(MoveDirection.FRONT, district);
                 else
                 {
@@ -149,7 +149,7 @@ public class Group
             }
             else if(relativePosition.getX() < 0)
             {
-                if(mapDirection == MapDirection.East)
+                if(mapDirection == MapDirection.EAST)
                     move(MoveDirection.FRONT, district);
                 else
                 {
@@ -161,7 +161,7 @@ public class Group
             }
             else if(relativePosition.getX() > 0)
             {
-                if(mapDirection == MapDirection.West)
+                if(mapDirection == MapDirection.WEST)
                     move(MoveDirection.FRONT, district);
                 else
                 {
