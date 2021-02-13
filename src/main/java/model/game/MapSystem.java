@@ -44,7 +44,7 @@ public class MapSystem
         return team.move(direction, currentDistrict);
     }
 
-    public void tryToChangeMap(Team team, MoveDirection direction) throws IOException
+    public void tryToChangeMap(Team team, MoveDirection direction)
     {
         String newMap = changeMap(team, direction);
         if(newMap != null)
@@ -269,7 +269,7 @@ public class MapSystem
         metInhabitant = currentInhabitant;
     }
 
-    public void loadNewWorldMap(String newMap) throws IOException
+    public void loadNewWorldMap(String newMap)
     {
         boolean isTown = (currentDistrict instanceof Town);
         boolean isDungeon = (currentDistrict instanceof Dungeon);

@@ -56,24 +56,14 @@ public class Group
 
     private boolean moveSomewhere(MoveDirection moveDirection, District district)
     {
-        Vector2d newPosition;
-        switch(moveDirection)
-        {
-            case FRONT:
-                newPosition = position.add(mapDirection.toVector2d());
-                break;
-            case BACK:
-                newPosition = position.subtract(mapDirection.toVector2d());
-                break;
-            case LEFT:
-                newPosition = position.subtract(mapDirection.getNext().toVector2d());
-                break;
-            case RIGHT:
-                newPosition = position.subtract(mapDirection.getPrevious().toVector2d());
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + moveDirection);
-        }
+        Vector2d newPosition = switch(moveDirection)
+                {
+                    case FRONT -> position.add(mapDirection.toVector2d());
+                    case BACK -> position.subtract(mapDirection.toVector2d());
+                    case LEFT -> position.subtract(mapDirection.getNext().toVector2d());
+                    case RIGHT -> position.subtract(mapDirection.getPrevious().toVector2d());
+                    default -> throw new IllegalStateException("Unexpected value: " + moveDirection);
+                };
         if(district.canMove(newPosition))
         {
             position = newPosition.trim(district);
@@ -85,37 +75,31 @@ public class Group
     public boolean move(MoveDirection moveDirection, District district)
     {
         boolean moved;
-        switch (moveDirection)
+        switch(moveDirection)
         {
-            case TURN_LEFT:
+            case TURN_LEFT -> {
                 mapDirection = mapDirection.getPrevious();
                 moved = true;
-                break;
-            case TURN_RIGHT:
+            }
+            case TURN_RIGHT -> {
                 mapDirection = mapDirection.getNext();
                 moved = true;
-                break;
-            default:
-                moved = moveSomewhere(moveDirection, district);
+            }
+            default -> moved = moveSomewhere(moveDirection, district);
         }
         return moved;
     }
 
     public MapDirection changeMap(MoveDirection moveDirection, District district)
     {
-        MapDirection newPosition = null;
-        switch (moveDirection)
-        {
-            case LEFT: newPosition = position.subtract(mapDirection.getNext().toVector2d()).exceeds(district.getWidth(), district.getHeight());
-                break;
-            case RIGHT: newPosition = position.subtract(mapDirection.getPrevious().toVector2d()).exceeds(district.getWidth(), district.getHeight());
-                break;
-            case FRONT: newPosition = position.add(mapDirection.toVector2d()).exceeds(district.getWidth(), district.getHeight());
-                break;
-            case BACK: newPosition = position.subtract(mapDirection.toVector2d()).exceeds(district.getWidth(), district.getHeight());
-                break;
-        }
-        return newPosition;
+        return switch(moveDirection)
+                {
+                    case LEFT -> position.subtract(mapDirection.getNext().toVector2d()).exceeds(district.getWidth(), district.getHeight());
+                    case RIGHT -> position.subtract(mapDirection.getPrevious().toVector2d()).exceeds(district.getWidth(), district.getHeight());
+                    case FRONT -> position.add(mapDirection.toVector2d()).exceeds(district.getWidth(), district.getHeight());
+                    case BACK -> position.subtract(mapDirection.toVector2d()).exceeds(district.getWidth(), district.getHeight());
+                    default -> null;
+                };
     }
 
     public void makeDecision(Vector2d teamPosition, District district)

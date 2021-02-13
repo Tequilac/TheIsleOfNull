@@ -1,16 +1,20 @@
 package view.textures;
 
+import com.google.inject.Singleton;
 import javafx.scene.image.Image;
 import model.map.tiles.TileType;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static model.map.tiles.TileType.GRASS;
+
+@Singleton
 public class TextureRepository
 {
-    private static final List<List<List<Image>>> images = new ArrayList<>(TileType.values().length);
+    private final List<List<List<Image>>> images = new ArrayList<>(TileType.values().length);
 
-    static
+    public TextureRepository()
     {
         for(int i = 0; i < TileType.values().length; i++)
         {
@@ -29,6 +33,10 @@ public class TextureRepository
     public Image getImage(TileType tileType, TextureType horizontalType, TextureType verticalType)
     {
         int tileNumber;
+        if(tileType == null)
+        {
+            tileType = GRASS;
+        }
         switch(tileType)
         {
             case GRASS -> tileNumber = 0;
@@ -63,29 +71,18 @@ public class TextureRepository
 
     private Image loadImage(TileType tileType, TextureType horizontalType, TextureType verticalType)
     {
-        Image image = null;
-        switch(horizontalType)
-        {
-            case LEFT:
-                switch(verticalType)
+        String url = switch(horizontalType)
                 {
-
-                }
-                break;
-            case MIDDLE:
-                switch(verticalType)
+                    case LEFT, RIGHT -> "/graphics/mainPane/" + tileType.toString().toLowerCase() + "_rotated.png";
+                    case MIDDLE -> "/graphics/mainPane/" + tileType.toString().toLowerCase() + ".png";
+                    default -> throw new IllegalArgumentException("Unexpected value: " + horizontalType);
+                };
+        return switch(verticalType)
                 {
-                    case CENTER -> new Image("/graphics/mainPane/grass.png", 500, 111, true, true);
-                    case CLOSE -> image = new Image("/graphics/mainPane/grass.png");
-                }
-                break;
-            case RIGHT:
-                switch(verticalType)
-                {
-
-                }
-                break;
-        }
-        return image;
+                    case FAR -> new Image(url, 278, 62, true, true);
+                    case CENTER -> new Image(url, 500, 111, true, true);
+                    case CLOSE -> new Image(url);
+                    default -> throw new IllegalArgumentException("Unexpected value: " + verticalType);
+                };
     }
 }

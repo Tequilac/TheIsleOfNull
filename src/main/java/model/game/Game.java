@@ -90,7 +90,7 @@ public class Game
 //        currentCharacter = team.getTeamMembers().get(0);
     }
 
-    public void tick(MoveDirection direction) throws IOException
+    public void tick(MoveDirection direction)
     {
         mapSystem.tryToChangeMap(team, direction);
         if(mapSystem.move(team, direction))

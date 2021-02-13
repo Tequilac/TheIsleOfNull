@@ -183,13 +183,7 @@ public class Frame extends JFrame implements KeyListener
             }
             if(chosenDirection != null)
             {
-                try
-                {
-                    game.tick(chosenDirection);
-                } catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
+                game.tick(chosenDirection);
             }
             game.update();
             mainPanel.repaint();

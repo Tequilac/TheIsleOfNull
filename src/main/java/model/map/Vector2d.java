@@ -42,6 +42,11 @@ public class Vector2d
         return new Vector2d((x + district.getWidth()) % district.getWidth(), (y + district.getHeight()) % district.getHeight());
     }
 
+    public boolean inBounds(int width, int height)
+    {
+        return 0 <= x && x < width && 0 <= y && y < height;
+    }
+
     @Override
     public boolean equals(Object o)
     {

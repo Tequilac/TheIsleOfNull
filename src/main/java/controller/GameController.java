@@ -10,9 +10,15 @@ import static model.map.MoveDirection.*;
 @Singleton
 public class GameController extends Controller
 {
+    private final MainPaneController mainPaneController;
+
+    private final OptionsController optionsController;
+
     @Inject
     public GameController(OptionsController optionsController, MainPaneController mainPaneController, TeamController teamController)
     {
+        this.mainPaneController = mainPaneController;
+        this.optionsController = optionsController;
         childrenControllers.add(optionsController);
         childrenControllers.add(mainPaneController);
         childrenControllers.add(teamController);
@@ -32,7 +38,9 @@ public class GameController extends Controller
         }
         if(direction != null)
         {
-            System.out.println(direction);
+            mainController.getGame().tick(direction);
+            mainPaneController.paint();
+            optionsController.paintMap();
         }
     }
 }

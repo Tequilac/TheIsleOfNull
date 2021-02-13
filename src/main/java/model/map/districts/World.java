@@ -27,6 +27,8 @@ public class World extends AbstractHiddenDistrict
 
     public TileType getTileType(Vector2d position)
     {
+        if(!position.inBounds(width, height))
+            return null;
         return switch(tiles[position.getX()][position.getY()])
                 {
                     case 0 -> WATER;

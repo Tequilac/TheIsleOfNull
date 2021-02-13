@@ -2,7 +2,11 @@
 
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.canvas.Canvas?>
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.OptionsController" prefWidth="300" prefHeight="1000">
+    <top>
+        <Canvas fx:id="mapCanvas"/>
+    </top>
     <center>
         <VBox fx:id="optionsBox"/>
     </center>

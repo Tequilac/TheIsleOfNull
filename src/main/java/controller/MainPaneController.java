@@ -34,9 +34,15 @@ public class MainPaneController extends Controller
     public MainPaneController(TextureRepository textureRepository)
     {
         this.textureRepository = textureRepository;
+        positions.add(new Vector2d(-700, 700));
         positions.add(new Vector2d(0, 700));
-        positions.add(new Vector2d(200, 590));
-        positions.add(new Vector2d(400, 400));
+        positions.add(new Vector2d(700, 700));
+        positions.add(new Vector2d(-100, 589));
+        positions.add(new Vector2d(200, 589));
+        positions.add(new Vector2d(500, 589));
+        positions.add(new Vector2d(111, 527));
+        positions.add(new Vector2d(311, 527));
+        positions.add(new Vector2d(511, 527));
     }
 
     @Override
@@ -53,7 +59,7 @@ public class MainPaneController extends Controller
     public void paint()
     {
         GraphicsContext context = canvas.getGraphicsContext2D();
-        context.setFill(new Color(57/255., 108/255., 142/255., 1));
+        context.setFill(new Color(84/255., 149/255., 172/255., 1));
         context.fillRect(0, 0, 900, 900);
 
         Vector2d position = mainController.getGame().getTeam().getPosition();
@@ -62,9 +68,12 @@ public class MainPaneController extends Controller
 
         for(int i = 0; i < 3; i++)
         {
-            position = position.add(direction.toVector2d());
-            Image image = textureRepository.getImage(district.getTileType(position), TextureType.values()[i], TextureType.values()[i+3]);
-            context.drawImage(image, positions.get(i).getX(), positions.get(i).getY());
+            for(int j = 0; j < 3; j++)
+            {
+                position = position.add(direction.toVector2d());
+                Image image = textureRepository.getImage(district.getTileType(position), TextureType.values()[j], TextureType.values()[i+3]);
+                context.drawImage(image, positions.get(3*i+j).getX(), positions.get(3*i+j).getY());
+            }
         }
     }
 }
