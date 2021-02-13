@@ -12,9 +12,10 @@ public class Town extends District
 {
     private final ArrayList<Inhabitant> inhabitants;
 
-    public Town(String name, int height, int width, int[][] tiles, ArrayList<Chest> chests, ArrayList<QuestGiver> questGivers, ArrayList<Inhabitant> inhabitants)
+    public Town(String name, int width, int height, int[][] tiles, ArrayList<Chest> chests,
+                ArrayList<QuestGiver> questGivers, ArrayList<Inhabitant> inhabitants)
     {
-        super(name, height, width, tiles, chests, questGivers);
+        super(name, width, height, tiles, chests, questGivers);
         this.inhabitants = inhabitants;
     }
 

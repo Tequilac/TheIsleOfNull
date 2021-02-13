@@ -6,17 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import model.map.MapDirection;
 import model.map.Vector2d;
 import model.map.districts.District;
-import model.map.tiles.TileType;
 import view.textures.TextureRepository;
 import view.textures.TextureType;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +33,12 @@ public class MainPaneController extends Controller
         positions.add(new Vector2d(-700, 700));
         positions.add(new Vector2d(0, 700));
         positions.add(new Vector2d(700, 700));
-        positions.add(new Vector2d(-100, 589));
+        positions.add(new Vector2d(-189, 589));
         positions.add(new Vector2d(200, 589));
-        positions.add(new Vector2d(500, 589));
-        positions.add(new Vector2d(111, 527));
+        positions.add(new Vector2d(587, 589));
+        positions.add(new Vector2d(95, 527));
         positions.add(new Vector2d(311, 527));
-        positions.add(new Vector2d(511, 527));
+        positions.add(new Vector2d(523, 527));
     }
 
     @Override
@@ -62,16 +58,22 @@ public class MainPaneController extends Controller
         context.setFill(new Color(84/255., 149/255., 172/255., 1));
         context.fillRect(0, 0, 900, 900);
 
-        Vector2d position = mainController.getGame().getTeam().getPosition();
         MapDirection direction = mainController.getGame().getTeam().getMapDirection();
         District district = mainController.getMapSystem().getCurrentDistrict();
+        Vector2d position = mainController.getGame().getTeam().getPosition();
+        Vector2d left = position.add(direction.getPrevious().toVector2d());
+        Vector2d right = position.add(direction.getNext().toVector2d());
 
         for(int i = 0; i < 3; i++)
         {
+            left = left.add(direction.toVector2d());
+            position = position.add(direction.toVector2d());
+            right = right.add(direction.toVector2d());
+
+            List<Vector2d> positionsList = List.of(left, position, right);
             for(int j = 0; j < 3; j++)
             {
-                position = position.add(direction.toVector2d());
-                Image image = textureRepository.getImage(district.getTileType(position), TextureType.values()[j], TextureType.values()[i+3]);
+                Image image = textureRepository.getImage(district.getTileType(positionsList.get(j)), TextureType.values()[j], TextureType.values()[i+3]);
                 context.drawImage(image, positions.get(3*i+j).getX(), positions.get(3*i+j).getY());
             }
         }

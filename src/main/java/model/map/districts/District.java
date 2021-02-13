@@ -13,9 +13,9 @@ public abstract class District
 
     protected String loadedInfo;
 
-    protected int height;
-
     protected int width;
+
+    protected int height;
 
     protected int[][] tiles;
 
@@ -23,11 +23,12 @@ public abstract class District
 
     protected ArrayList<QuestGiver> questGivers;
 
-    public District(String name, int height, int width, int[][] tiles, ArrayList<Chest> chests, ArrayList<QuestGiver> questGivers)
+    public District(String name, int width, int height, int[][] tiles,
+                    ArrayList<Chest> chests, ArrayList<QuestGiver> questGivers)
     {
         this.name = name;
-        this.height = height;
         this.width = width;
+        this.height = height;
         this.tiles = tiles;
         this.chests = chests;
         this.questGivers = questGivers;
@@ -52,14 +53,14 @@ public abstract class District
         return name;
     }
 
-    public int getHeight()
-    {
-        return height;
-    }
-
     public int getWidth()
     {
         return width;
+    }
+
+    public int getHeight()
+    {
+        return height;
     }
 
     public int[][] getTiles()

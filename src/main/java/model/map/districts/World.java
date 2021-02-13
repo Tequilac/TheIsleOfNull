@@ -17,10 +17,11 @@ public class World extends AbstractHiddenDistrict
 
     private final Vector2d dungeonEntrance;
 
-    public World(String name, int height, int width, int[][] tiles, boolean[][] visibleTiles, LinkedList<Group> enemies,
-                 ArrayList<Chest> chests, ArrayList<QuestGiver> questGivers, Vector2d townEntrance, Vector2d dungeonEntrance)
+    public World(String name, int width, int height, int[][] tiles, boolean[][] visibleTiles,
+                 LinkedList<Group> enemies, ArrayList<Chest> chests, ArrayList<QuestGiver> questGivers,
+                 Vector2d townEntrance, Vector2d dungeonEntrance)
     {
-        super(name, height, width, tiles, visibleTiles, enemies, chests, questGivers);
+        super(name, width, height, tiles, visibleTiles, enemies, chests, questGivers);
         this.townEntrance = townEntrance;
         this.dungeonEntrance = dungeonEntrance;
     }

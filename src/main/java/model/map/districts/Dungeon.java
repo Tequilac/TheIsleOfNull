@@ -11,9 +11,10 @@ import java.util.LinkedList;
 
 public class Dungeon extends AbstractHiddenDistrict
 {
-    public Dungeon(String name, int height, int width, int[][] tiles, boolean[][] visibleTiles, LinkedList<Group> enemies, ArrayList<Chest> chests, ArrayList<QuestGiver> questGivers)
+    public Dungeon(String name, int width, int height, int[][] tiles, boolean[][] visibleTiles,
+                   LinkedList<Group> enemies, ArrayList<Chest> chests, ArrayList<QuestGiver> questGivers)
     {
-        super(name, height, width, tiles, visibleTiles, enemies, chests, questGivers);
+        super(name, width, height, tiles, visibleTiles, enemies, chests, questGivers);
     }
 
     public TileType getTileType(Vector2d position)

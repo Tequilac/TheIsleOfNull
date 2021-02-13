@@ -23,7 +23,6 @@ public abstract class Controller
         for(Controller child : childrenControllers)
         {
             child.initView();
-
         }
     }
 }
