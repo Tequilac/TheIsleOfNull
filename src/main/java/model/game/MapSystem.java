@@ -196,9 +196,9 @@ public class MapSystem
         else
         {
             checkForChest();
-            if(openedChest != null)
-            {
-            }
+//            if(openedChest != null)
+//            {
+//            }
         }
         if(metQuestGiver != null)
         {
@@ -207,9 +207,9 @@ public class MapSystem
         else
         {
             checkForQuestGiver();
-            if(metQuestGiver != null)
-            {
-            }
+//            if(metQuestGiver != null)
+//            {
+//            }
         }
         if(metInhabitant != null)
         {
@@ -218,9 +218,9 @@ public class MapSystem
         else
         {
             checkForInhabitant();
-            if(metInhabitant != null)
-            {
-            }
+//            if(metInhabitant != null)
+//            {
+//            }
         }
     }
 
@@ -278,13 +278,13 @@ public class MapSystem
 //        Save.setCurrentDistrict(this, currentSave, newMap, team.getPosition(), team.getMapDirection());
 //        currentDistrict = MapParser.parseMap(newMap);
 //        Save.parseSave(this, currentSave);
-        if(isTown)
-            team.setPosition(((World)currentDistrict).getTownEntrance());
-        if(isDungeon)
-            team.setPosition(((World)currentDistrict).getDungeonEntrance());
+//        if(isTown)
+//            team.setPosition(((World)currentDistrict).getTownEntrance());
+//        if(isDungeon)
+//            team.setPosition(((World)currentDistrict).getDungeonEntrance());
     }
 
-    private void loadNewInnerMap(String newMap) throws IOException
+    private void loadNewInnerMap(String newMap)
     {
 //        Save.saveGame(this, currentSave);
 //        Save.parseSave(this, currentSave);
