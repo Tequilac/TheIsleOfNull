@@ -36,4 +36,15 @@ public enum MapDirection
                     default -> new Vector2d(-1, 0);
                 };
     }
+
+    public int toAngle()
+    {
+        return switch(this)
+                {
+                    case NORTH -> 0;
+                    case EAST -> 90;
+                    case SOUTH -> 180;
+                    default -> 270;
+                };
+    }
 }

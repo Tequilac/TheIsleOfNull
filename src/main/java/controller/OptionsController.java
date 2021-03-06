@@ -3,9 +3,11 @@ package controller;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import javafx.fxml.FXML;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.map.MapDirection;
@@ -61,6 +63,11 @@ public class OptionsController extends Controller
                 context.drawImage(mapTextureRepository.getImage(district.getTileType(currentTile)), i*20, j*20);
             }
         }
-        context.drawImage(new Image("/graphics/team.png"), 7*20, 7*20);
+        ImageView imageView = new ImageView("/graphics/team.png");
+        imageView.setRotate(direction.toAngle());
+        SnapshotParameters params = new SnapshotParameters();
+        params.setFill(Color.TRANSPARENT);
+        Image rotatedImage = imageView.snapshot(params, null);
+        context.drawImage(rotatedImage, 7*20, 7*20);
     }
 }

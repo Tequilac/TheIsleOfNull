@@ -7,6 +7,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import model.entities.Team;
 import model.map.MapDirection;
 import model.map.Vector2d;
 import model.map.districts.District;
@@ -58,9 +59,10 @@ public class MainPaneController extends Controller
         context.setFill(new Color(84/255., 149/255., 172/255., 1));
         context.fillRect(0, 0, 900, 900);
 
-        MapDirection direction = mainController.getGame().getTeam().getMapDirection();
+        Team team = mainController.getGame().getTeam();
+        MapDirection direction = team.getMapDirection();
         District district = mainController.getMapSystem().getCurrentDistrict();
-        Vector2d position = mainController.getGame().getTeam().getPosition();
+        Vector2d position = team.getPosition();
         Vector2d left = position.add(direction.getPrevious().toVector2d());
         Vector2d right = position.add(direction.getNext().toVector2d());
 
