@@ -35,6 +35,13 @@ public class MagicCharacter extends Character
         this.spells = new LinkedList<>();
     }
 
+    public MagicCharacter(String name, Race race, Class characterClass)
+    {
+        super(name, race, characterClass);
+        this.mana = 100;
+        this.maxMana = 100;
+    }
+
     public void removeMana(int mana)
     {
         this.mana -= mana;

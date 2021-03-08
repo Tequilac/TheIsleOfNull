@@ -82,7 +82,15 @@ public class Game
         ArrayList<Character> characters = new ArrayList<>(4);
         for (int i = 0; i < 4; i++)
         {
-            Character character = new Character(names.get(i), races.get(i), classes.get(i));
+            Character character;
+            if(classes.get(i).usesMagic())
+            {
+                character = new MagicCharacter(names.get(i), races.get(i), classes.get(i));
+            }
+            else
+            {
+                character = new Character(names.get(i), races.get(i), classes.get(i));
+            }
             characters.add(character);
         }
         team = new Team(new Vector2d(32, 34), MapDirection.NORTH, characters);
