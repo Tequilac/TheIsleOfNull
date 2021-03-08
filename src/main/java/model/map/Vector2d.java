@@ -16,12 +16,17 @@ public class Vector2d
 
     public Vector2d add(Vector2d other)
     {
-        return new Vector2d(this.x + other.x, this.y + other.y);
+        return new Vector2d(x + other.x, y + other.y);
     }
 
     public Vector2d subtract(Vector2d other)
     {
-        return new Vector2d(this.x - other.x, this.y - other.y);
+        return new Vector2d(x - other.x, y - other.y);
+    }
+
+    public Vector2d multiply(int number)
+    {
+        return new Vector2d(number * x, number * y);
     }
 
     public MapDirection exceeds(int width, int height)

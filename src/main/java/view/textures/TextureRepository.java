@@ -21,8 +21,17 @@ public class TextureRepository
             images.add(new ArrayList<>(3));
             for(int j = 0; j < 3; j++)
             {
-                images.get(i).add(new ArrayList<>(3));
-                for(int k = 0; k < 3; k++)
+                int amount;
+                if(j == 0)
+                {
+                    amount = 5;
+                }
+                else
+                {
+                    amount = 3;
+                }
+                images.get(i).add(new ArrayList<>(amount));
+                for(int k = 0; k < amount; k++)
                 {
                     images.get(i).get(j).add(null);
                 }
@@ -30,7 +39,7 @@ public class TextureRepository
         }
     }
 
-    public Image getImage(TileType tileType, TextureType horizontalType, TextureType verticalType)
+    public Image getImage(TileType tileType, HorizontalTextureType horizontalType, VerticalTextureType verticalType)
     {
         int tileNumber;
         if(tileType == null)
@@ -50,6 +59,8 @@ public class TextureRepository
             case LEFT -> horizontalNumber = 0;
             case MIDDLE -> horizontalNumber = 1;
             case RIGHT -> horizontalNumber = 2;
+            case FAR_LEFT -> horizontalNumber = 3;
+            case FAR_RIGHT -> horizontalNumber = 4;
             default -> horizontalNumber = -1;
         }
         int verticalNumber;
@@ -60,29 +71,30 @@ public class TextureRepository
             case CLOSE -> verticalNumber = 2;
             default -> verticalNumber = -1;
         }
-        Image image = images.get(tileNumber).get(horizontalNumber).get(verticalNumber);
+        System.out.println(tileType);
+        System.out.println(horizontalType);
+        System.out.println(verticalType);
+        Image image = images.get(tileNumber).get(verticalNumber).get(horizontalNumber);
         if(image == null)
         {
             image = loadImage(tileType, horizontalType, verticalType);
-            images.get(tileNumber).get(horizontalNumber).set(verticalNumber, image);
+            images.get(tileNumber).get(verticalNumber).set(horizontalNumber, image);
         }
         return image;
     }
 
-    private Image loadImage(TileType tileType, TextureType horizontalType, TextureType verticalType)
+    private Image loadImage(TileType tileType, HorizontalTextureType horizontalType, VerticalTextureType verticalType)
     {
         String url = switch(horizontalType)
                 {
-                    case LEFT, RIGHT -> "/graphics/mainPane/" + tileType.toString().toLowerCase() + "_rotated.png";
+                    case FAR_LEFT, LEFT, RIGHT, FAR_RIGHT -> "/graphics/mainPane/" + tileType.toString().toLowerCase() + "_rotated.png";
                     case MIDDLE -> "/graphics/mainPane/" + tileType.toString().toLowerCase() + ".png";
-                    default -> throw new IllegalArgumentException("Unexpected value: " + horizontalType);
                 };
         return switch(verticalType)
                 {
                     case FAR -> new Image(url, 278, 62, true, true);
                     case CENTER -> new Image(url, 500, 111, true, true);
                     case CLOSE -> new Image(url);
-                    default -> throw new IllegalArgumentException("Unexpected value: " + verticalType);
                 };
     }
 }

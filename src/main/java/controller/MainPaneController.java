@@ -11,8 +11,9 @@ import model.entities.Team;
 import model.map.MapDirection;
 import model.map.Vector2d;
 import model.map.districts.District;
+import view.textures.HorizontalTextureType;
 import view.textures.TextureRepository;
-import view.textures.TextureType;
+import view.textures.VerticalTextureType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,8 @@ public class MainPaneController extends Controller
         positions.add(new Vector2d(95, 527));
         positions.add(new Vector2d(311, 527));
         positions.add(new Vector2d(523, 527));
+        positions.add(new Vector2d(-60, 527));
+        positions.add(new Vector2d(680, 527));
     }
 
     @Override
@@ -62,21 +65,37 @@ public class MainPaneController extends Controller
         Team team = mainController.getGame().getTeam();
         MapDirection direction = team.getMapDirection();
         District district = mainController.getMapSystem().getCurrentDistrict();
-        Vector2d position = team.getPosition();
+        Vector2d position = team.getPosition().add(direction.toVector2d().multiply(4));
         Vector2d left = position.add(direction.getPrevious().toVector2d());
         Vector2d right = position.add(direction.getNext().toVector2d());
+        Vector2d farLeft = position.add(direction.getPrevious().toVector2d().multiply(2));
+        Vector2d farRight = position.add(direction.getNext().toVector2d().multiply(2));
 
         for(int i = 0; i < 3; i++)
         {
-            left = left.add(direction.toVector2d());
-            position = position.add(direction.toVector2d());
-            right = right.add(direction.toVector2d());
+            left = left.subtract(direction.toVector2d());
+            position = position.subtract(direction.toVector2d());
+            right = right.subtract(direction.toVector2d());
+            farLeft = farLeft.subtract(direction.toVector2d());
+            farRight = farRight.subtract(direction.toVector2d());
 
-            List<Vector2d> positionsList = List.of(left, position, right);
-            for(int j = 0; j < 3; j++)
+            if(i == 0)
             {
-                Image image = textureRepository.getImage(district.getTileType(positionsList.get(j)), TextureType.values()[j], TextureType.values()[i+3]);
-                context.drawImage(image, positions.get(3*i+j).getX(), positions.get(3*i+j).getY());
+                List<Vector2d> positionsList = List.of(left, position, right, farLeft, farRight);
+                for(int j = 0; j < 5; j++)
+                {
+                    Image image = textureRepository.getImage(district.getTileType(positionsList.get(j)), HorizontalTextureType.values()[j], VerticalTextureType.values()[i]);
+                    context.drawImage(image, positions.get(6+j).getX(), positions.get(6+j).getY());
+                }
+            }
+            else
+            {
+                List<Vector2d> positionsList = List.of(left, position, right);
+                for(int j = 0; j < 3; j++)
+                {
+                    Image image = textureRepository.getImage(district.getTileType(positionsList.get(j)), HorizontalTextureType.values()[j], VerticalTextureType.values()[i]);
+                    context.drawImage(image, positions.get(3*(2-i)+j).getX(), positions.get(3*(2-i)+j).getY());
+                }
             }
         }
     }
